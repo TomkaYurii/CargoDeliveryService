@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Post.BLL", "Post.BLL\Post.B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Post.API", "Post.API\Post.API.csproj", "{65328C06-6170-4869-A9D4-DA96446DDA2D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FakeDataPostDbGenerator", "FakeDataPostDbGenerator\FakeDataPostDbGenerator.csproj", "{911D2D17-4C5B-4FFB-8E36-C00D395D93B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{65328C06-6170-4869-A9D4-DA96446DDA2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65328C06-6170-4869-A9D4-DA96446DDA2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65328C06-6170-4869-A9D4-DA96446DDA2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{911D2D17-4C5B-4FFB-8E36-C00D395D93B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{911D2D17-4C5B-4FFB-8E36-C00D395D93B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{911D2D17-4C5B-4FFB-8E36-C00D395D93B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{911D2D17-4C5B-4FFB-8E36-C00D395D93B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,6 +51,7 @@ Global
 		{A2A0F28A-9BBB-4A74-9EFC-B1CBC7A0BFE1} = {F38847DB-7568-4272-ADE2-F94480C96ECC}
 		{4FD78D66-60C0-42B9-A482-B355D3EE8E77} = {F38847DB-7568-4272-ADE2-F94480C96ECC}
 		{65328C06-6170-4869-A9D4-DA96446DDA2D} = {F38847DB-7568-4272-ADE2-F94480C96ECC}
+		{911D2D17-4C5B-4FFB-8E36-C00D395D93B5} = {D264DFEE-3D4E-4C90-A8C0-1E2DE570F809}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F84E06C-5B88-446F-8BEF-60879A2BE854}
