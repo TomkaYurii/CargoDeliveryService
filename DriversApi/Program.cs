@@ -1,3 +1,5 @@
+using Drivers.BLL.Contracts;
+using Drivers.BLL.Managers;
 using Drivers.DAL.Contracts;
 using Drivers.DAL.Repositories;
 using Microsoft.Data.SqlClient;
@@ -33,6 +35,7 @@ builder.Services.AddScoped<IInspectionRepository, InspectionRepository>();
 builder.Services.AddScoped<ITruckRepository, TruckRepository>();
 builder.Services.AddScoped<IRepairRepository, RepairRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IDriversManager, DriversManager>();
 
 var app = builder.Build();
 

@@ -1,4 +1,6 @@
-﻿using Drivers.BLL.DTOs;
+﻿using Drivers.BLL.Contracts;
+using Drivers.BLL.DTOs;
+using Drivers.BLL.DTOs.Responces;
 using Drivers.DAL.Contracts;
 using Drivers.DAL.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -7,34 +9,66 @@ namespace Drivers.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DriverController : ControllerBase
+    public class DriversController : ControllerBase
     {
-        private readonly ILogger<DriverController> _logger;
-        private IUnitOfWork _ADOuow;
-        public DriverController(ILogger<DriverController> logger,
-            IUnitOfWork ado_unitofwork)
+        private readonly ILogger<DriversController> _logger;
+        private IDriversManager _DriversManager;
+
+        public DriversController(ILogger<DriversController> logger,
+            IDriversManager driversManager)
         {
             _logger = logger;
-            _ADOuow = ado_unitofwork;
+            _DriversManager= driversManager;
         }
 
-        //GET: api/driver
-        [HttpGet]
-        public async Task<ActionResult< IEnumerable<Driver> >> GetAllEventsAsync()
+
+        //GET: api/driver/Id
+        [HttpGet("{id}")]
+        public async Task<ActionResult<FullDriverResponceDTO>> GetFullInfoAboutDriver(int id)
         {
             try
             {
-                var results = await _ADOuow._driverRepository.GetAllAsync();
+                var result = await _DriversManager.GetFullInfoAboutDriver(id);
+                if (result == null)
+                {
+                    _logger.LogInformation($"Driver із Id: {id}, не був знайдейний у базі даних");
+                    return NotFound();
+                }
+                else
+                {
+                    _logger.LogInformation($"Отримали Driver з бази даних!");
+                    return Ok(result);
+                }
 
-                _logger.LogInformation($"Отримали всі записи з таблиці DRIVERS");
-                return Ok(results);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Запит не відпрацював, щось пішло не так! - {ex.Message}");
-                return StatusCode(StatusCodes.Status500InternalServerError, "вот так вот!");
+                _logger.LogError($"Транзакція сфейлилась! Щось пішло не так у методі GetAllEventsAsync() - {ex.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Потрібно дивитись!");
             }
         }
+
+
+
+
+
+        ////GET: api/driver
+        //[HttpGet]
+        //public async Task<ActionResult< IEnumerable<Driver> >> GetAllEventsAsync()
+        //{
+        //    try
+        //    {
+        //        var results = await _ADOuow._driverRepository.GetAllAsync();
+
+        //        _logger.LogInformation($"Отримали всі записи з таблиці DRIVERS");
+        //        return Ok(results);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError($"Запит не відпрацював, щось пішло не так! - {ex.Message}");
+        //        return StatusCode(StatusCodes.Status500InternalServerError, "вот так вот!");
+        //    }
+        //}
 
         ////GET: api/driver/Id
         //[HttpGet("{id}")]

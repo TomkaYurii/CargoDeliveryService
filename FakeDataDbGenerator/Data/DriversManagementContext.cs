@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using FakeDataDriverDbGenerator.Configurations;
 using FakeDataDriverDbGenerator.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -36,113 +37,12 @@ namespace FakeDataDriverDbGenerator.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Company>(entity =>
-            {
-                entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new CompanyConfiguration());
+            modelBuilder.ApplyConfiguration(new DriverConfiguration());
 
-                entity.Property(e => e.Address).HasMaxLength(100);
 
-                entity.Property(e => e.CompanyName).HasMaxLength(100);
 
-                entity.Property(e => e.ContactEmail).HasMaxLength(50);
-
-                entity.Property(e => e.ContactPerson).HasMaxLength(100);
-
-                entity.Property(e => e.ContactPhone).HasMaxLength(20);
-
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.DeletedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.Email).HasMaxLength(50);
-
-                entity.Property(e => e.Phone).HasMaxLength(20);
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-            });
-
-            modelBuilder.Entity<Driver>(entity =>
-            {
-                entity.HasIndex(e => e.PhotoId, "UQ__Drivers__21B7B583AB601A5C")
-                    .IsUnique();
-
-                entity.HasIndex(e => e.CompanyId, "UQ__Drivers__2D971C4D3AD2DF5B")
-                    .IsUnique();
-
-                entity.Property(e => e.DriverId).HasColumnName("DriverID");
-
-                entity.Property(e => e.Address).HasMaxLength(100);
-
-                entity.Property(e => e.Birthdate).HasColumnType("date");
-
-                entity.Property(e => e.CompanyId).HasColumnName("CompanyID");
-
-                entity.Property(e => e.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.DeletedAt).HasColumnType("datetime");
-
-                entity.Property(e => e.DriverLicenseCategory).HasMaxLength(50);
-
-                entity.Property(e => e.DriverLicenseExpirationDate).HasColumnType("date");
-
-                entity.Property(e => e.DriverLicenseIssuingAuthority).HasMaxLength(100);
-
-                entity.Property(e => e.DriverLicenseIssuingDate).HasColumnType("date");
-
-                entity.Property(e => e.DriverLicenseNumber).HasMaxLength(20);
-
-                entity.Property(e => e.Email).HasMaxLength(50);
-
-                entity.Property(e => e.EmploymentEndDate).HasColumnType("date");
-
-                entity.Property(e => e.EmploymentStartDate).HasColumnType("date");
-
-                entity.Property(e => e.EmploymentStatus).HasMaxLength(50);
-
-                entity.Property(e => e.FirstName).HasMaxLength(50);
-
-                entity.Property(e => e.Gender).HasMaxLength(10);
-
-                entity.Property(e => e.IdentificationExpirationDate).HasColumnType("date");
-
-                entity.Property(e => e.IdentificationNumber).HasMaxLength(50);
-
-                entity.Property(e => e.IdentificationType).HasMaxLength(50);
-
-                entity.Property(e => e.LastName).HasMaxLength(50);
-
-                entity.Property(e => e.MaritalStatus).HasMaxLength(20);
-
-                entity.Property(e => e.MiddleName).HasMaxLength(50);
-
-                entity.Property(e => e.Nationality).HasMaxLength(50);
-
-                entity.Property(e => e.Phone).HasMaxLength(20);
-
-                entity.Property(e => e.PhotoId).HasColumnName("PhotoID");
-
-                entity.Property(e => e.PlaceOfBirth).HasMaxLength(100);
-
-                entity.Property(e => e.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.HasOne(d => d.Company)
-                    .WithOne(p => p.Driver)
-                    .HasForeignKey<Driver>(d => d.CompanyId)
-                    .HasConstraintName("FK__Drivers__Company__3B75D760");
-
-                entity.HasOne(d => d.Photo)
-                    .WithOne(p => p.Driver)
-                    .HasForeignKey<Driver>(d => d.PhotoId)
-                    .HasConstraintName("FK__Drivers__PhotoID__3C69FB99");
-            });
 
             modelBuilder.Entity<Expense>(entity =>
             {

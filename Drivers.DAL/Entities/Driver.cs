@@ -33,9 +33,9 @@ namespace Drivers.DAL.Entities
         public DateTime? EmploymentEndDate { get; set; }
 
 
-        public int? CompanyID { get; set; }
+        public int CompanyID { get; set; }
         public Company? Company { get; set; }
-        public int? PhotoID { get; set; }
+        public int PhotoID { get; set; }
         public Photo? Photo { get; set; }
 
         //public int? TruckID { get; set; }
