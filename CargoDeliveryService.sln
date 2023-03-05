@@ -13,9 +13,28 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{7F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orders", "Orders", "{ABD51DD9-E7E1-4738-9CF4-B7C4015D9297}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{0C20B3A8-BF63-480E-8142-6DBA12E5775B}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DriversDb", "DriversDb\DriversDb.sqlproj", "{60D7E943-E7FA-4997-9243-2CAD5CDAD2E6}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60D7E943-E7FA-4997-9243-2CAD5CDAD2E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60D7E943-E7FA-4997-9243-2CAD5CDAD2E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60D7E943-E7FA-4997-9243-2CAD5CDAD2E6}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{60D7E943-E7FA-4997-9243-2CAD5CDAD2E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60D7E943-E7FA-4997-9243-2CAD5CDAD2E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60D7E943-E7FA-4997-9243-2CAD5CDAD2E6}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{60D7E943-E7FA-4997-9243-2CAD5CDAD2E6} = {0C20B3A8-BF63-480E-8142-6DBA12E5775B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F84E06C-5B88-446F-8BEF-60879A2BE854}
