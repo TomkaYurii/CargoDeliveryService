@@ -9,8 +9,6 @@ using FakeDataDriverDbGenerator.Entities;
 
 namespace FakeDataDriverDbGenerator.Configurations
 {
-    public class DriverConfiguration
-    {
         public class DriverConfiguration : IEntityTypeConfiguration<Driver>
         {
             public void Configure(EntityTypeBuilder<Driver> modelbuilder)
@@ -92,5 +90,5 @@ namespace FakeDataDriverDbGenerator.Configurations
                     .HasConstraintName("FK__Drivers__PhotoID__3C69FB99");
             }
         }
-    }
 }
+
