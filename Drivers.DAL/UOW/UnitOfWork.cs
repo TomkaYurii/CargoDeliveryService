@@ -1,7 +1,7 @@
-﻿using Drivers.DAL.Contracts;
+﻿using Drivers.DAL_ADO.Contracts;
 using System.Data;
 
-namespace MyEventsAdoNetDB.Repositories
+namespace Drivers.DAL_ADO.UOW
 {
     public class UnitOfWork : IUnitOfWork, IDisposable
     {

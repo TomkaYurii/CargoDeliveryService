@@ -14,7 +14,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Drivers.BLL\Drivers.BLL.csproj" />
-    <ProjectReference Include="..\Drivers.DAL\Drivers.DAL.csproj" />
+    <ProjectReference Include="..\Drivers.DAL\Drivers.DAL_ADO.csproj" />
+    <ProjectReference Include="..\Drivers.DAL_EF\Drivers.DAL_EF.csproj" />
   </ItemGroup>
 
 </Project>

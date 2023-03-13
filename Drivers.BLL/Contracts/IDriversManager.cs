@@ -1,10 +1,7 @@
 ﻿using Drivers.BLL.DTOs.Responces;
-using Drivers.DAL.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Drivers.DAL_EF.Entities;
+using Drivers.DAL_EF.Entities.HelpModels;
+using Drivers.DAL_EF.Helpers;
 
 namespace Drivers.BLL.Contracts
 {
@@ -12,5 +9,8 @@ namespace Drivers.BLL.Contracts
     {
         Task<IEnumerable<ShortDriverResponceDTO>> GetListOfAllDrivers();
         Task<FullDriverResponceDTO> GetFullInfoAboutDriver(int id);
+
+
+        Task<PagedList<EFDriver>> GetPaginatedDrivers(QueryStringParameters queryStringParameters);
     }
 }

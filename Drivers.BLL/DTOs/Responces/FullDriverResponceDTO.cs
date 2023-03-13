@@ -1,4 +1,5 @@
-﻿using Drivers.DAL.Entities;
+﻿using Drivers.DAL_ADO.Entities;
+using Drivers.DAL_EF.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

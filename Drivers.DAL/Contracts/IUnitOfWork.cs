@@ -1,7 +1,7 @@
-﻿namespace Drivers.DAL.Contracts
+﻿namespace Drivers.DAL_ADO.Contracts
 {
     public interface IUnitOfWork : IDisposable
-    {      
+    {
         IDriverRepository _driverRepository { get; }
         ICompanyRepository _companyRepository { get; }
         IExpensesRepository _expensesRepository { get; }

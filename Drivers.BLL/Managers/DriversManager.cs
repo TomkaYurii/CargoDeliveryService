@@ -1,12 +1,11 @@
 ﻿using Drivers.BLL.Contracts;
 using Drivers.BLL.DTOs.Responces;
-using Drivers.DAL.Contracts;
+using Drivers.DAL_ADO.Contracts;
+using Drivers.DAL_EF.Contracts;
+using Drivers.DAL_EF.Entities;
+using Drivers.DAL_EF.Entities.HelpModels;
+using Drivers.DAL_EF.Helpers;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Drivers.BLL.Managers
 {
@@ -14,17 +13,24 @@ namespace Drivers.BLL.Managers
     {
         private readonly ILogger<DriversManager> _logger;
         private IUnitOfWork _ADOuow;
+        private IEFUnitOfWork _EFuow;
+        
         public DriversManager(ILogger<DriversManager> logger,
-            IUnitOfWork ado_unitofwork)
+            IUnitOfWork ado_unitofwork,
+            IEFUnitOfWork eFUnitOfWork)
         {
             _logger = logger;
             _ADOuow = ado_unitofwork;
+            _EFuow = eFUnitOfWork;
         }
+
+
 
         public Task<IEnumerable<ShortDriverResponceDTO>> GetListOfAllDrivers()
         {
             throw new NotImplementedException();
         }
+
 
         public async Task<FullDriverResponceDTO> GetFullInfoAboutDriver(int id)
         {
@@ -38,7 +44,11 @@ namespace Drivers.BLL.Managers
             result.pht = photo;
 
             return result;
+        }
 
+        Task<PagedList<EFDriver>> IDriversManager.GetPaginatedDrivers(QueryStringParameters queryStringParameters)
+        {
+            throw new NotImplementedException();
         }
     }
 }
