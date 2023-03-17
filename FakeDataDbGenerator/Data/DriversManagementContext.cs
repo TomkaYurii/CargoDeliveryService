@@ -39,7 +39,7 @@ namespace FakeDataDriverDbGenerator.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new CompanyConfiguration());
-            modelBuilder.ApplyConfiguration(new DriverConfiguration());
+            //modelBuilder.ApplyConfiguration(new DriverConfiguration());
 
 
 

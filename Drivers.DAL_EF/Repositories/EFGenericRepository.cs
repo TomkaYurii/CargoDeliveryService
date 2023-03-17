@@ -2,6 +2,7 @@ using Drivers.DAL_EF.Contracts;
 using Drivers.DAL_EF.Data;
 using Drivers.DAL_EF.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace MyEventsEntityFrameworkDb.EFRepositories;
 
@@ -18,12 +19,6 @@ public abstract class EFGenericRepository<TEntity> : IEFGenericRepository<TEntit
         table = this.databaseContext.Set<TEntity>();
     }
 
-
-    public IQueryable<TEntity> FindAll()
-    {
-        return this.databaseContext.Set<TEntity>()
-            .AsNoTracking();
-    }
 
     /// <summary>
     /// GetByIdAsync
@@ -106,6 +101,29 @@ public abstract class EFGenericRepository<TEntity> : IEFGenericRepository<TEntit
         }
         await Task.Run(() => table.Remove(entity));
     }
+
+    /// <summary>
+    /// Пошук
+    /// </summary>
+    /// <returns></returns>
+    public IQueryable<TEntity> FindAll()
+    {
+        return this.databaseContext.Set<TEntity>()
+            .AsNoTracking();
+    }
+
+    /// <summary>
+    /// метод специфікація
+    /// </summary>
+    /// <param name="expression"></param>
+    /// <returns></returns>
+    public async Task<IQueryable<TEntity>> FindByCondition(Expression<Func<TEntity, bool>> expression)
+    {
+        return await Task.Run(() => this.databaseContext.Set<TEntity>()
+            .Where(expression)
+            .AsNoTracking());
+    }
+
 
     /// <summary>
     /// GetCompleteEntityAsync

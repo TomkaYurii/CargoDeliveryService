@@ -5,6 +5,8 @@ using Drivers.DAL_ADO.Repositories;
 using Drivers.DAL_ADO.UOW;
 using Drivers.DAL_EF.Contracts;
 using Drivers.DAL_EF.Data;
+using Drivers.DAL_EF.Entities;
+using Drivers.DAL_EF.Helpers;
 using Drivers.DAL_EF.Repositories;
 using Drivers.DAL_EF.UOW;
 using Microsoft.Data.SqlClient;
@@ -53,6 +55,8 @@ builder.Services.AddDbContext<DriversManagementContext>(options =>
 // Dependendency Injection for Repositories/UOW from EF DAL
 builder.Services.AddScoped<IEFDriverRepository, EFDriverRepository>();
 builder.Services.AddScoped<IEFUnitOfWork, EFUnitOfWork>();
+
+builder.Services.AddScoped<ISortHelper<EFDriver>, SortHelper<EFDriver>>();
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 builder.Services.AddScoped<IDriversManager, DriversManager>();

@@ -63,6 +63,10 @@ namespace Drivers.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<PagedList<EFDriver>>> GetAllEventsAsync([FromQuery] DriverParameters driverParameters)
         {
+            if (!driverParameters.ValidYearRange)
+            {
+                return BadRequest("Max year of birth cannot be less than min year of birth");
+            }
             try
             {
                 var drivers = await _DriversManager.GetPaginatedDrivers(driverParameters);
