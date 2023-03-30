@@ -1,11 +1,6 @@
 ﻿using FakeDataDriverDbGenerator.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FakeDataDriverDbGenerator.Configurations
 {
@@ -52,11 +47,11 @@ namespace FakeDataDriverDbGenerator.Configurations
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Expenses__Driver__412EB0B6");
 
-        modelbuilder.HasOne(d => d.Truck)
-                    .WithMany(p => p.Expenses)
-                    .HasForeignKey(d => d.TruckId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Expenses__TruckI__4222D4EF");
-    });
+            modelbuilder.HasOne(d => d.Truck)
+                        .WithMany(p => p.Expenses)
+                        .HasForeignKey(d => d.TruckId)
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK__Expenses__TruckI__4222D4EF");
+        }
     }
 }

@@ -13,6 +13,7 @@ namespace FakeDataDriverDbGenerator.Configurations
     {
         public void Configure(EntityTypeBuilder<Inspection> modelbuilder)
         {
+            modelbuilder.HasKey(i => i.InspectionId);
             modelbuilder.Property(e => e.InspectionId).HasColumnName("InspectionID");
 
             modelbuilder.Property(e => e.CreatedAt)

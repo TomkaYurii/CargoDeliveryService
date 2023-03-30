@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using FakeDataDriverDbGenerator.Configurations;
 using FakeDataDriverDbGenerator.Entities;
+using FakeDataDriverDbGenerator.Seeders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -30,8 +31,7 @@ namespace FakeDataDriverDbGenerator.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-TOMKA;Initial Catalog=DriversManagement;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                optionsBuilder.UseSqlServer("Data Source=DESKTOP-TOMKA;Initial Catalog=DriversManagement2;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
 
@@ -46,11 +46,15 @@ namespace FakeDataDriverDbGenerator.Data
             modelBuilder.ApplyConfiguration(new RepairConfiguration());
             modelBuilder.ApplyConfiguration(new TruckConfiguration());
 
-         
+            var databaseSeeder = new DriversManagementDatabaseSeeder();
 
-            OnModelCreatingPartial(modelBuilder);
+            modelBuilder.Entity<Company>().HasData(databaseSeeder.Companies);
+            modelBuilder.Entity<Driver>().HasData(databaseSeeder.Drivers);
+            modelBuilder.Entity<Expense>().HasData(databaseSeeder.Expenses);
+            modelBuilder.Entity<Inspection>().HasData(databaseSeeder.Inspections);
+            modelBuilder.Entity<Photo>().HasData(databaseSeeder.Photos);
+            modelBuilder.Entity<Repair>().HasData(databaseSeeder.Repairs);
+            modelBuilder.Entity<Truck>().HasData(databaseSeeder.Trucks);
         }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

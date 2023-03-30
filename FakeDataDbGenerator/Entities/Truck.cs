@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace FakeDataDriverDbGenerator.Entities
 {
-    public partial class Truck
+    public class Truck
     {
         public Truck()
         {

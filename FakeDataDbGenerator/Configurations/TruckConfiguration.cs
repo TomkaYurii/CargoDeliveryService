@@ -13,7 +13,8 @@ namespace FakeDataDriverDbGenerator.Configurations
     {
         public void Configure (EntityTypeBuilder<Truck> modelbuilder)
         {
-            modelbuilder.Property(e => e.TruckId).HasColumnName("TruckID");
+            modelbuilder.HasKey(t => t.TruckId);
+            modelbuilder.Property(t => t.TruckId).HasColumnName("TruckID");
 
             modelbuilder.Property(e => e.ChassisNumber).HasMaxLength(50);
 
