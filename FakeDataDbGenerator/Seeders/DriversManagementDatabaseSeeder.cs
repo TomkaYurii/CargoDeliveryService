@@ -35,18 +35,23 @@ namespace FakeDataDriverDbGenerator.Seeders
         public DriversManagementDatabaseSeeder(int number_of_rows = 20)
         {
             quantity = number_of_rows;
-            Companies = GenerateCompanies(amount: quantity);
-            //Drivers = GenerateDrivers(amount: quantity);
-            //Expenses = GenerateExpenses(amount: quantity);
+            
             Trucks = GenerateTrucks(amount: quantity);
-
             Inspections = GenerateInspections(amount: quantity, Trucks);
-            this.quantity = quantity;
-            //Repairs = GenerateRepairs(amount: quantity);
+            Repairs = GenerateRepairs(amount: quantity, Trucks);
 
+            Companies = GenerateCompanies(amount: quantity);
             Photos = GeneratePhotos(amount: quantity);
+            Drivers = GenerateDrivers(amount: quantity, Companies, Photos);
+
+            Expenses = GenerateExpenses(amount: quantity, Drivers, Trucks);
         }
 
+        /// <summary>
+        /// Генерація компаній
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <returns></returns>
         private IReadOnlyCollection<Company> GenerateCompanies(int amount)
         {
             var CompanyId = 1;
@@ -69,39 +74,84 @@ namespace FakeDataDriverDbGenerator.Seeders
             return companies;
         }
 
-        //private IReadOnlyCollection<Driver> GenerateDrivers(int amount)
-        //{
-        //    var DriverId = 1;
-        //    var driverFaker = new Faker<Driver>()
-        //        .RuleFor(c => c.DriverId, f => f.DriverId++)
-        //        .RuleFor(c => c.FirstName, f => f.Name.FirstName())
-        //        .RuleFor(c => c.LastName, f => f.Name.LastName())
-        //        .RuleFor(c => c.MiddleName, f => null)
-        //        .RuleFor(c => c.Gender, f => f.PickRandom<Gender>())
-        //        .RuleFor
+        /// <summary>
+        /// Генерація фотографій
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        private IReadOnlyCollection<Photo> GeneratePhotos(int amount)
+        {
+            var PhotoId = 1;
+            var photoFaker = new Faker<Photo>()
+                .RuleFor(c => c.PhotoId, f => PhotoId++)
+                //.RuleFor(c => c.PhotoData, f => Convert.FromBase64String(f.Image.DataUri(100, 100).Split(',')[1]))
+                //надо сгенерировать картинку в строке и потом кинуть в масив байтов
+                .RuleFor(c => c.PhotoData, f => f.Random.Bytes(1024))
+                .RuleFor(c => c.ContentType, (f, u) => f.Commerce.Categories(1)[0])
+                .RuleFor(c => c.FileName, f => f.Lorem.Word())
+                .RuleFor(c => c.FileSize, f => f.Random.Number(1000, 50000))
+                .RuleFor(c => c.CreatedAt, f => f.Date.Past())
+                .RuleFor(c => c.UpdatedAt, f => null as DateTime?)
+                .RuleFor(c => c.DeletedAt, f => null as DateTime?)
+                .RuleFor(c => c.Driver, f => null);
+            var photos = Enumerable.Range(1, amount)
+                .Select(i => SeedRow(photoFaker, i))
+                .ToList();
+            return photos;
+        }
 
-        //}
+        /// <summary>
+        /// Генерація водіїв
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <param name="companies"></param>
+        /// <param name="photos"></param>
+        /// <returns></returns>
+        private IReadOnlyCollection<Driver> GenerateDrivers(int amount,
+            IEnumerable<Company> companies,
+            IEnumerable<Photo> photos)
+        {
+            var DriverId = 1;
+            var driverFaker = new Faker<Driver>()
+                .RuleFor(c => c.DriverId, f => DriverId++)
+                .RuleFor(d => d.FirstName, f => f.Name.FirstName())
+                .RuleFor(d => d.LastName, f => f.Name.LastName())
+                .RuleFor(d => d.MiddleName, f => f.Name.LastName())
+                .RuleFor(d => d.Gender, f => f.PickRandom(new[] { "Male", "Female" }))
+                .RuleFor(d => d.Birthdate, f => f.Date.Past(30))
+                .RuleFor(d => d.PlaceOfBirth, f => f.Address.City())
+                .RuleFor(d => d.Nationality, f => f.Address.Country())
+                .RuleFor(d => d.MaritalStatus, f => f.PickRandom(new[] { "Single", "Married", "Divorced", "Widowed" }))
+                .RuleFor(d => d.IdentificationType, f => f.PickRandom(new[] { "Passport", "National ID", "Driver's License" }))
+                .RuleFor(d => d.IdentificationNumber, f => f.Random.AlphaNumeric(10))
+                .RuleFor(d => d.IdentificationExpirationDate, f => f.Date.Future())
+                .RuleFor(d => d.Address, f => f.Address.FullAddress())
+                .RuleFor(d => d.Phone, f => f.Phone.PhoneNumberFormat())
+                .RuleFor(d => d.Email, f => f.Person.Email)
+                .RuleFor(d => d.DriverLicenseNumber, f => f.Random.AlphaNumeric(10))
+                .RuleFor(d => d.DriverLicenseCategory, f => f.PickRandom(new[] { "A", "B", "C", "D", "E" }))
+                .RuleFor(d => d.DriverLicenseIssuingDate, f => f.Date.Past(10))
+                .RuleFor(d => d.DriverLicenseExpirationDate, f => f.Date.Future())
+                .RuleFor(d => d.DriverLicenseIssuingAuthority, f => f.Address.City())
+                .RuleFor(d => d.EmploymentStatus, f => f.PickRandom(new[] { "Full-Time", "Part-Time", "Contractor", "Freelance" }))
+                .RuleFor(d => d.EmploymentStartDate, f => f.Date.Past(1))
+                .RuleFor(d => d.EmploymentEndDate, f => f.Date.Future(5))
+                .RuleFor(d => d.CompanyId, f => f.PickRandom(companies).CompanyId)
+                .RuleFor(d => d.PhotoId, f => f.PickRandom(photos).PhotoId)
+                .RuleFor(d => d.CreatedAt, f => f.Date.Past(1))
+                .RuleFor(d => d.UpdatedAt, f => null as DateTime?)
+                .RuleFor(d => d.DeletedAt, f => null as DateTime?);
+            var drivers = Enumerable.Range(1, amount)
+                .Select(i => SeedRow(driverFaker, i))
+                .ToList();
+            return drivers;
+        }
 
-        //private IReadOnlyCollection<Expense> GenerateExpenses(int amount)
-        //{
-        //    var ExpenseId = 1;
-        //    var ExpenseFaker = new Faker<Expense>()
-        //        //.RuleFor(c => c.ExpensesId, f => f.ExpenseId++)
-        //        //.RuleFor(c => c.DriverId, f => f.)
-        //        .RuleFor(c => c.DriverPayment, f => f.Finance.Amount())
-        //        .RuleFor(c => c.FuelCost, f => f.Finance.Amount())
-        //        .RuleFor(c => c.MaintenanceCost, f => f.Finance.Amount())
-        //        //.RuleFor(c => c.Category, f => f.PickRandom<ExpenseCategory>())
-        //        .RuleFor(c => c.Date, f => f.Date.Past())
-        //        .RuleFor(c => c.Note, f => f.Rant.Review())
-        //        .RuleFor(c => c.CreatedAt, f => f.Date.Past())
-        //        .RuleFor(c => c.UpdatedAt, f => null as DateTime?)
-        //        .RuleFor(c => c.DeletedAt, f => null as DateTime?)
-        //        .RuleFor(c => c.Driver, f => null)
-        //        .RuleFor(c => c.Truck, f => null);
-
-        //}
-
+        /// <summary>
+        /// Генерація машин
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <returns></returns>
         private IReadOnlyCollection<Truck> GenerateTrucks(int amount)
         {
             var TruckId = 1;
@@ -128,7 +178,12 @@ namespace FakeDataDriverDbGenerator.Seeders
             return trucks;
         }
 
-
+        /// <summary>
+        /// Генерація інспекцій
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <param name="trucks"></param>
+        /// <returns></returns>
         private IReadOnlyCollection<Inspection> GenerateInspections(int amount, IEnumerable<Truck> trucks)
         {
             var InspectionId = 1;
@@ -148,75 +203,79 @@ namespace FakeDataDriverDbGenerator.Seeders
             return inspections;
         }
 
-
-
-
-        // private static IReadOnlyCollection<ProductProductCategory> GenerateProductProductCategories(
-        //int amount,
-        //IEnumerable<Product> products,
-        //IEnumerable<ProductCategory> productCategories)
-        // {
-        //     // Now we set up the faker for our join table.
-        //     // We do this by grabbing a random product and category that were generated.
-        //     var productProductCategoryFaker = new Faker<ProductProductCategory>()
-        //         .RuleFor(x => x.ProductId, f => f.PickRandom(products).Id)
-        //         .RuleFor(x => x.CategoryId, f => f.PickRandom(productCategories).Id);
-
-        //     var productProductCategories = Enumerable.Range(1, amount)
-        //         .Select(i => SeedRow(productProductCategoryFaker, i))
-        //         // We do this GroupBy() + Select() to remove the duplicates
-        //         // from the generated join table entities
-        //         .GroupBy(x => new { x.ProductId, x.CategoryId })
-        //         .Select(x => x.First())
-        //         .ToList();
-
-        //     return productProductCategories;
-        // }
-
-
-
-
-
-
-        //private IReadOnlyCollection<Repair> GenerateRepairs(int amount)
-        //{
-        //    var RepairId = 1;
-        //    var RepairFaker = new Faker<Repair>()
-        //        .RuleFor(c => c.RepairDate, f => f.Date.Past())
-        //        .RuleFor(c => c.Description, f => f.Lorem.Text())
-        //        .RuleFor(c => c.Cost, f => f.Finance.Amount())
-        //        //.RuleFor(c => c.TruckId, f => )
-        //        .RuleFor(c => c.CreatedAt, f => f.Date.Past())
-        //        .RuleFor(c => c.UpdatedAt, f => null as DateTime?)
-        //        .RuleFor(c => c.DeletedAt, f => null as DateTime?)
-        //        .RuleFor(c => c.Truck, f => null);
-        //}
-
-        private IReadOnlyCollection<Photo> GeneratePhotos(int amount)
+        /// <summary>
+        /// Генерація ремонтів
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <param name="trucks"></param>
+        /// <returns></returns>
+        private IReadOnlyCollection<Repair> GenerateRepairs(int amount, IEnumerable<Truck> trucks)
         {
-            var PhotoId = 1;
-            var photoFaker = new Faker<Photo>()
-                .RuleFor(c => c.PhotoId, f => PhotoId++)
-                .RuleFor(c => c.PhotoData, f => Convert.FromBase64String(f.Image.DataUri(100, 100).Split(',')[1]))
-                .RuleFor(c => c.ContentType, (f, u) => f.Commerce.Categories(1)[0])
-                .RuleFor(c => c.FileName, f => f.Lorem.Word())
-                .RuleFor(c => c.FileSize, f => f.Random.Number(1000, 50000))
+            var RepairId = 1;
+            var RepairFaker = new Faker<Repair>()
+                .RuleFor(c => c.RepairId, f => RepairId++)
+                .RuleFor(c => c.RepairDate, f => f.Date.Past())
+                .RuleFor(c => c.Description, f => f.Lorem.Sentence())
+                .RuleFor(c => c.Cost, f => f.Finance.Amount())
+                .RuleFor(c => c.TruckId, f => f.PickRandom(trucks).TruckId)
                 .RuleFor(c => c.CreatedAt, f => f.Date.Past())
                 .RuleFor(c => c.UpdatedAt, f => null as DateTime?)
-                .RuleFor(c => c.DeletedAt, f => null as DateTime?);
-            var photos = Enumerable.Range(1, amount)
-                .Select(i => SeedRow(photoFaker, i))
+                .RuleFor(c => c.DeletedAt, f => null as DateTime?)
+                .RuleFor(c => c.Truck, f => null);
+            var repairs = Enumerable.Range(1, amount)
+                .Select(i => SeedRow(RepairFaker, i))
                 .ToList();
-            return photos;
+            return repairs;
         }
 
+        /// <summary>
+        /// Генерація вартості. Виступає також як проміжна таблиця
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        private IReadOnlyCollection<Expense> GenerateExpenses(int amount,
+            IEnumerable<Driver> drivers,
+            IEnumerable<Truck> trucks)
+        {
+            var ExpenseId = 1;
+            var ExpenseFaker = new Faker<Expense>()
+                .RuleFor(c => c.ExpensesId, f => ExpenseId++)
+                .RuleFor(c => c.DriverId, f => f.PickRandom(drivers).DriverId)
+                .RuleFor(c => c.TruckId, f => f.PickRandom(trucks).TruckId)
+                .RuleFor(c => c.DriverPayment, f => f.Finance.Amount())
+                .RuleFor(c => c.FuelCost, f => f.Finance.Amount())
+                .RuleFor(c => c.MaintenanceCost, f => f.Finance.Amount())
+                .RuleFor(c => c.Category, f => f.Commerce.Categories(1)[0])
+                .RuleFor(c => c.Date, f => f.Date.Past())
+                .RuleFor(c => c.Note, f => f.Rant.Review())
+                .RuleFor(c => c.CreatedAt, f => f.Date.Past())
+                .RuleFor(c => c.UpdatedAt, f => null as DateTime?)
+                .RuleFor(c => c.DeletedAt, f => null as DateTime?)
+                .RuleFor(c => c.Driver, f => null as Driver)
+                .RuleFor(c => c.Truck, f => null as Truck);
 
+            var expenses = Enumerable.Range(1, amount)
+                .Select(i => SeedRow(ExpenseFaker, i))
+                // We do this GroupBy() + Select() to remove the duplicates
+                // from the generated join table entities
+                .GroupBy(x => new { x.DriverId, x.TruckId })
+                .Select(x => x.First())
+                .ToList();
+
+            return expenses;
+        }
+
+        /// <summary>
+        /// Допомійжний метод
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="faker"></param>
+        /// <param name="rowId"></param>
+        /// <returns></returns>
         private static T SeedRow<T>(Faker<T> faker, int rowId) where T : class
         {
             var recordRow = faker.UseSeed(rowId).Generate();
             return recordRow;
         }
-
-
     }
 }

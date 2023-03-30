@@ -23,7 +23,7 @@ namespace FakeDataDriverDbGenerator.Configurations
 
             modelbuilder.Property(e => e.DeletedAt).HasColumnType("datetime");
 
-            modelbuilder.Property(e => e.Description).HasMaxLength(200);
+            modelbuilder.Property(e => e.Description).HasMaxLength(2000);
 
             modelbuilder.Property(e => e.RepairDate).HasColumnType("date");
 

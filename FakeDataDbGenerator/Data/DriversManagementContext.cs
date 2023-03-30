@@ -17,6 +17,7 @@ namespace FakeDataDriverDbGenerator.Data
         public DriversManagementContext(DbContextOptions<DriversManagementContext> options)
             : base(options)
         {
+
         }
 
         public virtual DbSet<Company> Companies { get; set; } = null!;
@@ -49,12 +50,14 @@ namespace FakeDataDriverDbGenerator.Data
             var databaseSeeder = new DriversManagementDatabaseSeeder();
 
             modelBuilder.Entity<Company>().HasData(databaseSeeder.Companies);
-            modelBuilder.Entity<Driver>().HasData(databaseSeeder.Drivers);
-            modelBuilder.Entity<Expense>().HasData(databaseSeeder.Expenses);
-            modelBuilder.Entity<Inspection>().HasData(databaseSeeder.Inspections);
             modelBuilder.Entity<Photo>().HasData(databaseSeeder.Photos);
+            modelBuilder.Entity<Driver>().HasData(databaseSeeder.Drivers);
+            
+            modelBuilder.Entity<Inspection>().HasData(databaseSeeder.Inspections);
             modelBuilder.Entity<Repair>().HasData(databaseSeeder.Repairs);
             modelBuilder.Entity<Truck>().HasData(databaseSeeder.Trucks);
+
+            //modelBuilder.Entity<Expense>().HasData(databaseSeeder.Expenses);
         }
     }
 }
