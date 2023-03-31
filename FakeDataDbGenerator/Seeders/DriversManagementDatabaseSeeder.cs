@@ -112,8 +112,10 @@ namespace FakeDataDriverDbGenerator.Seeders
             IEnumerable<Photo> photos)
         {
             var DriverId = 1;
+            var uniquePhotoId = 1;
+
             var driverFaker = new Faker<Driver>()
-                .RuleFor(c => c.DriverId, f => DriverId++)
+                .RuleFor(d => d.DriverId, f => DriverId++)
                 .RuleFor(d => d.FirstName, f => f.Name.FirstName())
                 .RuleFor(d => d.LastName, f => f.Name.LastName())
                 .RuleFor(d => d.MiddleName, f => f.Name.LastName())
@@ -137,7 +139,9 @@ namespace FakeDataDriverDbGenerator.Seeders
                 .RuleFor(d => d.EmploymentStartDate, f => f.Date.Past(1))
                 .RuleFor(d => d.EmploymentEndDate, f => f.Date.Future(5))
                 .RuleFor(d => d.CompanyId, f => f.PickRandom(companies).CompanyId)
-                .RuleFor(d => d.PhotoId, f => f.PickRandom(photos).PhotoId)
+                .RuleFor(d => d.PhotoId, f => f. PickRandom(photos).PhotoId)
+                .RuleFor(d => d.PhotoId, f => uniquePhotoId++)//)f.PickRandom(photos).PhotoId)
+
                 .RuleFor(d => d.CreatedAt, f => f.Date.Past(1))
                 .RuleFor(d => d.UpdatedAt, f => null as DateTime?)
                 .RuleFor(d => d.DeletedAt, f => null as DateTime?);

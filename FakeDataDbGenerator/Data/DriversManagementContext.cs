@@ -57,7 +57,7 @@ namespace FakeDataDriverDbGenerator.Data
             modelBuilder.Entity<Repair>().HasData(databaseSeeder.Repairs);
             modelBuilder.Entity<Truck>().HasData(databaseSeeder.Trucks);
 
-            //modelBuilder.Entity<Expense>().HasData(databaseSeeder.Expenses);
+            modelBuilder.Entity<Expense>().HasData(databaseSeeder.Expenses);
         }
     }
 }
