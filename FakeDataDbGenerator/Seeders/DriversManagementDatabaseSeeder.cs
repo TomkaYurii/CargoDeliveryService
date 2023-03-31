@@ -2,6 +2,7 @@
 using FakeDataDriverDbGenerator.Entities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -112,8 +113,7 @@ namespace FakeDataDriverDbGenerator.Seeders
             IEnumerable<Photo> photos)
         {
             var DriverId = 1;
-            var uniquePhotoId = 1;
-
+            var Counter = 0;
             var driverFaker = new Faker<Driver>()
                 .RuleFor(d => d.DriverId, f => DriverId++)
                 .RuleFor(d => d.FirstName, f => f.Name.FirstName())
@@ -140,8 +140,7 @@ namespace FakeDataDriverDbGenerator.Seeders
                 .RuleFor(d => d.EmploymentEndDate, f => f.Date.Future(5))
                 .RuleFor(d => d.CompanyId, f => f.PickRandom(companies).CompanyId)
                 .RuleFor(d => d.PhotoId, f => f. PickRandom(photos).PhotoId)
-                .RuleFor(d => d.PhotoId, f => uniquePhotoId++)//)f.PickRandom(photos).PhotoId)
-
+                .RuleFor(d => d.PhotoId, f => photos.ElementAt(Counter++).PhotoId)
                 .RuleFor(d => d.CreatedAt, f => f.Date.Past(1))
                 .RuleFor(d => d.UpdatedAt, f => null as DateTime?)
                 .RuleFor(d => d.DeletedAt, f => null as DateTime?);
