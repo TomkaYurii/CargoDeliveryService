@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Text;
+using static Program;
 
 class Program
 {
@@ -27,10 +28,10 @@ class Program
             switch (input)
             {
                 case "1":
-                    await Task.Run(() => Task1());
+                    await Task.Run(() => DeleteDatabase());
                     break;
                 case "2":
-                    await Task.Run(() => Task2());
+                    await Task.Run(() => CreateDatabase());
                     break;
                 case "3":
                     exit = true;
@@ -44,7 +45,10 @@ class Program
         }
     }
 
-    static void Task1()
+    /// <summary>
+    /// ВИДАЛЕННЯ БАЗИ ДАНИХ
+    /// </summary>
+    static void DeleteDatabase()
     {
         Console.Clear();
         Console.WriteLine("Task is started...\n");
@@ -60,7 +64,7 @@ class Program
         string connectionString;
 
         // Перевіряєм, чи є у користувача логін та пароль для бази даних
-        Console.WriteLine("Чи встановлено на бахі даних логін та пароль? (y/n): ");
+        Console.WriteLine("Чи встановлено на базі даних логін та пароль? (y/n): ");
         string response = Console.ReadLine().ToLower();
 
         if (response == "y")
@@ -86,9 +90,7 @@ class Program
 
 
         // Створення контексту бази даних
-        DbContextOptionsBuilder builder = new DbContextOptionsBuilder();
-        builder.UseSqlServer(connectionString);
-        using (var dbContext = new DbContext(builder.Options))
+        using (var dbContext = new DbContext(new DbContextOptionsBuilder().UseSqlServer(connectionString).Options))
         {
             // Перевірка існування бази даних
             bool databaseExists = dbContext.Database.CanConnect();
@@ -109,17 +111,116 @@ class Program
         Console.Clear();
     }
 
-    static void Task2()
+    /// <summary>
+    /// СТВОРЕННЯ БАЗИ ДАНИХ
+    /// </summary>
+    static void CreateDatabase()
     {
-        Console.WriteLine("Задача 2 выполняется...");
-        // Выполнение задачи 2
-    }
+        Console.Clear();
+        Console.WriteLine("Task is started...\n");
+        Task.Delay(1000).Wait();
 
-    public class MyDbContext : DbContext
-    {
-        public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
+        Console.WriteLine("==================");
+        Console.Write("Введіть ім'я серверу: \n");
+        string serverName = Console.ReadLine();
+
+        Console.Write("Введыть ім'я бази даних: \n");
+        string databaseName = Console.ReadLine();
+
+        Console.Write("Чи хочете ви використовувати логін ты пароль для доступу до бази даних? (y/n): \n");
+        string useCredentials = Console.ReadLine();
+
+        string connectionString;
+        if (useCredentials.ToLower() == "y")
         {
+            Console.Write("Введіть ім'я користувача: \n");
+            string userName = Console.ReadLine();
+
+            Console.Write("Введіть пароль: \n");
+            string password = ReadPassword();
+
+            connectionString = $"Server={serverName};Database={databaseName};User Id={userName};Password={password};Integrated Security=true;";
         }
+        else
+        {
+            connectionString = $"Server={serverName};Database={databaseName};Integrated Security=true;";
+        }
+
+
+        using (var context = new DbContext(new DbContextOptionsBuilder().UseSqlServer(connectionString).Options))
+        {
+            if (context.Database.CanConnect())
+            {
+                Console.WriteLine($"База даних {databaseName} вже існує. Бажаєте змінити ім'я бази даних? Якщо не змынимо - то відбудеться перезапис (y/n): \n");
+                bool renameDatabase = Console.ReadLine().ToLower() == "y";
+
+                if (renameDatabase)
+                {
+                    Console.Write("Введіть нове ім'я бази даних: \n");
+                    string newDatabaseName = Console.ReadLine();
+                    connectionString = RenameDatabase(connectionString, newDatabaseName);
+                    context.Database.GetDbConnection().ConnectionString = connectionString;
+                    Console.WriteLine($"Рядок підключення та контекст даних змінено з в рахуванням того, що ім'я бази даних тепер: {newDatabaseName} \n");
+                    Console.WriteLine($"Рядок підключення: {connectionString} \n");
+                    context.Database.EnsureCreated();
+                    Console.WriteLine($"База даних {newDatabaseName} успішно створена! \n");
+                    Task.Delay(1000).Wait();
+                }
+            }
+            else
+            {
+                context.Database.EnsureCreated();
+                Console.WriteLine($"База даних {databaseName} успішно створена! \n");
+            }
+        }
+
+        Console.WriteLine("Task is finished...\n");
+        Task.Delay(2000).Wait();
+        Console.Clear();
     }
 
+    /// <summary>
+    /// Приховування вводимого паролю. По Enter завершується ввід
+    /// </summary>
+    /// <returns></returns>
+    static string ReadPassword()
+    {
+        string password = "";
+        ConsoleKeyInfo key;
+
+        do
+        {
+            key = Console.ReadKey(true);
+
+            if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
+            {
+                password += key.KeyChar;
+                Console.Write("*");
+            }
+            else if (key.Key == ConsoleKey.Backspace && password.Length > 0)
+            {
+                password = password.Substring(0, (password.Length - 1));
+                Console.Write("\b \b");
+            }
+        } while (key.Key != ConsoleKey.Enter);
+
+        Console.WriteLine();
+
+        return password;
+    }
+
+    /// <summary>
+    /// Зміна імені бази даних у рядку піключення
+    /// </summary>
+    /// <param name="connectionString"></param>
+    /// <param name="newDatabaseName"></param>
+    /// <returns></returns>
+    static string RenameDatabase(string connectionString, string newDatabaseName)
+    {
+        SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(connectionString);
+        builder.InitialCatalog = newDatabaseName;
+        string newConnectionString = builder.ToString();
+        Console.WriteLine($"Ім'я бази даних успішно змінено на {newDatabaseName}.");
+        return newConnectionString;
+    }
 }
