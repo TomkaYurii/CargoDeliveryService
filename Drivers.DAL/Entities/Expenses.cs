@@ -2,7 +2,7 @@
 {
     public class Expenses
     {
-        public int ExpensesID { get; set; }
+        public int Id { get; set; }
         public decimal DriverPayment { get; set; }
         public decimal FuelCost { get; set; }
         public decimal MaintenanceCost { get; set; }

@@ -38,14 +38,16 @@ namespace Drivers.BLL.Managers
             return result;
         }
 
-        public Task<IEnumerable<ShortDriverResponceDTO>> GetListOfAllDrivers()
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<PagedList<EFDriver>> GetPaginatedDrivers(DriverParameters driverParameters)
         {
             return await _EFuow.EFDriverRepository.GetPaginatedDriversAsync(driverParameters);
+        }
+
+
+
+        public Task<IEnumerable<ShortDriverResponceDTO>> GetListOfAllDrivers()
+        {
+            throw new NotImplementedException();
         }
     }
 }

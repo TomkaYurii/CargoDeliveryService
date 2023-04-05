@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Drivers.DAL_EF.Entities
 {
-    public partial class EFPhoto
+    public class EFPhoto
     {
-        public int PhotoId { get; set; }
+        public int Id { get; set; }
         public byte[] PhotoData { get; set; } = null!;
         public string ContentType { get; set; } = null!;
         public string FileName { get; set; } = null!;

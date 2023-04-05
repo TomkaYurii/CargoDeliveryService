@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Drivers.DAL_EF.Entities
 {
-    public partial class EFInspection
+    public class EFInspection
     {
-        public int InspectionId { get; set; }
+        public int Id { get; set; }
         public DateTime InspectionDate { get; set; }
         public string? Description { get; set; }
         public bool Result { get; set; }

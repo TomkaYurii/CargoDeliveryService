@@ -2,7 +2,7 @@
 {
     public class Repair
     {
-        public int RepairID { get; set; }
+        public int Id { get; set; }
         public DateTime RepairDate { get; set; }
         public string Description { get; set; } = default!;
         public decimal Cost { get; set; }

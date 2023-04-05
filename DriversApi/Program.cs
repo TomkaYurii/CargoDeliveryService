@@ -10,6 +10,7 @@ using Drivers.DAL_EF.Helpers;
 using Drivers.DAL_EF.Repositories;
 using Drivers.DAL_EF.UOW;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System.Data;
 
 
@@ -50,7 +51,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddDbContext<DriversManagementContext>(options =>
 {
     string connectionString = builder.Configuration.GetConnectionString("MSSQLConnection");
-    //options.UseSqlServer(connectionString);
+    options.UseSqlServer(connectionString);
 });
 // Dependendency Injection for Repositories/UOW from EF DAL
 builder.Services.AddScoped<IEFDriverRepository, EFDriverRepository>();

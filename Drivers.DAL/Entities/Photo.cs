@@ -8,7 +8,7 @@ namespace Drivers.DAL_ADO.Entities
 {
     public class Photo
     {
-        public int PhotoID { get; set; }
+        public int Id { get; set; }
         public byte[]? PhotoData { get; set; }
         public string? ContentType { get; set; }
         public string? FileName { get; set; }

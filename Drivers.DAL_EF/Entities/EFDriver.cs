@@ -3,14 +3,9 @@ using System.Collections.Generic;
 
 namespace Drivers.DAL_EF.Entities
 {
-    public partial class EFDriver
+    public class EFDriver
     {
-        public EFDriver()
-        {
-            Expenses = new HashSet<EFExpense>();
-        }
-
-        public int DriverId { get; set; }
+        public int Id { get; set; }
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
         public string? MiddleName { get; set; }

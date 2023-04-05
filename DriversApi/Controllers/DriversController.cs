@@ -26,11 +26,6 @@ namespace Drivers.Api.Controllers
 
 
         //GET: api/driver/Id
-        /// <summary>
-        /// Отримання повної ынформації про водія
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<FullDriverResponceDTO>> GetFullInfoAboutDriver(int id)
         {

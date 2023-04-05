@@ -8,7 +8,7 @@ namespace Drivers.DAL_ADO.Entities
 {
     public class Driver
     {
-        public int DriverID { get; set; }
+        public int Id { get; set; }
         public string FirstName { get; set; } = default!;
         public string LastName { get; set; } = default!;
         public string MiddleName { get; set; } = default!;

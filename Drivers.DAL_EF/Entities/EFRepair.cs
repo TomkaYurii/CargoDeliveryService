@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Drivers.DAL_EF.Entities
 {
-    public partial class EFRepair
+    public class EFRepair
     {
-        public int RepairId { get; set; }
+        public int Id { get; set; }
         public DateTime RepairDate { get; set; }
         public string? Description { get; set; }
         public decimal Cost { get; set; }

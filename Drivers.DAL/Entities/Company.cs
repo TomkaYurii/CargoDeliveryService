@@ -2,7 +2,7 @@
 {
     public class Company
     {
-        public int CompanyID { get; set; }
+        public int Id { get; set; }
         public string CompanyName { get; set; } = default!;
         public string Address { get; set; } = default!;
         public string Phone { get; set; } = default!;

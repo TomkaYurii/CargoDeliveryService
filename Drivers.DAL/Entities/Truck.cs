@@ -2,7 +2,7 @@
 {
     public class Truck
     {
-        public int TruckID { get; set; }
+        public int Id { get; set; }
         public string TruckNumber { get; set; } = default!;
         public string Model { get; set; } = default!;
         public int Year { get; set; }
