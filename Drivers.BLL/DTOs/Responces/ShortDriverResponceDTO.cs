@@ -9,10 +9,10 @@ namespace Drivers.BLL.DTOs.Responces
     public class ShortDriverResponceDTO
     {
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string CompanyName { get; set; }
-        public decimal DriverPayment { get; set; }
-        public string TruckModel { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public string? CompanyName { get; set; }
+        public decimal? DriverPayment { get; set; }
+        public string? TruckModel { get; set; }
     }
 }

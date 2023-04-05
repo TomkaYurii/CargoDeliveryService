@@ -42,11 +42,6 @@ namespace FakeDataDriverDbGenerator.Data
                 if (connectionString != null)
                 optionsBuilder.UseSqlServer(connectionString);
             }
-
-            //if (!optionsBuilder.IsConfigured)
-            //{
-            //    optionsBuilder.UseSqlServer("Data Source=DESKTOP-TOMKA;Initial Catalog=DriversManagement20;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-            //}
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

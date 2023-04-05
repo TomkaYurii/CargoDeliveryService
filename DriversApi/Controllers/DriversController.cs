@@ -1,9 +1,12 @@
 ﻿using Drivers.BLL.Contracts;
 using Drivers.BLL.DTOs;
 using Drivers.BLL.DTOs.Responces;
-using Drivers.DAL.Contracts;
-using Drivers.DAL.Entities;
+using Drivers.DAL_EF.Contracts;
+using Drivers.DAL_EF.Entities;
+using Drivers.DAL_EF.Entities.HelpModels;
+using Drivers.DAL_EF.Helpers;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Drivers.Api.Controllers
 {
@@ -23,6 +26,11 @@ namespace Drivers.Api.Controllers
 
 
         //GET: api/driver/Id
+        /// <summary>
+        /// Отримання повної ынформації про водія
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<FullDriverResponceDTO>> GetFullInfoAboutDriver(int id)
         {
@@ -48,27 +56,44 @@ namespace Drivers.Api.Controllers
             }
         }
 
+        //GET: api/driver
+        [HttpGet]
+        public async Task<ActionResult<PagedList<EFDriver>>> GetAllDriversAsync([FromQuery] DriverParameters driverParameters)
+        {
+            if (!driverParameters.ValidYearRange)
+            {
+                return BadRequest("Max year of birth cannot be less than min year of birth");
+            }
+            try
+            {
+                var drivers = await _DriversManager.GetPaginatedDrivers(driverParameters);
+                var metadata = new
+                {
+                    drivers.TotalCount,
+                    drivers.PageSize,
+                    drivers.CurrentPage,
+                    drivers.TotalPages,
+                    drivers.HasNext,
+                    drivers.HasPrevious
+                };
+
+                Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+
+                _logger.LogInformation($"Returned {drivers.TotalCount} owners from database.");
+
+                return Ok(drivers);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Запит не відпрацював, щось пішло не так! - {ex.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, "вот так вот!");
+            }
+        }
 
 
 
 
-        ////GET: api/driver
-        //[HttpGet]
-        //public async Task<ActionResult< IEnumerable<Driver> >> GetAllEventsAsync()
-        //{
-        //    try
-        //    {
-        //        var results = await _ADOuow._driverRepository.GetAllAsync();
 
-        //        _logger.LogInformation($"Отримали всі записи з таблиці DRIVERS");
-        //        return Ok(results);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError($"Запит не відпрацював, щось пішло не так! - {ex.Message}");
-        //        return StatusCode(StatusCodes.Status500InternalServerError, "вот так вот!");
-        //    }
-        //}
 
         ////GET: api/driver/Id
         //[HttpGet("{id}")]

@@ -1,13 +1,8 @@
-﻿using Drivers.DAL.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Drivers.DAL_ADO.Entities;
 
-namespace Drivers.DAL.Contracts
+namespace Drivers.DAL_ADO.Contracts
 {
-    public interface IDriverRepository :IGenericRepository<Driver>
+    public interface IDriverRepository : IGenericRepository<Driver>
     {
         Task<IEnumerable<Driver>> GetAllDrivers();
         Task<Driver> GetDriversInfo();

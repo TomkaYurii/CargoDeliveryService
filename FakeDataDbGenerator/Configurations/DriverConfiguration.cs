@@ -91,4 +91,3 @@ namespace FakeDataDriverDbGenerator.Configurations
             }
         }
 }
-

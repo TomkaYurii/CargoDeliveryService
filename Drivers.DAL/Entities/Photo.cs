@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Drivers.DAL.Entities
+namespace Drivers.DAL_ADO.Entities
 {
     public class Photo
     {

@@ -3,11 +3,11 @@ using System.Text;
 using System.Data;
 using Dapper;
 using System.ComponentModel;
-using Drivers.DAL.Contracts;
 using Microsoft.Data.SqlClient;
-using Drivers.DAL.Entities;
+using Drivers.DAL_ADO.Entities;
+using Drivers.DAL_ADO.Contracts;
 
-namespace Drivers.DAL.Repositories
+namespace Drivers.DAL_ADO.Repositories
 {
     public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
     {
