@@ -13,19 +13,20 @@ namespace FakeDataDriverDbGenerator.Configurations
     {
         public void Configure(EntityTypeBuilder<Photo> modelbuilder)
         {
-            modelbuilder.Property(e => e.PhotoId).HasColumnName("PhotoID");
+            modelbuilder.HasKey(p => p.Id);
+            modelbuilder.Property(p => p.Id).HasColumnName("Id");
 
-            modelbuilder.Property(e => e.ContentType).HasMaxLength(50);
+            modelbuilder.Property(p => p.ContentType).HasMaxLength(50);
 
-            modelbuilder.Property(e => e.CreatedAt)
+            modelbuilder.Property(p => p.CreatedAt)
                 .HasColumnType("datetime")
                 .HasDefaultValueSql("(getdate())");
 
-            modelbuilder.Property(e => e.DeletedAt).HasColumnType("datetime");
+            modelbuilder.Property(p => p.DeletedAt).HasColumnType("datetime");
 
-            modelbuilder.Property(e => e.FileName).HasMaxLength(255);
+            modelbuilder.Property(p => p.FileName).HasMaxLength(255);
 
-            modelbuilder.Property(e => e.UpdatedAt)
+            modelbuilder.Property(p => p.UpdatedAt)
                 .HasColumnType("datetime")
                 .HasDefaultValueSql("(getdate())");
         }

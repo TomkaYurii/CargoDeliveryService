@@ -13,28 +13,28 @@ namespace FakeDataDriverDbGenerator.Configurations
     {
         public void Configure(EntityTypeBuilder<Inspection> modelbuilder)
         {
-            modelbuilder.HasKey(i => i.InspectionId);
-            modelbuilder.Property(e => e.InspectionId).HasColumnName("InspectionID");
+            modelbuilder.HasKey(i => i.Id);
+            modelbuilder.Property(i => i.Id).HasColumnName("Id");
 
-            modelbuilder.Property(e => e.CreatedAt)
+            modelbuilder.Property(i => i.CreatedAt)
                 .HasColumnType("datetime")
                 .HasDefaultValueSql("(getdate())");
 
-            modelbuilder.Property(e => e.DeletedAt).HasColumnType("datetime");
+            modelbuilder.Property(i => i.DeletedAt).HasColumnType("datetime");
 
-            modelbuilder.Property(e => e.Description).HasMaxLength(500);
+            modelbuilder.Property(i => i.Description).HasMaxLength(500);
 
-            modelbuilder.Property(e => e.InspectionDate).HasColumnType("date");
+            modelbuilder.Property(i => i.InspectionDate).HasColumnType("date");
 
-            modelbuilder.Property(e => e.TruckId).HasColumnName("TruckID");
+            modelbuilder.Property(i => i.TruckId).HasColumnName("TruckID");
 
-            modelbuilder.Property(e => e.UpdatedAt)
+            modelbuilder.Property(i => i.UpdatedAt)
                 .HasColumnType("datetime")
                 .HasDefaultValueSql("(getdate())");
 
-            modelbuilder.HasOne(d => d.Truck)
-                .WithMany(p => p.Inspections)
-                .HasForeignKey(d => d.TruckId)
+            modelbuilder.HasOne(i => i.Truck)
+                .WithMany(t => t.Inspections)
+                .HasForeignKey(i => i.TruckId)
                 .HasConstraintName("FK__Inspectio__Truck__300424B4");
         }
     }

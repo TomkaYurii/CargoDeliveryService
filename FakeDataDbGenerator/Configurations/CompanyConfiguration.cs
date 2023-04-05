@@ -14,28 +14,29 @@ namespace FakeDataDriverDbGenerator.Configurations
     {
         public void Configure(EntityTypeBuilder<Company> modelbuilder)
         {
-            modelbuilder.Property(e => e.CompanyId).HasColumnName("CompanyID");
-            modelbuilder.Property(e => e.Address).HasMaxLength(100);
+            modelbuilder.HasKey(c => c.Id);
+            modelbuilder.Property(c => c.Id).HasColumnName("Id");
+            modelbuilder.Property(c => c.Address).HasMaxLength(100);
 
-            modelbuilder.Property(e => e.CompanyName).HasMaxLength(100);
+            modelbuilder.Property(c => c.CompanyName).HasMaxLength(100);
 
-            modelbuilder.Property(e => e.ContactEmail).HasMaxLength(50);
+            modelbuilder.Property(c => c.ContactEmail).HasMaxLength(50);
 
-            modelbuilder.Property(e => e.ContactPerson).HasMaxLength(100);
+            modelbuilder.Property(c => c.ContactPerson).HasMaxLength(100);
 
-            modelbuilder.Property(e => e.ContactPhone).HasMaxLength(20);
+            modelbuilder.Property(c => c.ContactPhone).HasMaxLength(20);
 
-            modelbuilder.Property(e => e.CreatedAt)
+            modelbuilder.Property(c => c.CreatedAt)
                 .HasColumnType("datetime")
                 .HasDefaultValueSql("(getdate())");
 
-            modelbuilder.Property(e => e.DeletedAt).HasColumnType("datetime");
+            modelbuilder.Property(c => c.DeletedAt).HasColumnType("datetime");
 
-            modelbuilder.Property(e => e.Email).HasMaxLength(50);
+            modelbuilder.Property(c => c.Email).HasMaxLength(50);
 
-            modelbuilder.Property(e => e.Phone).HasMaxLength(20);
+            modelbuilder.Property(c => c.Phone).HasMaxLength(20);
 
-            modelbuilder.Property(e => e.UpdatedAt)
+            modelbuilder.Property(c => c.UpdatedAt)
                 .HasColumnType("datetime")
                 .HasDefaultValueSql("(getdate())");
 

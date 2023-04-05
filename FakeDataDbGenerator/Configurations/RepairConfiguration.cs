@@ -13,29 +13,30 @@ namespace FakeDataDriverDbGenerator.Configurations
     {
         public void Configure( EntityTypeBuilder<Repair> modelbuilder)
         {
-            modelbuilder.Property(e => e.RepairId).HasColumnName("RepairID");
+            modelbuilder.HasKey(r => r.Id);
+            modelbuilder.Property(r => r.Id).HasColumnName("Id");
 
-            modelbuilder.Property(e => e.Cost).HasColumnType("decimal(10, 2)");
+            modelbuilder.Property(r => r.Cost).HasColumnType("decimal(10, 2)");
 
-            modelbuilder.Property(e => e.CreatedAt)
+            modelbuilder.Property(r => r.CreatedAt)
                 .HasColumnType("datetime")
                 .HasDefaultValueSql("(getdate())");
 
-            modelbuilder.Property(e => e.DeletedAt).HasColumnType("datetime");
+            modelbuilder.Property(r => r.DeletedAt).HasColumnType("datetime");
 
-            modelbuilder.Property(e => e.Description).HasMaxLength(2000);
+            modelbuilder.Property(r => r.Description).HasMaxLength(2000);
 
-            modelbuilder.Property(e => e.RepairDate).HasColumnType("date");
+            modelbuilder.Property(r => r.RepairDate).HasColumnType("date");
 
-            modelbuilder.Property(e => e.TruckId).HasColumnName("TruckID");
+            modelbuilder.Property(r => r.TruckId).HasColumnName("TruckID");
 
-            modelbuilder.Property(e => e.UpdatedAt)
+            modelbuilder.Property(r => r.UpdatedAt)
                 .HasColumnType("datetime")
                 .HasDefaultValueSql("(getdate())");
 
-            modelbuilder.HasOne(d => d.Truck)
-                .WithMany(p => p.Repairs)
-                .HasForeignKey(d => d.TruckId)
+            modelbuilder.HasOne(r => r.Truck)
+                .WithMany(t => t.Repairs)
+                .HasForeignKey(r => r.TruckId)
                 .HasConstraintName("FK__Repairs__TruckID__34C8D9D1");
         }
     }

@@ -5,7 +5,7 @@ namespace FakeDataDriverDbGenerator.Entities
 {
     public partial class Repair
     {
-        public int RepairId { get; set; }
+        public int Id { get; set; }
         public DateTime RepairDate { get; set; }
         public string? Description { get; set; }
         public decimal Cost { get; set; }

@@ -13,38 +13,38 @@ namespace FakeDataDriverDbGenerator.Configurations
     {
         public void Configure (EntityTypeBuilder<Truck> modelbuilder)
         {
-            modelbuilder.HasKey(t => t.TruckId);
-            modelbuilder.Property(t => t.TruckId).HasColumnName("TruckID");
+            modelbuilder.HasKey(t => t.Id);
+            modelbuilder.Property(t => t.Id).HasColumnName("Id");
 
-            modelbuilder.Property(e => e.ChassisNumber).HasMaxLength(50);
+            modelbuilder.Property(t => t.ChassisNumber).HasMaxLength(50);
 
-            modelbuilder.Property(e => e.CreatedAt)
+            modelbuilder.Property(t => t.CreatedAt)
                 .HasColumnType("datetime")
                 .HasDefaultValueSql("(getdate())");
 
-            modelbuilder.Property(e => e.DeletedAt).HasColumnType("datetime");
+            modelbuilder.Property(t => t.DeletedAt).HasColumnType("datetime");
 
-            modelbuilder.Property(e => e.EngineNumber).HasMaxLength(50);
+            modelbuilder.Property(t => t.EngineNumber).HasMaxLength(50);
 
-            modelbuilder.Property(e => e.FuelConsumption).HasColumnType("decimal(4, 2)");
+            modelbuilder.Property(t => t.FuelConsumption).HasColumnType("decimal(4, 2)");
 
-            modelbuilder.Property(e => e.FuelType).HasMaxLength(50);
+            modelbuilder.Property(t => t.FuelType).HasMaxLength(50);
 
-            modelbuilder.Property(e => e.InsuranceExpirationDate).HasColumnType("date");
+            modelbuilder.Property(t => t.InsuranceExpirationDate).HasColumnType("date");
 
-            modelbuilder.Property(e => e.InsurancePolicyNumber).HasMaxLength(50);
+            modelbuilder.Property(t => t.InsurancePolicyNumber).HasMaxLength(50);
 
-            modelbuilder.Property(e => e.Model).HasMaxLength(50);
+            modelbuilder.Property(t => t.Model).HasMaxLength(50);
 
-            modelbuilder.Property(e => e.RegistrationNumber).HasMaxLength(20);
+            modelbuilder.Property(t => t.RegistrationNumber).HasMaxLength(20);
 
-            modelbuilder.Property(e => e.TruckNumber).HasMaxLength(20);
+            modelbuilder.Property(t => t.TruckNumber).HasMaxLength(20);
 
-            modelbuilder.Property(e => e.UpdatedAt)
+            modelbuilder.Property(t => t.UpdatedAt)
                 .HasColumnType("datetime")
                 .HasDefaultValueSql("(getdate())");
 
-            modelbuilder.Property(e => e.Vin)
+            modelbuilder.Property(t => t.Vin)
                 .HasMaxLength(50)
                 .HasColumnName("VIN");
         }

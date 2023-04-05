@@ -25,12 +25,12 @@ class Program
         bool exit = false;
         while (!exit)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("=======================");
-            Console.WriteLine("Выберите задачу:");
+            Console.WriteLine("ВИБЕРІТЬ ЗАДАЧУ:");
             Console.WriteLine("1. Видалення бази даних");
             Console.WriteLine("2. Створення файлу міграцій");
             Console.WriteLine("3. Розгортання бази даних");
-            Console.WriteLine("6. Conf File");
             Console.WriteLine("4. Вихід");
             Console.WriteLine("=======================");
 
@@ -45,10 +45,6 @@ class Program
                     break;
                 case "3":
                     await Task.Run(() => CreateDatabase());
-                    break;
-                case "6":
-                    var str = "Data Source=DESKTOP-TOMKA;Initial Catalog=DDD;Integrated Security=True;";
-                    await Task.Run(() => ChangeConfigFile("ConnectionStrings:DefaultConnection", str));
                     break;
                 case "4":
                     exit = true;
@@ -123,9 +119,7 @@ class Program
         
         Console.WriteLine("Task is finished...\n");
         Task.Delay(2000).Wait();
-        Console.Clear();
-        Console.WriteLine("Press Enter to continue...");
-        while (Console.ReadKey().Key != ConsoleKey.Enter) ;
+        Console.WriteLine("Press Enter to continue...\n");
     }
 
     /// <summary>
@@ -133,23 +127,13 @@ class Program
     /// </summary>
     static void CreateMigration()
     {
-        // Получить текущую директорию
+        // Отримуємо поточну директорію
         string currentDirectory = Directory.GetCurrentDirectory();
-
-        // Поиск проекта в текущей директории и в директории выше
-        //string projectName = FindProject(currentDirectory);
-        //if (projectName == null)
-        //{
-        //    Console.WriteLine("Ошибка: проект не найден в текущей директории или в директории выше.");
-        //    return;
-        //}
-        //projectName = Path.GetFileNameWithoutExtension(projectName);
-        var projectName = "C:\\Users\\Yurii\\source\\repos\\CargoDeliveryService\\FakeDataDbGenerator\\FakeDataDriverDbGenerator.csproj";
-
+        //Шукаємо шлях до кореню проекту
+        var projectName = FindFileWithExtension(currentDirectory, "csproj");
         // Запитуємось у користувача ім'я файлу міграції
-        Console.Write("Введите имя миграции: ");
+        Console.Write("Введіть ім'я міграції: ");
         string? migrationName = Console.ReadLine();
-
         // Створюємо клас міграції з допомогою командного рядка операційної системи
         string command = $"dotnet ef migrations add {migrationName} --project {projectName} --no-build";
         Process process = new Process();
@@ -158,20 +142,16 @@ class Program
         process.StartInfo.RedirectStandardOutput = true;
         process.StartInfo.UseShellExecute = false;
         process.Start();
-
         // Виводимо результат виконання команди
         string output = process.StandardOutput.ReadToEnd();
         Console.WriteLine(output);
-
         // Очікуємо завершення процесу
         process.WaitForExit();
-
         Console.WriteLine("Press Enter to continue...");
-        while (Console.ReadKey().Key != ConsoleKey.Enter) ;
     }
 
     /// <summary>
-    /// СТВОРЕННЯ БАЗИ ДАНИХ
+    /// РОЗГОРТАННЯ БАЗИ ДАНИХ
     /// </summary>
     static void CreateDatabase()
     {
@@ -224,8 +204,11 @@ class Program
                         connectionString = RenameDatabase(connectionString, newDatabaseName);
                         Console.WriteLine($"Рядок підключення змінено з в рахуванням того, що ім'я бази даних тепер: {newDatabaseName} \n");
                         Console.WriteLine($"Новий рядок підключення: {connectionString} \n");
-                        // змінюємо рядок підключення в конфігураційному файлі
-                        ChangeConfigFile("ConnectionStrings:DefaultConnection", connectionString);
+                        // змінюємо рядок підключення в конфігураційному файлі (нове ім'я бази)
+                        string directory_path = Directory.GetCurrentDirectory();
+                        ChangeConfigFile(directory_path, "ConnectionStrings:DefaultConnection", connectionString);
+                        string? parentDirectory = Directory.GetParent(directory_path)?.FullName;
+                        ChangeConfigFile(directory_path, "ConnectionStrings:DefaultConnection", connectionString);
                     }
                     else
                     {
@@ -236,6 +219,11 @@ class Program
             else
             {
                 Console.WriteLine($"Такої бази даних {databaseName} не має. Продовжуємо!");
+                // змінюємо рядок підключення в конфігураційному файлі (нове ім'я бази даних)
+                string directory_path = Directory.GetCurrentDirectory();
+                ChangeConfigFile(directory_path, "ConnectionStrings:DefaultConnection", connectionString);
+                string? parentDirectory = Directory.GetParent(directory_path)?.FullName;
+                ChangeConfigFile(parentDirectory, "ConnectionStrings:DefaultConnection", connectionString);
             }
         }
 
@@ -251,15 +239,12 @@ class Program
                 Console.WriteLine($"Все пішло шкереберть!!! \n");
                 Console.WriteLine(ex.ToString());
             }
-
         }
 
         Console.WriteLine("Task is finished...\n");
         Task.Delay(2000).Wait();
-        Console.Clear();
 
         Console.WriteLine("Press Enter to continue...");
-        while (Console.ReadKey().Key != ConsoleKey.Enter) ;
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -312,23 +297,25 @@ class Program
     }
 
     /// <summary>
-    /// Пошук теки в якій знаходиться файл проекту
+    /// Пошук теки в якій знаходиться файл із певним розширенням
     /// </summary>
     /// <param name="directory"></param>
     /// <returns></returns>
-    static string? FindProject(string directory)
+    static string? FindFileWithExtension(string directory, string extension)
     {
-        string[] projectFiles = Directory.GetFiles(directory, "*.csproj");
-        if (projectFiles.Length > 0)
+        string currentDirectory = directory;
+        string[] files = Directory.GetFiles(currentDirectory, $"*.{extension}");
+
+        if (files.Length > 0)
         {
-            return projectFiles.FirstOrDefault();
+            return files[0];
         }
         else
         {
-            string? parentDirectory = Directory.GetParent(directory)?.FullName;
+            string? parentDirectory = Directory.GetParent(currentDirectory)?.FullName;
             if (parentDirectory != null)
             {
-                return FindProject(parentDirectory);
+                return FindFileWithExtension(parentDirectory, extension);
             }
             else
             {
@@ -338,21 +325,18 @@ class Program
     }
     
     /// <summary>
-    /// Зміна конфігураційного файлу в проекті
+    /// Зміна конфігураційного файлу
     /// </summary>
-    /// <param name="connection_string"></param>
-    static void ChangeConfigFile<T>(string key, T value)
+    /// <typeparam name="T"></typeparam>
+    /// <param name="directory_path"></param>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    static void ChangeConfigFile<T>(string directory_path, string key, T value)
     {
-        //Можем поменять конфигрурирование но не перезаписать файл
-        //var builder = new ConfigurationBuilder()
-        //    .SetBasePath(Directory.GetCurrentDirectory())
-        //    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-        //var configuration = builder.Build();
-        //configuration.GetSection("ConnectionStrings")["DefaultConnection"] = new_connection_string;
 
         try
         {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "appSettings.json");
+            string? filePath = FindFileWithExtension(directory_path, "json");
             string json = File.ReadAllText(filePath);
             dynamic? jsonObj = JsonConvert.DeserializeObject(json);
 
@@ -365,7 +349,7 @@ class Program
             }
             else
             {
-                jsonObj[sectionPath] = value; // if no sectionpath just set the value
+                jsonObj[sectionPath] = value;
             }
 
             string output =JsonConvert.SerializeObject(jsonObj, Formatting.Indented);
@@ -375,8 +359,6 @@ class Program
         {
             Console.WriteLine("Error writing app settings");
         }
-
-
-        Console.WriteLine("Connection string saved to appsettings.json.");
+        Console.WriteLine("Connection string збережено appsettings.json.");
     }
 }

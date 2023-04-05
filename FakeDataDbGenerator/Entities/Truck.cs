@@ -15,7 +15,7 @@ namespace FakeDataDriverDbGenerator.Entities
             Repairs = new HashSet<Repair>();
         }
 
-        public int TruckId { get; set; }
+        public int Id { get; set; }
         public string TruckNumber { get; set; } = null!;
         public string Model { get; set; } = null!;
         public int Year { get; set; }

@@ -33,7 +33,7 @@ namespace FakeDataDriverDbGenerator.Seeders
         public IReadOnlyCollection<Truck> Trucks { get; } = new List<Truck>();
         public IReadOnlyCollection<Photo> Photos { get; } = new List<Photo>();
 
-        public DriversManagementDatabaseSeeder(int number_of_rows = 20)
+        public DriversManagementDatabaseSeeder(int number_of_rows = 50)
         {
             quantity = number_of_rows;
             
@@ -55,9 +55,9 @@ namespace FakeDataDriverDbGenerator.Seeders
         /// <returns></returns>
         private IReadOnlyCollection<Company> GenerateCompanies(int amount)
         {
-            var CompanyId = 1;
+            var Id = 1;
             var companyFaker = new Faker<Company>()
-                    .RuleFor(c => c.CompanyId, f => CompanyId++)
+                    .RuleFor(c => c.Id, f => Id++)
                     .RuleFor(c => c.CompanyName, f => f.Company.CompanyName())
                     .RuleFor(c => c.Address, f => f.Address.FullAddress())
                     .RuleFor(c => c.Phone, f => f.Phone.PhoneNumberFormat())
@@ -82,9 +82,9 @@ namespace FakeDataDriverDbGenerator.Seeders
         /// <returns></returns>
         private IReadOnlyCollection<Photo> GeneratePhotos(int amount)
         {
-            var PhotoId = 1;
+            var Id = 1;
             var photoFaker = new Faker<Photo>()
-                .RuleFor(c => c.PhotoId, f => PhotoId++)
+                .RuleFor(c => c.Id, f => Id++)
                 //.RuleFor(c => c.PhotoData, f => Convert.FromBase64String(f.Image.DataUri(100, 100).Split(',')[1]))
                 //надо сгенерировать картинку в строке и потом кинуть в масив байтов
                 .RuleFor(c => c.PhotoData, f => f.Random.Bytes(1024))
@@ -112,10 +112,10 @@ namespace FakeDataDriverDbGenerator.Seeders
             IEnumerable<Company> companies,
             IEnumerable<Photo> photos)
         {
-            var DriverId = 1;
+            var Id = 1;
             var Counter = 0;
             var driverFaker = new Faker<Driver>()
-                .RuleFor(d => d.DriverId, f => DriverId++)
+                .RuleFor(d => d.Id, f => Id++)
                 .RuleFor(d => d.FirstName, f => f.Name.FirstName())
                 .RuleFor(d => d.LastName, f => f.Name.LastName())
                 .RuleFor(d => d.MiddleName, f => f.Name.LastName())
@@ -138,9 +138,9 @@ namespace FakeDataDriverDbGenerator.Seeders
                 .RuleFor(d => d.EmploymentStatus, f => f.PickRandom(new[] { "Full-Time", "Part-Time", "Contractor", "Freelance" }))
                 .RuleFor(d => d.EmploymentStartDate, f => f.Date.Past(1))
                 .RuleFor(d => d.EmploymentEndDate, f => f.Date.Future(5))
-                .RuleFor(d => d.CompanyId, f => f.PickRandom(companies).CompanyId)
-                .RuleFor(d => d.PhotoId, f => f. PickRandom(photos).PhotoId)
-                .RuleFor(d => d.PhotoId, f => photos.ElementAt(Counter++).PhotoId)
+                .RuleFor(d => d.CompanyId, f => f.PickRandom(companies).Id)
+                .RuleFor(d => d.PhotoId, f => f. PickRandom(photos).Id)
+                .RuleFor(d => d.PhotoId, f => photos.ElementAt(Counter++).Id)
                 .RuleFor(d => d.CreatedAt, f => f.Date.Past(1))
                 .RuleFor(d => d.UpdatedAt, f => null as DateTime?)
                 .RuleFor(d => d.DeletedAt, f => null as DateTime?);
@@ -157,9 +157,9 @@ namespace FakeDataDriverDbGenerator.Seeders
         /// <returns></returns>
         private IReadOnlyCollection<Truck> GenerateTrucks(int amount)
         {
-            var TruckId = 1;
+            var Id = 1;
             var truckFaker = new Faker<Truck>()
-                 .RuleFor(t => t.TruckId, f => TruckId++)
+                 .RuleFor(t => t.Id, f => Id++)
                  .RuleFor(c => c.TruckNumber, f => f.Vehicle.Vin())
                  .RuleFor(c => c.Model, f => f.Vehicle.Model())
                  .RuleFor(c => c.Year, f => f.Date.Past().Year)
@@ -189,13 +189,13 @@ namespace FakeDataDriverDbGenerator.Seeders
         /// <returns></returns>
         private IReadOnlyCollection<Inspection> GenerateInspections(int amount, IEnumerable<Truck> trucks)
         {
-            var InspectionId = 1;
+            var Id = 1;
             var inspectionFaker = new Faker<Inspection>()
-                .RuleFor(c => c.InspectionId, f => InspectionId++)
+                .RuleFor(c => c.Id, f => Id++)
                 .RuleFor(c => c.InspectionDate, f => f.Date.Past())
                 .RuleFor(c => c.Description, f => f.Lorem.Text())
                 .RuleFor(c => c.Result, f => f.Random.Bool())
-                .RuleFor(c => c.TruckId, f => f.PickRandom(trucks).TruckId)
+                .RuleFor(c => c.TruckId, f => f.PickRandom(trucks).Id)
                 .RuleFor(c => c.CreatedAt, f => f.Date.Past())
                 .RuleFor(c => c.UpdatedAt, f => null as DateTime?)
                 .RuleFor(c => c.DeletedAt, f => null as DateTime?)
@@ -214,13 +214,13 @@ namespace FakeDataDriverDbGenerator.Seeders
         /// <returns></returns>
         private IReadOnlyCollection<Repair> GenerateRepairs(int amount, IEnumerable<Truck> trucks)
         {
-            var RepairId = 1;
+            var Id = 1;
             var RepairFaker = new Faker<Repair>()
-                .RuleFor(c => c.RepairId, f => RepairId++)
+                .RuleFor(c => c.Id, f => Id++)
                 .RuleFor(c => c.RepairDate, f => f.Date.Past())
                 .RuleFor(c => c.Description, f => f.Lorem.Sentence())
                 .RuleFor(c => c.Cost, f => f.Finance.Amount())
-                .RuleFor(c => c.TruckId, f => f.PickRandom(trucks).TruckId)
+                .RuleFor(c => c.TruckId, f => f.PickRandom(trucks).Id)
                 .RuleFor(c => c.CreatedAt, f => f.Date.Past())
                 .RuleFor(c => c.UpdatedAt, f => null as DateTime?)
                 .RuleFor(c => c.DeletedAt, f => null as DateTime?)
@@ -240,29 +240,29 @@ namespace FakeDataDriverDbGenerator.Seeders
             IEnumerable<Driver> drivers,
             IEnumerable<Truck> trucks)
         {
-            var ExpenseId = 1;
+            var Id = 1;
             var ExpenseFaker = new Faker<Expense>()
-                .RuleFor(c => c.ExpensesId, f => ExpenseId++)
-                .RuleFor(c => c.DriverId, f => f.PickRandom(drivers).DriverId)
-                .RuleFor(c => c.TruckId, f => f.PickRandom(trucks).TruckId)
-                .RuleFor(c => c.DriverPayment, f => f.Finance.Amount())
-                .RuleFor(c => c.FuelCost, f => f.Finance.Amount())
-                .RuleFor(c => c.MaintenanceCost, f => f.Finance.Amount())
-                .RuleFor(c => c.Category, f => f.Commerce.Categories(1)[0])
-                .RuleFor(c => c.Date, f => f.Date.Past())
-                .RuleFor(c => c.Note, f => f.Rant.Review())
-                .RuleFor(c => c.CreatedAt, f => f.Date.Past())
-                .RuleFor(c => c.UpdatedAt, f => null as DateTime?)
-                .RuleFor(c => c.DeletedAt, f => null as DateTime?)
-                .RuleFor(c => c.Driver, f => null as Driver)
-                .RuleFor(c => c.Truck, f => null as Truck);
+                .RuleFor(e => e.Id, f => Id++)
+                .RuleFor(e => e.DriverId, f => f.PickRandom(drivers).Id)
+                .RuleFor(e => e.TruckId, f => f.PickRandom(trucks).Id)
+                .RuleFor(e => e.DriverPayment, f => f.Finance.Amount())
+                .RuleFor(e => e.FuelCost, f => f.Finance.Amount())
+                .RuleFor(e => e.MaintenanceCost, f => f.Finance.Amount())
+                .RuleFor(e => e.Category, f => f.Commerce.Categories(1)[0])
+                .RuleFor(e => e.Date, f => f.Date.Past())
+                .RuleFor(e => e.Note, f => f.Rant.Review())
+                .RuleFor(e => e.CreatedAt, f => f.Date.Past())
+                .RuleFor(e => e.UpdatedAt, f => null as DateTime?)
+                .RuleFor(e => e.DeletedAt, f => null as DateTime?)
+                .RuleFor(e => e.Driver, f => null as Driver)
+                .RuleFor(e => e.Truck, f => null as Truck);
 
             var expenses = Enumerable.Range(1, amount)
                 .Select(i => SeedRow(ExpenseFaker, i))
                 // We do this GroupBy() + Select() to remove the duplicates
                 // from the generated join table entities
-                .GroupBy(x => new { x.DriverId, x.TruckId })
-                .Select(x => x.First())
+                .GroupBy(e => new { e.DriverId, e.TruckId })
+                .Select(e => e.First())
                 .ToList();
 
             return expenses;

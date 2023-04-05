@@ -5,7 +5,7 @@ namespace FakeDataDriverDbGenerator.Entities
 {
     public partial class Photo
     {
-        public int PhotoId { get; set; }
+        public int Id { get; set; }
         public byte[] PhotoData { get; set; } = null!;
         public string ContentType { get; set; } = null!;
         public string FileName { get; set; } = null!;

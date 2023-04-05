@@ -5,7 +5,7 @@ namespace FakeDataDriverDbGenerator.Entities
 {
     public partial class Expense
     {
-        public int ExpensesId { get; set; }
+        public int Id { get; set; }
         public int DriverId { get; set; }
         public int TruckId { get; set; }
         public decimal DriverPayment { get; set; }
