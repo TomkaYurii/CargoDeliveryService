@@ -5,6 +5,7 @@ using FakeDataDriverDbGenerator.Entities;
 using FakeDataDriverDbGenerator.Seeders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 namespace FakeDataDriverDbGenerator.Data
 {
@@ -32,8 +33,20 @@ namespace FakeDataDriverDbGenerator.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-TOMKA;Initial Catalog=DriversManagement;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                IConfigurationRoot configuration = new ConfigurationBuilder()
+                    .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                    .AddJsonFile("appsettings.json")
+                    .Build();
+
+                string? connectionString = configuration.GetConnectionString("DefaultConnection");
+                if (connectionString != null)
+                optionsBuilder.UseSqlServer(connectionString);
             }
+
+            //if (!optionsBuilder.IsConfigured)
+            //{
+            //    optionsBuilder.UseSqlServer("Data Source=DESKTOP-TOMKA;Initial Catalog=DriversManagement20;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            //}
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
