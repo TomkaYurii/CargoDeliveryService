@@ -26,6 +26,11 @@ namespace Drivers.Api.Controllers
 
 
         //GET: api/driver/Id
+        /// <summary>
+        /// Отримання повної ынформації про водія
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<FullDriverResponceDTO>> GetFullInfoAboutDriver(int id)
         {
@@ -51,17 +56,9 @@ namespace Drivers.Api.Controllers
             }
         }
 
-
-
-
-
-
-
-
-
         //GET: api/driver
         [HttpGet]
-        public async Task<ActionResult<PagedList<EFDriver>>> GetAllEventsAsync([FromQuery] DriverParameters driverParameters)
+        public async Task<ActionResult<PagedList<EFDriver>>> GetAllDriversAsync([FromQuery] DriverParameters driverParameters)
         {
             if (!driverParameters.ValidYearRange)
             {

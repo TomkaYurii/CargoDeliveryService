@@ -8,9 +8,10 @@ namespace Drivers.BLL.Contracts
     public interface IDriversManager
     {
         Task<IEnumerable<ShortDriverResponceDTO>> GetListOfAllDrivers();
+
+
+
         Task<FullDriverResponceDTO> GetFullInfoAboutDriver(int id);
-
-
-        Task<PagedList<EFDriver>> GetPaginatedDrivers(QueryStringParameters queryStringParameters);
+        Task<PagedList<EFDriver>> GetPaginatedDrivers(DriverParameters driverParameters);
     }
 }

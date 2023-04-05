@@ -17,14 +17,14 @@ public class EFDriverRepository : EFGenericRepository<EFDriver>, IEFDriverReposi
         _sortHelper = sortHelper;
     }
 
-    public async Task<PagedList<EFDriver>> GetPaginerDrivers(DriverParameters driverParameters)
+    public async Task<PagedList<EFDriver>> GetPaginatedDriversAsync(DriverParameters driverParameters)
     {
         var drivers = await FindByCondition(d => d.Birthdate.Year >= driverParameters.MinYearOfBirth &&
                             d.Birthdate.Year <= driverParameters.MaxYearOfBirth);
 
         SearchByName(ref drivers, driverParameters.LastName);
 
-        var sortedOwners = _sortHelper.ApplySort(owners, ownerParameters.OrderBy);
+        var sortedOwners = _sortHelper.ApplySort(drivers, driverParameters.OrderBy);
 
         return PagedList<EFDriver>.ToPagedList(drivers,
                 driverParameters.PageNumber,

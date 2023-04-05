@@ -6,5 +6,5 @@ namespace Drivers.DAL_EF.Contracts;
 
 public interface IEFDriverRepository : IEFGenericRepository<EFDriver>
 {
-    Task<PagedList<EFDriver>> GetPaginerDrivers(DriverParameters driverParameters);
+    Task<PagedList<EFDriver>> GetPaginatedDriversAsync(DriverParameters driverParameters);
 }
