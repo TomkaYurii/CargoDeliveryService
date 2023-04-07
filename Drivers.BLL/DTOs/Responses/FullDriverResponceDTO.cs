@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Drivers.BLL.DTOs.Responces
+namespace Drivers.BLL.DTOs.Responses
 {
     public class FullDriverResponceDTO
     {

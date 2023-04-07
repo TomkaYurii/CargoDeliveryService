@@ -1,6 +1,6 @@
 ﻿using Drivers.BLL.Contracts;
 using Drivers.BLL.DTOs;
-using Drivers.BLL.DTOs.Responces;
+using Drivers.BLL.DTOs.Responses;
 using Drivers.DAL_EF.Contracts;
 using Drivers.DAL_EF.Entities;
 using Drivers.DAL_EF.Entities.HelpModels;
@@ -15,13 +15,13 @@ namespace Drivers.Api.Controllers
     public class DriversController : ControllerBase
     {
         private readonly ILogger<DriversController> _logger;
-        private IDriversManager _DriversManager;
+        private IDriversManager _driversManager;
 
         public DriversController(ILogger<DriversController> logger,
             IDriversManager driversManager)
         {
             _logger = logger;
-            _DriversManager= driversManager;
+            _driversManager= driversManager;
         }
 
 
@@ -31,7 +31,7 @@ namespace Drivers.Api.Controllers
         {
             try
             {
-                var result = await _DriversManager.GetFullInfoAboutDriver(id);
+                var result = await _driversManager.GetFullInfoAboutDriver(id);
                 if (result == null)
                 {
                     _logger.LogInformation($"Driver із Id: {id}, не був знайдейний у базі даних");
@@ -61,7 +61,7 @@ namespace Drivers.Api.Controllers
             }
             try
             {
-                var drivers = await _DriversManager.GetPaginatedDrivers(driverParameters);
+                var drivers = await _driversManager.GetPaginatedDrivers(driverParameters);
                 var metadata = new
                 {
                     drivers.TotalCount,

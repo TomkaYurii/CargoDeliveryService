@@ -1,5 +1,5 @@
 ﻿using Drivers.BLL.Contracts;
-using Drivers.BLL.DTOs.Responces;
+using Drivers.BLL.DTOs.Responses;
 using Drivers.DAL_ADO.Contracts;
 using Drivers.DAL_EF.Contracts;
 using Drivers.DAL_EF.Entities;
@@ -24,27 +24,38 @@ namespace Drivers.BLL.Managers
             _EFuow = eFUnitOfWork;
         }
 
+        /// <summary>
+        /// ПОВНА ІНФОРМАЦІЯ ПРО ВОДІЯ
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<FullDriverResponceDTO> GetFullInfoAboutDriver(int id)
         {
             var result = new FullDriverResponceDTO();
             var driver = await _ADOuow._driverRepository.GetAsync(id);
             var company = await _ADOuow._companyRepository.GetAsync(driver.CompanyID);
             var photo = await _ADOuow._photoRepository.GetAsync(driver.PhotoID);
-
-            result.drv = driver;
-            result.cmp = company;
-            result.pht = photo;
-
+                result.drv = driver;
+                result.cmp = company;
+                result.pht = photo;
             return result;
         }
 
+        /// <summary>
+        /// ОТРИМАННЯ ПАГІНОВАНИХ ДАНИХ ПРО ВОДІЯ
+        /// </summary>
+        /// <param name="driverParameters"></param>
+        /// <returns></returns>
         public async Task<PagedList<EFDriver>> GetPaginatedDrivers(DriverParameters driverParameters)
         {
             return await _EFuow.EFDriverRepository.GetPaginatedDriversAsync(driverParameters);
         }
 
-
-
+        /// <summary>
+        /// ОТРИМАННЯ СПИСКУ ВСІХ ВОДІЇВ
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public Task<IEnumerable<ShortDriverResponceDTO>> GetListOfAllDrivers()
         {
             throw new NotImplementedException();

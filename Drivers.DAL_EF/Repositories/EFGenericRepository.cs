@@ -32,7 +32,6 @@ public abstract class EFGenericRepository<TEntity> : IEFGenericRepository<TEntit
         ?? throw new EntityNotFoundException($"{typeof(TEntity).Name} with id {id} not found.");
     }
 
-
     /// <summary>
     /// GetAllAsync
     /// </summary>
@@ -43,7 +42,6 @@ public abstract class EFGenericRepository<TEntity> : IEFGenericRepository<TEntit
         return await table.ToListAsync()
         ?? throw new Exception($"Couldn't retrieve entities {typeof(TEntity).Name} ");
     }
-
 
     /// <summary>
     /// AddAsync
@@ -87,7 +85,6 @@ public abstract class EFGenericRepository<TEntity> : IEFGenericRepository<TEntit
         await Task.Run(() => table.Remove(entity));
     }
 
-
     /// <summary>
     /// DeleteAsync
     /// </summary>
@@ -123,7 +120,6 @@ public abstract class EFGenericRepository<TEntity> : IEFGenericRepository<TEntit
             .Where(expression)
             .AsNoTracking());
     }
-
 
     /// <summary>
     /// GetCompleteEntityAsync
