@@ -9,13 +9,13 @@ namespace Drivers.Api.Controllers
     public class ExpenseController : ControllerBase
     {
         private readonly ILogger<ExpenseController> _logger;
-        private IExpenseManager _ExpenseManager;
+        private IExpenseManager _expenseManager;
 
         public ExpenseController(ILogger<ExpenseController> logger,
             IExpenseManager expenseManager)
         {
             _logger = logger;
-            _ExpenseManager = expenseManager;
+            _expenseManager = expenseManager;
         }
 
 

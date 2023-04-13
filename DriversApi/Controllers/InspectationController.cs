@@ -8,13 +8,13 @@ namespace Drivers.Api.Controllers
     public class InspectationController : ControllerBase
     {
         private readonly ILogger<InspectationController> _logger;
-        private IInspectationManager _InspectationManager;
+        private IInspectationManager _inspectationManager;
 
         public InspectationController(ILogger<InspectationController> logger,
             IInspectationManager inspectationManager)
         {
             _logger = logger;
-            _InspectationManager = inspectationManager;
+            _inspectationManager = inspectationManager;
         }
 
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Drivers.BLL.Contracts;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,6 +9,16 @@ namespace Drivers.Api.Controllers
     [ApiController]
     public class TruckController : ControllerBase
     {
+        private readonly ILogger<TruckController> _logger;
+        private ITruckManager _truckManager;
+
+        public TruckController(ILogger<TruckController> logger,
+            ITruckManager truckManager)
+        {
+            _logger = logger;
+            _truckManager = truckManager;
+        }
+
         // GET: api/<TruckController>
         [HttpGet]
         public IEnumerable<string> Get()

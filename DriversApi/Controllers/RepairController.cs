@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Drivers.BLL.Contracts;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,6 +9,17 @@ namespace Drivers.Api.Controllers
     [ApiController]
     public class RepairController : ControllerBase
     {
+        private readonly ILogger<RepairController> _logger;
+        private IRepairManager _repairManager;
+
+        public RepairController(ILogger<RepairController> logger,
+            IRepairManager repairManager)
+        {
+            _logger = logger;
+            _repairManager = repairManager;
+        }
+
+
         // GET: api/<RepairController>
         [HttpGet]
         public IEnumerable<string> Get()

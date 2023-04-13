@@ -12,13 +12,13 @@ namespace Drivers.Api.Controllers
     {
 
         private readonly ILogger<PhotoController> _logger;
-        private IPhotoManager _PhotoManager;
+        private IPhotoManager _photoManager;
 
         public PhotoController(ILogger<PhotoController> logger,
             IPhotoManager photoManager)
         {
             _logger = logger;
-            _PhotoManager = photoManager;
+            _photoManager = photoManager;
         }
 
 

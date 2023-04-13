@@ -24,7 +24,6 @@ namespace Drivers.Api.Controllers
             _driversManager= driversManager;
         }
 
-
         //GET: api/driver/Id
         [HttpGet("{id}")]
         public async Task<ActionResult<FullDriverResponceDTO>> GetFullInfoAboutDriver(int id)

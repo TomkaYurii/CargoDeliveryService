@@ -8,13 +8,13 @@ namespace Drivers.Api.Controllers
     public class CompanyController : ControllerBase
     {
         private readonly ILogger<CompanyController> _logger;
-        private ICompanyManager _CompanyManager;
+        private ICompanyManager _companyManager;
 
         public CompanyController(ILogger<CompanyController> logger,
             ICompanyManager companyManager)
         {
             _logger = logger;
-            _CompanyManager = companyManager;
+            _companyManager = companyManager;
         }
 
 
