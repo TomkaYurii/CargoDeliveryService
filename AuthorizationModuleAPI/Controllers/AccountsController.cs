@@ -3,8 +3,8 @@
 using AuthorizationModuleAPI.Entities;
 using AuthorizationModuleAPI.Models.Accounts;
 using AuthorizationModuleAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Authorization;
 
 [Authorize]
 [ApiController]
@@ -137,7 +137,7 @@ public class AccountsController : BaseController
     /// ОТРИМАННЯ всых аккаунтів 
     /// </summary>
     /// <returns></returns>
-    [Authorize(Role.Admin)]
+  //  [Authorize(Role.Admin)]
     [HttpGet]
     public ActionResult<IEnumerable<AccountResponse>> GetAll()
     {
@@ -166,7 +166,7 @@ public class AccountsController : BaseController
     /// </summary>
     /// <param name="model"></param>
     /// <returns></returns>
-    [Authorize(Role.Admin)]
+  //  [Authorize(Role.Admin)]
     [HttpPost]
     public ActionResult<AccountResponse> Create(CreateRequest model)
     {
@@ -214,7 +214,6 @@ public class AccountsController : BaseController
 
 
     // helper methods
-
     private void setTokenCookie(string token)
     {
         var cookieOptions = new CookieOptions
