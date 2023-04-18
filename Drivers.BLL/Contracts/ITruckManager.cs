@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Drivers.BLL.DTOs.Responses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace Drivers.BLL.Contracts
 {
     public interface ITruckManager
     {
+        Task<IEnumerable<TruckResponceDTO>> GetAllTrucks();
     }
 }

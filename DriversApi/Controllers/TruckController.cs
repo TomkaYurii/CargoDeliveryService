@@ -1,4 +1,6 @@
 ﻿using Drivers.BLL.Contracts;
+using Drivers.BLL.DTOs.Responses;
+using Drivers.BLL.Managers;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -21,9 +23,9 @@ namespace Drivers.Api.Controllers
 
         // GET: api/<TruckController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IEnumerable<TruckResponceDTO>> GetAllTrucks()
         {
-            return new string[] { "value1", "value2" };
+            return await _truckManager.GetAllTrucks();
         }
 
         // GET api/<TruckController>/5

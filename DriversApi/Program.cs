@@ -71,6 +71,12 @@ builder.Services.AddScoped<ISortHelper<EFDriver>, SortHelper<EFDriver>>();
 
 // Dependendency Injection for Managers
 builder.Services.AddScoped<IDriversManager, DriversManager>();
+builder.Services.AddScoped<ICompanyManager, CompanyManager>();
+builder.Services.AddScoped<IExpenseManager, ExpenseManager>();
+builder.Services.AddScoped<IInspectationManager, InspectationManager>();
+builder.Services.AddScoped<IPhotoManager, PhotoManager>();
+builder.Services.AddScoped<IRepairManager, RepairManager>();
+builder.Services.AddScoped<ITruckManager, TruckManager>();
 
 var app = builder.Build();
 

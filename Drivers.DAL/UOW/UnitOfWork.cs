@@ -19,7 +19,7 @@ namespace Drivers.DAL_ADO.UOW
             IDriverRepository driverRepository,
             ICompanyRepository companyRepository,
             IExpensesRepository expensesRepository,
-            IInspectionRepository galleryRepository,
+            IInspectionRepository inspectionRepository,
             IPhotoRepository photoRepository,
             IRepairRepository repairRepository,
             ITruckRepository truckRepository,
@@ -29,7 +29,7 @@ namespace Drivers.DAL_ADO.UOW
             _companyRepository = companyRepository;
             _expensesRepository = expensesRepository;
             _photoRepository = photoRepository;
-            _inspectionRepository = galleryRepository;
+            _inspectionRepository = inspectionRepository;
             _repairRepository = repairRepository;
             _truckRepository = truckRepository;
             _dbTransaction = dbTransaction;

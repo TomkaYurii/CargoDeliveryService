@@ -17,8 +17,6 @@ namespace Drivers.Api.Controllers
             _companyManager = companyManager;
         }
 
-
-
         // GET: api/<CompanyController>
         [HttpGet]
         public IEnumerable<string> Get()
