@@ -36,7 +36,5 @@ public class EmailService : IEmailService
         smtp.Authenticate(_appSettings.SmtpUser, _appSettings.SmtpPass);
         smtp.Send(email);
         smtp.Disconnect(true);
-
-
     }
 }
