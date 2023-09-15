@@ -17,27 +17,23 @@ namespace FakeDataDriverDbGenerator.Configurations
             modelbuilder.Property(r => r.Id).HasColumnName("Id");
 
             modelbuilder.Property(r => r.Cost).HasColumnType("decimal(10, 2)");
-
-            modelbuilder.Property(r => r.CreatedAt)
-                .HasColumnType("datetime")
-                .HasDefaultValueSql("(getdate())");
-
-            modelbuilder.Property(r => r.DeletedAt).HasColumnType("datetime");
-
             modelbuilder.Property(r => r.Description).HasMaxLength(2000);
-
             modelbuilder.Property(r => r.RepairDate).HasColumnType("date");
-
             modelbuilder.Property(r => r.TruckId).HasColumnName("TruckID");
 
-            modelbuilder.Property(r => r.UpdatedAt)
+            modelbuilder.Property(d => d.CreatedAt)
                 .HasColumnType("datetime")
                 .HasDefaultValueSql("(getdate())");
+            modelbuilder.Property(d => d.UpdatedAt)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql(null);
+            modelbuilder.Property(d => d.DeletedAt)
+                .HasColumnType("datetime")
+                .HasDefaultValue(null);
 
             modelbuilder.HasOne(r => r.Truck)
                 .WithMany(t => t.Repairs)
-                .HasForeignKey(r => r.TruckId)
-                .HasConstraintName("FK__Repairs__TruckID__34C8D9D1");
+                .HasForeignKey(r => r.TruckId);
         }
     }
 }

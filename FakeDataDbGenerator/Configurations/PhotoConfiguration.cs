@@ -16,19 +16,20 @@ namespace FakeDataDriverDbGenerator.Configurations
             modelbuilder.HasKey(p => p.Id);
             modelbuilder.Property(p => p.Id).HasColumnName("Id");
 
-            modelbuilder.Property(p => p.ContentType).HasMaxLength(50);
+            modelbuilder.Property(p => p.ContentType).HasMaxLength(50).IsRequired();
+            modelbuilder.Property(p => p.FileName).HasMaxLength(255).IsRequired();
 
-            modelbuilder.Property(p => p.CreatedAt)
+            modelbuilder.Property(d => d.CreatedAt)
                 .HasColumnType("datetime")
                 .HasDefaultValueSql("(getdate())");
-
-            modelbuilder.Property(p => p.DeletedAt).HasColumnType("datetime");
-
-            modelbuilder.Property(p => p.FileName).HasMaxLength(255);
-
-            modelbuilder.Property(p => p.UpdatedAt)
+            modelbuilder.Property(d => d.UpdatedAt)
                 .HasColumnType("datetime")
-                .HasDefaultValueSql("(getdate())");
+                .HasDefaultValueSql(null);
+            modelbuilder.Property(d => d.DeletedAt)
+                .HasColumnType("datetime")
+                .HasDefaultValue(null);
+
+
         }
     }
 }

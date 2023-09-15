@@ -16,30 +16,24 @@ namespace FakeDataDriverDbGenerator.Configurations
         {
             modelbuilder.HasKey(c => c.Id);
             modelbuilder.Property(c => c.Id).HasColumnName("Id");
+
+            modelbuilder.Property(c => c.CompanyName).HasMaxLength(100).IsRequired();
             modelbuilder.Property(c => c.Address).HasMaxLength(100);
-
-            modelbuilder.Property(c => c.CompanyName).HasMaxLength(100);
-
+            modelbuilder.Property(c => c.Phone).HasMaxLength(20);
+            modelbuilder.Property(c => c.Email).HasMaxLength(50);
             modelbuilder.Property(c => c.ContactEmail).HasMaxLength(50);
-
             modelbuilder.Property(c => c.ContactPerson).HasMaxLength(100);
-
             modelbuilder.Property(c => c.ContactPhone).HasMaxLength(20);
 
-            modelbuilder.Property(c => c.CreatedAt)
+            modelbuilder.Property(d => d.CreatedAt)
                 .HasColumnType("datetime")
                 .HasDefaultValueSql("(getdate())");
-
-            modelbuilder.Property(c => c.DeletedAt).HasColumnType("datetime");
-
-            modelbuilder.Property(c => c.Email).HasMaxLength(50);
-
-            modelbuilder.Property(c => c.Phone).HasMaxLength(20);
-
-            modelbuilder.Property(c => c.UpdatedAt)
+            modelbuilder.Property(d => d.UpdatedAt)
                 .HasColumnType("datetime")
-                .HasDefaultValueSql("(getdate())");
-
+                .HasDefaultValueSql(null);
+            modelbuilder.Property(d => d.DeletedAt)
+                .HasColumnType("datetime")
+                .HasDefaultValue(null);
         }
     }
 }

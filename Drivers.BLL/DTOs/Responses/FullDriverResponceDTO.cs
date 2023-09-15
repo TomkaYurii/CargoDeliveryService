@@ -10,6 +10,9 @@ namespace Drivers.BLL.DTOs.Responses
 {
     public class FullDriverResponceDTO
     {
+
+        public EFDriver? efdrv { get; set; }
+
         public Driver? drv { get; set; }
         public Company? cmp { get; set; }
         public Expenses? eps { get; set; }

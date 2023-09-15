@@ -113,7 +113,8 @@ namespace FakeDataDriverDbGenerator.Seeders
             IEnumerable<Photo> photos)
         {
             var Id = 1;
-            var Counter = 0;
+            var CounterCompany = 0;
+            var CounterPhoto = 0;
             var driverFaker = new Faker<Driver>()
                 .RuleFor(d => d.Id, f => Id++)
                 .RuleFor(d => d.FirstName, f => f.Name.FirstName())
@@ -138,12 +139,24 @@ namespace FakeDataDriverDbGenerator.Seeders
                 .RuleFor(d => d.EmploymentStatus, f => f.PickRandom(new[] { "Full-Time", "Part-Time", "Contractor", "Freelance" }))
                 .RuleFor(d => d.EmploymentStartDate, f => f.Date.Past(1))
                 .RuleFor(d => d.EmploymentEndDate, f => f.Date.Future(5))
-                .RuleFor(d => d.CompanyId, f => f.PickRandom(companies).Id)
-                .RuleFor(d => d.PhotoId, f => f. PickRandom(photos).Id)
-                .RuleFor(d => d.PhotoId, f => photos.ElementAt(Counter++).Id)
+                //.RuleFor(d => d.CompanyId, f => f.PickRandom(companies).Id)
+                //.RuleFor(d => d.PhotoId, f => f. PickRandom(photos).Id)
+                .RuleFor(d => d.CompanyId, f =>
+                {
+                    var companyId = companies.ElementAt(CounterCompany).Id;
+                    CounterCompany++;
+                    return companyId;
+                })
+                .RuleFor(d => d.PhotoId, f =>
+                {
+                    var photoId = photos.ElementAt(CounterPhoto).Id;
+                    CounterPhoto++;
+                    return photoId;
+                })
                 .RuleFor(d => d.CreatedAt, f => f.Date.Past(1))
                 .RuleFor(d => d.UpdatedAt, f => null as DateTime?)
                 .RuleFor(d => d.DeletedAt, f => null as DateTime?);
+
             var drivers = Enumerable.Range(1, amount)
                 .Select(i => SeedRow(driverFaker, i))
                 .ToList();
@@ -259,8 +272,7 @@ namespace FakeDataDriverDbGenerator.Seeders
 
             var expenses = Enumerable.Range(1, amount)
                 .Select(i => SeedRow(ExpenseFaker, i))
-                // We do this GroupBy() + Select() to remove the duplicates
-                // from the generated join table entities
+                // We do this GroupBy() + Select() to remove the duplicates from the generated join table entities
                 .GroupBy(e => new { e.DriverId, e.TruckId })
                 .Select(e => e.First())
                 .ToList();

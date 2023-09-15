@@ -32,12 +32,13 @@ namespace Drivers.BLL.Managers
         public async Task<FullDriverResponceDTO> GetFullInfoAboutDriver(int id)
         {
             var result = new FullDriverResponceDTO();
-            var driver = await _ADOuow._driverRepository.GetAsync(id);
-            var company = await _ADOuow._companyRepository.GetAsync(driver.CompanyID);
-            var photo = await _ADOuow._photoRepository.GetAsync(driver.PhotoID);
-                result.drv = driver;
-                result.cmp = company;
-                result.pht = photo;
+            var driver = await _EFuow.EFDriverRepository.GetByIdAsync(id);
+            //var driver = await _ADOuow._driverRepository.GetAsync(id);
+            //var company = await _ADOuow._companyRepository.GetAsync(driver.CompanyID);
+            //var photo = await _ADOuow._photoRepository.GetAsync(driver.PhotoID);
+            result.efdrv = driver;
+            //result.cmp = company;
+            //result.pht = photo;
             return result;
         }
 
