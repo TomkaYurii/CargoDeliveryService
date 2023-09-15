@@ -6,10 +6,12 @@ namespace FakeDataDriverDbGenerator.Entities
     public partial class Photo
     {
         public int Id { get; set; }
-        public byte[] PhotoData { get; set; } = null!;
-        public string ContentType { get; set; } = null!;
-        public string FileName { get; set; } = null!;
+
+        public byte[] PhotoData { get; set; }
+        public string ContentType { get; set; }
+        public string FileName { get; set; }
         public int FileSize { get; set; }
+
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }

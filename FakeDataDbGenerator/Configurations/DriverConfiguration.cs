@@ -6,88 +6,67 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FakeDataDriverDbGenerator.Entities;
+using System.Reflection.Emit;
 
 namespace FakeDataDriverDbGenerator.Configurations
 {
-        public class DriverConfiguration : IEntityTypeConfiguration<Driver>
+    public class DriverConfiguration : IEntityTypeConfiguration<Driver>
+    {
+        public void Configure(EntityTypeBuilder<Driver> modelBuilder)
         {
-            public void Configure(EntityTypeBuilder<Driver> modelbuilder)
-            {
-                modelbuilder.HasIndex(d => d.PhotoId, "UQ__Drivers__21B7B583AB601A5C")
-                    .IsUnique();
+            modelBuilder.HasKey(d => d.Id);
+            modelBuilder.Property(d => d.Id).HasColumnName("Id");
 
-                modelbuilder.HasIndex(d => d.CompanyId, "UQ__Drivers__2D971C4D3AD2DF5B")
-                    .IsUnique();
-                modelbuilder.HasKey(d => d.Id);
-                modelbuilder.Property(d => d.Id).HasColumnName("Id");
+            modelBuilder.Property(d => d.FirstName).HasMaxLength(50).IsRequired();
+            modelBuilder.Property(d => d.LastName).HasMaxLength(50).IsRequired();
+            modelBuilder.Property(d => d.MiddleName).HasMaxLength(50);
+            modelBuilder.Property(d => d.Gender).HasMaxLength(10).IsRequired();
+            modelBuilder.Property(d => d.Birthdate).HasColumnType("date").IsRequired();
+            modelBuilder.Property(d => d.PlaceOfBirth).HasMaxLength(100);
+            modelBuilder.Property(d => d.Nationality).HasMaxLength(50);
+            modelBuilder.Property(d => d.MaritalStatus).HasMaxLength(20);
+            modelBuilder.Property(d => d.IdentificationType).HasMaxLength(50);
+            modelBuilder.Property(d => d.IdentificationNumber).HasMaxLength(50);
+            modelBuilder.Property(d => d.IdentificationExpirationDate).HasColumnType("date");
+            modelBuilder.Property(d => d.Address).HasMaxLength(100);
+            modelBuilder.Property(d => d.Phone).HasMaxLength(20);
+            modelBuilder.Property(d => d.Email).HasMaxLength(50);
 
-                modelbuilder.Property(d => d.Address).HasMaxLength(100);
+            modelBuilder.Property(d => d.DriverLicenseNumber).HasMaxLength(20).IsRequired();
+            modelBuilder.Property(d => d.DriverLicenseCategory).HasMaxLength(50);
+            modelBuilder.Property(d => d.DriverLicenseIssuingDate).HasColumnType("date").IsRequired();
+            modelBuilder.Property(d => d.DriverLicenseExpirationDate).HasColumnType("date").IsRequired();
+            modelBuilder.Property(d => d.DriverLicenseIssuingAuthority).HasMaxLength(100);
 
-                modelbuilder.Property(d => d.Birthdate).HasColumnType("date");
+            modelBuilder.Property(d => d.EmploymentStatus).HasMaxLength(50);
+            modelBuilder.Property(d => d.EmploymentStartDate).HasColumnType("date");
+            modelBuilder.Property(d => d.EmploymentEndDate).HasColumnType("date");
 
-                modelbuilder.Property(d => d.CompanyId).HasColumnName("CompanyID");
+            modelBuilder.Property(d => d.CreatedAt)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql("(getdate())");
+            modelBuilder.Property(d => d.UpdatedAt)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql(null);
+            modelBuilder.Property(d => d.DeletedAt)
+                .HasColumnType("datetime")
+                .HasDefaultValue(null);
 
-                modelbuilder.Property(d => d.CreatedAt)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
 
-                modelbuilder.Property(d => d.DeletedAt).HasColumnType("datetime");
+            modelBuilder.Property(d => d.PhotoId).HasColumnName("PhotoID");
+            modelBuilder.Property(d => d.CompanyId).HasColumnName("CompanyID");
 
-                modelbuilder.Property(d => d.DriverLicenseCategory).HasMaxLength(50);
+            modelBuilder.HasIndex(d => d.PhotoId).IsUnique();
+            modelBuilder.HasIndex(d => d.CompanyId).IsUnique(); ;
 
-                modelbuilder.Property(d => d.DriverLicenseExpirationDate).HasColumnType("date");
+            modelBuilder.HasOne(d => d.Company)
+                .WithOne(c => c.Driver)
+                .HasForeignKey<Driver>(d => d.CompanyId);
 
-                modelbuilder.Property(d => d.DriverLicenseIssuingAuthority).HasMaxLength(100);
-
-                modelbuilder.Property(d => d.DriverLicenseIssuingDate).HasColumnType("date");
-
-                modelbuilder.Property(d => d.DriverLicenseNumber).HasMaxLength(20);
-
-                modelbuilder.Property(d => d.Email).HasMaxLength(50);
-
-                modelbuilder.Property(d => d.EmploymentEndDate).HasColumnType("date");
-
-                modelbuilder.Property(d => d.EmploymentStartDate).HasColumnType("date");
-
-                modelbuilder.Property(d => d.EmploymentStatus).HasMaxLength(50);
-
-                modelbuilder.Property(d => d.FirstName).HasMaxLength(50);
-
-                modelbuilder.Property(d => d.Gender).HasMaxLength(10);
-
-                modelbuilder.Property(d => d.IdentificationExpirationDate).HasColumnType("date");
-
-                modelbuilder.Property(d => d.IdentificationNumber).HasMaxLength(50);
-
-                modelbuilder.Property(d => d.IdentificationType).HasMaxLength(50);
-
-                modelbuilder.Property(d => d.LastName).HasMaxLength(50);
-
-                modelbuilder.Property(d => d.MaritalStatus).HasMaxLength(20);
-
-                modelbuilder.Property(d => d.MiddleName).HasMaxLength(50);
-
-                modelbuilder.Property(d => d.Nationality).HasMaxLength(50);
-
-                modelbuilder.Property(d => d.Phone).HasMaxLength(20);
-
-                modelbuilder.Property(d => d.PhotoId).HasColumnName("PhotoID");
-
-                modelbuilder.Property(d => d.PlaceOfBirth).HasMaxLength(100);
-
-                modelbuilder.Property(d => d.UpdatedAt)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                modelbuilder.HasOne(d => d.Company)
-                    .WithOne(c => c.Driver)
-                    .HasForeignKey<Driver>(d => d.CompanyId)
-                    .HasConstraintName("FK__Drivers__Company__3B75D760");
-
-                modelbuilder.HasOne(d => d.Photo)
-                    .WithOne(p => p.Driver)
-                    .HasForeignKey<Driver>(d => d.PhotoId)
-                    .HasConstraintName("FK__Drivers__PhotoID__3C69FB99");
-            }
+            modelBuilder.HasOne(d => d.Photo)
+                .WithOne(p => p.Driver)
+                .HasForeignKey<Driver>(d => d.PhotoId);
         }
+    }
 }
+

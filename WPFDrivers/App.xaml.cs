@@ -1,4 +1,5 @@
-﻿using Drivers.BLL.Contracts;
+﻿using DataAccessLibrary.Notes;
+using Drivers.BLL.Contracts;
 using Drivers.BLL.Managers;
 using Drivers.DAL_ADO.Contracts;
 using Drivers.DAL_ADO.Repositories;
@@ -14,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Reservoom.DbContexts;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -71,6 +73,10 @@ namespace WPFDrivers
                             options.UseSqlServer(connectionString);
                         });
 
+
+                        //string connectionString = hostContext.Configuration.GetConnectionString("MSSQLConnection");
+                        //services.AddSingleton<IDriversManagementDbContextFactory>(new DriversManagementDbContextFactory(connectionString));
+
                         // Dependendency Injection for Repositories/UOW from ADO.NET DAL
                         services.AddScoped<IDriverRepository, DriverRepository>();
                         services.AddScoped<ICompanyRepository, CompanyRepository>();
@@ -126,9 +132,9 @@ namespace WPFDrivers
         protected override async void OnStartup(StartupEventArgs e)
         {
             await _appHost.StartAsync();
+
             using IServiceScope scope = _appHost.Services.CreateScope();
-            //NotesDbContext db = scope.ServiceProvider.GetRequiredService<NotesDbContext>();
-            //db.Database.Migrate();
+            
             Window mainWindow = scope.ServiceProvider.GetRequiredService<MainWindow>();
             mainWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             mainWindow.Show();

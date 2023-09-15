@@ -178,11 +178,11 @@ class Program
             Console.Write("Введіть пароль: \n");
             string password = ReadPassword();
 
-            connectionString = $"Server={serverName};Database={databaseName};User Id={userName};Password={password};Integrated Security=true;";
+            connectionString = $"Server={serverName};Database={databaseName};User Id={userName};Password={password};Integrated Security=true;TrustServerCertificate=true;";
         }
         else
         {
-            connectionString = $"Server={serverName};Database={databaseName};Integrated Security=true;";
+            connectionString = $"Server={serverName};Database={databaseName};Integrated Security=true;TrustServerCertificate=true";
         }
 
         // Створення контексту бази даних

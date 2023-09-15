@@ -1,5 +1,7 @@
 ﻿using Drivers.BLL.Contracts;
 using Drivers.BLL.Managers;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using WPFDrivers.ViewModels;
 
 namespace WPFDrivers.Commands;
@@ -7,7 +9,9 @@ namespace WPFDrivers.Commands;
 public class NavigateCommand : CommandBase
 {
     private readonly MainViewModel _mainViewModel;
-    private readonly IDriversManager _driversManager;
+    //ivate readonly IDriversManager _driversManager; 
+    private readonly IServiceProvider _serviceProvider;
+
 
     public enum ViewType
     {
@@ -16,11 +20,12 @@ public class NavigateCommand : CommandBase
     }
 
 
-    public NavigateCommand(MainViewModel mainViewModel,
-        IDriversManager driversManager)
+    public NavigateCommand(MainViewModel mainViewModel, IServiceProvider serviceProvider)
+    //IDriversManager driversManager)
     {
+        _serviceProvider = serviceProvider;
         _mainViewModel = mainViewModel;
-        _driversManager = driversManager;
+ //       _driversManager = driversManager;
     }
 
     public override void Execute(object parameter)
@@ -30,7 +35,7 @@ public class NavigateCommand : CommandBase
             switch (viewType)
             {
                 case ViewType.Drivers:
-                    _mainViewModel.CurrentVM = new DriversViewModel(_driversManager);
+                    _mainViewModel.CurrentVM = new DriversViewModel(_serviceProvider);
                     break;
                 default:
                     break;

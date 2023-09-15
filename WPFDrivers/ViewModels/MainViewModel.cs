@@ -1,4 +1,5 @@
 ﻿using Drivers.BLL.Contracts;
+using System;
 using System.Windows.Input;
 using WPFDrivers.Commands;
 using static WPFDrivers.Commands.NavigateCommand;
@@ -9,12 +10,14 @@ public class MainViewModel : ViewModelBase
 {
     public ICommand NavigateCommand { get; set; }
 
-    private readonly IDriversManager _driversManager;
+    private readonly IServiceProvider _serviceProvider;
+    //private readonly IDriversManager _driversManager;
 
-    public MainViewModel(IDriversManager driversManager)
+    public MainViewModel(IServiceProvider serviceProvider)//IDriversManager driversManager)
     {
-        _driversManager = driversManager;
-        NavigateCommand = new NavigateCommand(this, _driversManager);
+        //_driversManager = driversManager;
+        _serviceProvider = serviceProvider;
+        NavigateCommand = new NavigateCommand(this, _serviceProvider);
         NavigateCommand.Execute(ViewType.Drivers);
     }
 

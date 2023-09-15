@@ -17,36 +17,25 @@ namespace FakeDataDriverDbGenerator.Configurations
             modelbuilder.Property(t => t.Id).HasColumnName("Id");
 
             modelbuilder.Property(t => t.ChassisNumber).HasMaxLength(50);
-
-            modelbuilder.Property(t => t.CreatedAt)
-                .HasColumnType("datetime")
-                .HasDefaultValueSql("(getdate())");
-
-            modelbuilder.Property(t => t.DeletedAt).HasColumnType("datetime");
-
             modelbuilder.Property(t => t.EngineNumber).HasMaxLength(50);
-
             modelbuilder.Property(t => t.FuelConsumption).HasColumnType("decimal(4, 2)");
-
             modelbuilder.Property(t => t.FuelType).HasMaxLength(50);
-
             modelbuilder.Property(t => t.InsuranceExpirationDate).HasColumnType("date");
-
             modelbuilder.Property(t => t.InsurancePolicyNumber).HasMaxLength(50);
-
             modelbuilder.Property(t => t.Model).HasMaxLength(50);
-
             modelbuilder.Property(t => t.RegistrationNumber).HasMaxLength(20);
-
             modelbuilder.Property(t => t.TruckNumber).HasMaxLength(20);
+            modelbuilder.Property(t => t.Vin).HasMaxLength(50).HasColumnName("VIN");
 
-            modelbuilder.Property(t => t.UpdatedAt)
+            modelbuilder.Property(d => d.CreatedAt)
                 .HasColumnType("datetime")
                 .HasDefaultValueSql("(getdate())");
-
-            modelbuilder.Property(t => t.Vin)
-                .HasMaxLength(50)
-                .HasColumnName("VIN");
+            modelbuilder.Property(d => d.UpdatedAt)
+                .HasColumnType("datetime")
+                .HasDefaultValueSql(null);
+            modelbuilder.Property(d => d.DeletedAt)
+                .HasColumnType("datetime")
+                .HasDefaultValue(null);
         }
     }
 }
