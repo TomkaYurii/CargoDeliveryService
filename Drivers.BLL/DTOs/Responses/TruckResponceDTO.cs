@@ -10,8 +10,8 @@ namespace Drivers.BLL.DTOs.Responses
     public class TruckResponceDTO
     {
         public int Id { get; set; }
-        public string TruckNumber { get; set; } = null!;
-        public string Model { get; set; } = null!;
+        public string TruckNumber { get; set; } 
+        public string Model { get; set; }
         public int Year { get; set; }
         public int Capacity { get; set; }
         public string? FuelType { get; set; }

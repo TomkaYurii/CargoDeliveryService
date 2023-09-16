@@ -9,5 +9,6 @@ namespace Drivers.DAL_EF.Contracts
 {
     public interface IEFExpenseRepository : IEFGenericRepository<EFExpense>
     {
+        Task<IEnumerable<EFExpense>> GetExpencesByDriver(int driver_id);
     }
 }

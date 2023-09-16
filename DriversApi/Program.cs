@@ -17,11 +17,6 @@ using System.Data;
 //КОНФІГРУВАННЯ: 1) файли конфігурацій 2) IOC 3) логіювання
 var builder = WebApplication.CreateBuilder(args);
 
-    // Add services to the container.
-    builder.Services.AddControllers();
-    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-    builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen();
 
 ////////////////////////////////////////////////////////////////////////////////////
 /// ADO.NET = Dapper
@@ -77,6 +72,16 @@ builder.Services.AddScoped<IInspectationManager, InspectationManager>();
 builder.Services.AddScoped<IPhotoManager, PhotoManager>();
 builder.Services.AddScoped<IRepairManager, RepairManager>();
 builder.Services.AddScoped<ITruckManager, TruckManager>();
+
+
+//AUTOMAPPER
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+// Add services to the container.
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 

@@ -1,4 +1,6 @@
 ﻿using Drivers.BLL.Contracts;
+using Drivers.BLL.DTOs.Responses;
+using Drivers.BLL.Managers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Drivers.Api.Controllers
@@ -26,9 +28,31 @@ namespace Drivers.Api.Controllers
 
         // GET api/<CompanyController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<CompanyResponceDTO>> GetById(int id)
         {
-            return "value";
+            try
+            {
+                var result = await _companyManager.GetCompanyById(id);
+                if (result == null)
+                {
+                    _logger.LogInformation($"Company із Id: {id}, не був знайдейний у базі даних");
+                    return NotFound();
+                }
+                else
+                {
+                    _logger.LogInformation($"Отримали Company з бази даних!");
+                    return Ok(result);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Транзакція сфейлилась! Щось пішло не так - {ex.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Потрібно дивитись!");
+            }
         }
 
         // POST api/<CompanyController>

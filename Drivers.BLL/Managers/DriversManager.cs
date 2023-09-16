@@ -1,4 +1,5 @@
-﻿using Drivers.BLL.Contracts;
+﻿using AutoMapper;
+using Drivers.BLL.Contracts;
 using Drivers.BLL.DTOs.Responses;
 using Drivers.DAL_ADO.Contracts;
 using Drivers.DAL_EF.Contracts;
@@ -12,14 +13,17 @@ namespace Drivers.BLL.Managers
     public class DriversManager : IDriversManager
     {
         private readonly ILogger<DriversManager> _logger;
+        private readonly IMapper _mapper;
         private IUnitOfWork _ADOuow;
         private IEFUnitOfWork _EFuow;
         
         public DriversManager(ILogger<DriversManager> logger,
+            IMapper mapper,
             IUnitOfWork ado_unitofwork,
             IEFUnitOfWork eFUnitOfWork)
         {
             _logger = logger;
+            _mapper = mapper;
             _ADOuow = ado_unitofwork;
             _EFuow = eFUnitOfWork;
         }
@@ -33,12 +37,29 @@ namespace Drivers.BLL.Managers
         {
             var result = new FullDriverResponceDTO();
             var driver = await _EFuow.EFDriverRepository.GetByIdAsync(id);
-            //var driver = await _ADOuow._driverRepository.GetAsync(id);
-            //var company = await _ADOuow._companyRepository.GetAsync(driver.CompanyID);
-            //var photo = await _ADOuow._photoRepository.GetAsync(driver.PhotoID);
-            result.efdrv = driver;
-            //result.cmp = company;
-            //result.pht = photo;
+            if (driver == null)
+            {
+                // Обработка случая, когда водитель с указанным id не найден.
+                return null;
+            }
+
+            if (driver.CompanyId.HasValue)
+            {
+                var company = await _EFuow.EFCompanyRepository.GetByIdAsync(driver.CompanyId.Value);
+                driver.Company = company;
+            }
+
+            if (driver.PhotoId.HasValue)
+            {
+                var photo = await _EFuow.EFPhotoRepository.GetByIdAsync(driver.PhotoId.Value);
+                driver.Photo = photo;
+            }
+
+            var expenses = await _EFuow.EFExpenseRepository.GetExpencesByDriver(driver.Id);
+            driver.Expenses = expenses.ToList();
+
+            result = _mapper.Map<FullDriverResponceDTO>(driver);
+
             return result;
         }
 

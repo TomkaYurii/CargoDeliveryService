@@ -26,6 +26,9 @@ namespace Drivers.Api.Controllers
 
         //GET: api/driver/Id
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<FullDriverResponceDTO>> GetFullInfoAboutDriver(int id)
         {
             try
@@ -45,7 +48,7 @@ namespace Drivers.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Транзакція сфейлилась! Щось пішло не так у методі GetAllEventsAsync() - {ex.Message}");
+                _logger.LogError($"Транзакція сфейлилась! Щось пішло не так у методі GetFullInfoAboutDriver() - {ex.Message}");
                 return StatusCode(StatusCodes.Status500InternalServerError, "Потрібно дивитись!");
             }
         }
