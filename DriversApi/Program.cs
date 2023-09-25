@@ -14,7 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Data;
 
 
-//КОНФІГРУВАННЯ: 1) файли конфігурацій 2) IOC 3) логіювання
+//РљРћРќР¤Р†Р“Р РЈР’РђРќРќРЇ: 1) С„Р°Р№Р»Рё РєРѕРЅС„С–РіСѓСЂР°С†С–Р№ 2) IOC 3) Р»РѕРіС–СЋРІР°РЅРЅСЏ
 var builder = WebApplication.CreateBuilder(args);
 
 
