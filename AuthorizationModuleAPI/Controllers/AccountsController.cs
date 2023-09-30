@@ -6,7 +6,7 @@ using AuthorizationModuleAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-[Authorize]
+//[Authorize]
 [ApiController]
 [Route("[controller]")]
 public class AccountsController : BaseController
