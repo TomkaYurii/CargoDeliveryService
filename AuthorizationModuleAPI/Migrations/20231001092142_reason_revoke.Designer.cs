@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthorizationModuleAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230930201540_initial")]
-    partial class initial
+    [Migration("20231001092142_reason_revoke")]
+    partial class reason_revoke
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -104,7 +104,6 @@ namespace AuthorizationModuleAPI.Migrations
                                 .HasColumnType("datetime2");
 
                             b1.Property<string>("ReasonRevoked")
-                                .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
                             b1.Property<string>("ReplacedByToken")

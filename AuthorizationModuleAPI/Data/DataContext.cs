@@ -1,7 +1,7 @@
-namespace AuthorizationModuleAPI.Helpers;
-
 using AuthorizationModuleAPI.Entities;
 using Microsoft.EntityFrameworkCore;
+
+namespace AuthorizationModuleAPI.Data;
 
 public class DataContext : DbContext
 {

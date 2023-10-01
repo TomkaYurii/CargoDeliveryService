@@ -1,6 +1,7 @@
 namespace AuthorizationModuleAPI.Services;
 
 using AuthorizationModuleAPI.Authorization;
+using AuthorizationModuleAPI.Data;
 using AuthorizationModuleAPI.Entities;
 using AuthorizationModuleAPI.Helpers;
 using AuthorizationModuleAPI.Models.Accounts;

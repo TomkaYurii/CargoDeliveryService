@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Posts", "Posts", "{F38847DB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FakeDataModule", "FakeDataModule", "{D264DFEE-3D4E-4C90-A8C0-1E2DE570F809}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{7F6C662C-9745-42DD-9FD8-6CBD9DD8675C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuthJWTModule", "AuthJWTModule", "{7F6C662C-9745-42DD-9FD8-6CBD9DD8675C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orders", "Orders", "{ABD51DD9-E7E1-4738-9CF4-B7C4015D9297}"
 EndProject
@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Drivers.Api", "DriversApi\D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FakeDataDriverDbGenerator", "FakeDataDbGenerator\FakeDataDriverDbGenerator.csproj", "{065AE2A4-7E59-49C6-9DD0-3623698486FB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{31D6E6E2-5D25-4065-923A-4BE227ABF405}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Databases", "Databases", "{31D6E6E2-5D25-4065-923A-4BE227ABF405}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Drivers.DAL_EF", "Drivers.DAL_EF\Drivers.DAL_EF.csproj", "{AE5CC0FF-6A84-4179-A318-4807020CD9F6}"
 EndProject
@@ -31,7 +31,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFDrivers", "WPFDrivers\WP
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Drivers.Db", "Drivers.Db\Drivers.Db.sqlproj", "{61316759-3E38-450E-AAEC-40EC53137F8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthorizationModuleAPI", "AuthorizationModuleAPI\AuthorizationModuleAPI.csproj", "{2FA03A46-00B7-404C-B6D8-D0F5372327C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthorizationModuleAPI", "AuthorizationModuleAPI\AuthorizationModuleAPI.csproj", "{2FA03A46-00B7-404C-B6D8-D0F5372327C9}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Drivers.JWT", "Drivers.JWT\Drivers.JWT.sqlproj", "{DA062081-4757-4F0B-876D-3E0037C471AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,45 +42,29 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{59DFA3C5-B745-4AE7-AAC1-9C0DD38344C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{59DFA3C5-B745-4AE7-AAC1-9C0DD38344C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59DFA3C5-B745-4AE7-AAC1-9C0DD38344C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{59DFA3C5-B745-4AE7-AAC1-9C0DD38344C9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6E9054A7-191A-482C-A943-85C81769263D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6E9054A7-191A-482C-A943-85C81769263D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E9054A7-191A-482C-A943-85C81769263D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6E9054A7-191A-482C-A943-85C81769263D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{801F8C89-4C24-4FBC-AB62-2A7AFB7AC67F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{801F8C89-4C24-4FBC-AB62-2A7AFB7AC67F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{801F8C89-4C24-4FBC-AB62-2A7AFB7AC67F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{801F8C89-4C24-4FBC-AB62-2A7AFB7AC67F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{065AE2A4-7E59-49C6-9DD0-3623698486FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{065AE2A4-7E59-49C6-9DD0-3623698486FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{065AE2A4-7E59-49C6-9DD0-3623698486FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{065AE2A4-7E59-49C6-9DD0-3623698486FB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AE5CC0FF-6A84-4179-A318-4807020CD9F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE5CC0FF-6A84-4179-A318-4807020CD9F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE5CC0FF-6A84-4179-A318-4807020CD9F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE5CC0FF-6A84-4179-A318-4807020CD9F6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AF882894-546D-437B-A1BF-6E779924032D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF882894-546D-437B-A1BF-6E779924032D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF882894-546D-437B-A1BF-6E779924032D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF882894-546D-437B-A1BF-6E779924032D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{61316759-3E38-450E-AAEC-40EC53137F8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{61316759-3E38-450E-AAEC-40EC53137F8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{61316759-3E38-450E-AAEC-40EC53137F8E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{61316759-3E38-450E-AAEC-40EC53137F8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{61316759-3E38-450E-AAEC-40EC53137F8E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{61316759-3E38-450E-AAEC-40EC53137F8E}.Release|Any CPU.Deploy.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{2FA03A46-00B7-404C-B6D8-D0F5372327C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2FA03A46-00B7-404C-B6D8-D0F5372327C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FA03A46-00B7-404C-B6D8-D0F5372327C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FA03A46-00B7-404C-B6D8-D0F5372327C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA062081-4757-4F0B-876D-3E0037C471AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA062081-4757-4F0B-876D-3E0037C471AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA062081-4757-4F0B-876D-3E0037C471AA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{DA062081-4757-4F0B-876D-3E0037C471AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA062081-4757-4F0B-876D-3E0037C471AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA062081-4757-4F0B-876D-3E0037C471AA}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +78,7 @@ Global
 		{AF882894-546D-437B-A1BF-6E779924032D} = {0F73B14D-B1F9-452B-81C4-697811948376}
 		{61316759-3E38-450E-AAEC-40EC53137F8E} = {31D6E6E2-5D25-4065-923A-4BE227ABF405}
 		{2FA03A46-00B7-404C-B6D8-D0F5372327C9} = {7F6C662C-9745-42DD-9FD8-6CBD9DD8675C}
+		{DA062081-4757-4F0B-876D-3E0037C471AA} = {31D6E6E2-5D25-4065-923A-4BE227ABF405}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F84E06C-5B88-446F-8BEF-60879A2BE854}

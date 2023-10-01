@@ -1,4 +1,5 @@
 using AuthorizationModuleAPI.Authorization;
+using AuthorizationModuleAPI.Data;
 using AuthorizationModuleAPI.Helpers;
 using AuthorizationModuleAPI.Services;
 using Microsoft.EntityFrameworkCore;
@@ -6,8 +7,8 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// add services to DI container
+// Add services to the container
+// Add services to DI container
 {
     var services = builder.Services;
     var env = builder.Environment;
@@ -16,7 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
     services.AddCors();
     services.AddControllers().AddJsonOptions(x =>
     {
-        // serialize enums as strings in api responses (e.g. Role)
+        // Serialize enums as strings in api responses (e.g. Role)
         x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
     services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

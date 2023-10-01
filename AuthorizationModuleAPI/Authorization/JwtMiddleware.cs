@@ -1,5 +1,6 @@
 namespace AuthorizationModuleAPI.Authorization;
 
+using AuthorizationModuleAPI.Data;
 using AuthorizationModuleAPI.Helpers;
 using Microsoft.Extensions.Options;
 

@@ -134,10 +134,10 @@ public class AccountsController : BaseController
     }
 
     /// <summary>
-    /// ОТРИМАННЯ всых аккаунтів 
+    /// ОТРИМАННЯ всіх аккаунтів 
     /// </summary>
     /// <returns></returns>
-  //  [Authorize(Role.Admin)]
+    //  [Authorize(Role.Admin)]
     [HttpGet]
     public ActionResult<IEnumerable<AccountResponse>> GetAll()
     {
@@ -166,7 +166,7 @@ public class AccountsController : BaseController
     /// </summary>
     /// <param name="model"></param>
     /// <returns></returns>
-  //  [Authorize(Role.Admin)]
+    //  [Authorize(Role.Admin)]
     [HttpPost]
     public ActionResult<AccountResponse> Create(CreateRequest model)
     {
@@ -210,7 +210,6 @@ public class AccountsController : BaseController
         _accountService.Delete(id);
         return Ok(new { message = "Account deleted successfully" });
     }
-
 
 
     // helper methods
