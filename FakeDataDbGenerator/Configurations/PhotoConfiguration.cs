@@ -28,8 +28,6 @@ namespace FakeDataDriverDbGenerator.Configurations
             modelbuilder.Property(d => d.DeletedAt)
                 .HasColumnType("datetime")
                 .HasDefaultValue(null);
-
-
         }
     }
 }

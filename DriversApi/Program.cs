@@ -1,4 +1,7 @@
+using Drivers.Api.Middleware;
 using Drivers.BLL.Contracts;
+using Drivers.BLL.DTOs.Requests;
+using Drivers.BLL.DTOs.Validation;
 using Drivers.BLL.Managers;
 using Drivers.DAL_ADO.Contracts;
 using Drivers.DAL_ADO.Repositories;
@@ -9,9 +12,13 @@ using Drivers.DAL_EF.Entities;
 using Drivers.DAL_EF.Helpers;
 using Drivers.DAL_EF.Repositories;
 using Drivers.DAL_EF.UOW;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Data;
+
 
 
 //КОНФІГРУВАННЯ: 1) файли конфігурацій 2) IOC 3) логіювання
@@ -73,15 +80,26 @@ builder.Services.AddScoped<IPhotoManager, PhotoManager>();
 builder.Services.AddScoped<IRepairManager, RepairManager>();
 builder.Services.AddScoped<ITruckManager, TruckManager>();
 
-
+builder.Services.AddTransient<ExceptionMiddleware>();
 //AUTOMAPPER
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
-// Add services to the container.
+
+//FLUENT VALIDATION
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddFluentValidationClientsideAdapters();
+
+builder.Services.AddScoped<IValidator<MiniDriverReqDTO>, MiniDriverReqDTO_Validator>();
+
+// Controllers
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var app = builder.Build();
 
@@ -91,9 +109,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+// global cors policy
+app.UseCors(x => x
+    .SetIsOriginAllowed(origin => true)
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .AllowCredentials());
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionMiddleware>();
+
+
 app.MapControllers();
 app.Run();

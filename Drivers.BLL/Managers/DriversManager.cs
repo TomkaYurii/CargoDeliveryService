@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Drivers.BLL.Contracts;
+using Drivers.BLL.DTOs.Requests;
 using Drivers.BLL.DTOs.Responses;
 using Drivers.DAL_ADO.Contracts;
 using Drivers.DAL_EF.Contracts;
@@ -74,13 +75,39 @@ namespace Drivers.BLL.Managers
         }
 
         /// <summary>
-        /// ОТРИМАННЯ СПИСКУ ВСІХ ВОДІЇВ
+        /// ОТРИМАННЯ CКОРОЧЕНОї ІНФОРМАЦІЇ ПРО ВСІХ ВСІХ ВОДІЇВ
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public Task<IEnumerable<ShortDriverResponceDTO>> GetListOfAllDrivers()
+        public async Task<IEnumerable<ShortDriverResponceDTO>> GetListOfAllDrivers()
         {
-            throw new NotImplementedException();
+            var alldrv = await _EFuow.EFDriverRepository.GetAllAsync();
+            return _mapper.Map<IEnumerable<ShortDriverResponceDTO>>(alldrv);
+        }
+
+        /// <summary>
+        /// ДОДАВАННЯ ВОДІЯ
+        /// </summary>
+        /// <param name="driverDTO"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationException"></exception>
+        public async Task<EFDriver> AddDriverToSystemAsync(MiniDriverReqDTO driverDTO, CancellationToken cancellationToken)
+        {
+            var result = new EFDriver();
+            try
+            {
+                await _EFuow.BeginTransactionAsync(cancellationToken);
+                    result = await _EFuow.EFDriverRepository.AddAsync(_mapper.Map<EFDriver>(driverDTO));
+                    await _EFuow.CompleteAsync(cancellationToken);
+                await _EFuow.CommitTransactionAsync(cancellationToken);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                await _EFuow.RollbackTransactionAsync(cancellationToken);
+                throw new ApplicationException("Error in transaction while adding information about driver", ex);
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ public interface IEFGenericRepository<TEntity> where TEntity : class
 
     Task<TEntity> GetCompleteEntityAsync(int id);
 
-    Task AddAsync(TEntity entity);
+    Task<TEntity> AddAsync(TEntity entity);
 
     Task UpdateAsync(TEntity entity);
 

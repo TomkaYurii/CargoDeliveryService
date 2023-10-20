@@ -1,10 +1,12 @@
-﻿using Drivers.BLL.Contracts;
-using Drivers.BLL.DTOs;
+﻿using Drivers.Api.Exceptions;
+using Drivers.BLL.Contracts;
+using Drivers.BLL.DTOs.Requests;
 using Drivers.BLL.DTOs.Responses;
-using Drivers.DAL_EF.Contracts;
 using Drivers.DAL_EF.Entities;
 using Drivers.DAL_EF.Entities.HelpModels;
 using Drivers.DAL_EF.Helpers;
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -24,6 +26,12 @@ namespace Drivers.Api.Controllers
             _driversManager= driversManager;
         }
 
+        /// <summary>
+        /// Get Driver by Id
+        /// </summary>
+        /// <param name="id">Key</param>
+        /// <returns></returns>
+        /// <exception cref="NotFoundException">Not found any driver</exception>
         //GET: api/driver/Id
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -31,31 +39,24 @@ namespace Drivers.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<FullDriverResponceDTO>> GetFullInfoAboutDriver(int id)
         {
-            try
+            var result = await _driversManager.GetFullInfoAboutDriver(id);
+            if (result == null)
             {
-                var result = await _driversManager.GetFullInfoAboutDriver(id);
-                if (result == null)
-                {
-                    _logger.LogInformation($"Driver із Id: {id}, не був знайдейний у базі даних");
-                    return NotFound();
-                }
-                else
-                {
-                    _logger.LogInformation($"Отримали Driver з бази даних!");
-                    return Ok(result);
-                }
-
+                throw new NotFoundException($"A driver from the database with ID: {id} could not be found.");
             }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Транзакція сфейлилась! Щось пішло не так у методі GetFullInfoAboutDriver() - {ex.Message}");
-                return StatusCode(StatusCodes.Status500InternalServerError, "Потрібно дивитись!");
-            }
+            return Ok(result);
         }
 
-        //GET: api/driver
-        [HttpGet]
-        public async Task<ActionResult<PagedList<EFDriver>>> GetAllDriversAsync([FromQuery] DriverParameters driverParameters)
+        /// <summary>
+        /// Get paganated drivers
+        /// </summary>
+        /// <param name="driverParameters">Model for paginated drivers</param>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpGet("alldriverspaginated")]
+        public async Task<ActionResult<PagedList<EFDriver>>> GetAllDriversPaginatedAsync([FromQuery] DriverParameters driverParameters)
         {
             if (!driverParameters.ValidYearRange)
             {
@@ -87,106 +88,60 @@ namespace Drivers.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Get all drivers from database
+        /// </summary>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpGet("alldrivers")]
+        public async Task<ActionResult<IEnumerable<ShortDriverResponceDTO>>> GetAllDriversAsync()
+        {
 
+            var result = await _driversManager.GetListOfAllDrivers();
+            if (result == null)
+            {
+                _logger.LogInformation($"Records are absent in database");
+                return NotFound();
+            }
+            else
+            {
+                _logger.LogInformation($"Кeceived drivers from the database!");
+                return Ok(result);
+            }
+        }
 
-
-
-
-        ////GET: api/driver/Id
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Driver>> GetByIdAsync(int id)
-        //{
-        //    try
-        //    {
-        //        var result = await _ADOuow._driverRepository.GetAsync(id);
-        //        if (result == null)
-        //        {
-        //            _logger.LogInformation($"Івент із Id: {id}, не був знайдейний у базі даних");
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            _logger.LogInformation($"Отримали івент з бази даних!");
-        //            return Ok(result);
-        //        }
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError($"Транзакція сфейлилась! Щось пішло не так у методі GetAllEventsAsync() - {ex.Message}");
-        //        return StatusCode(StatusCodes.Status500InternalServerError, "вот так вот!");
-        //    }
-        //}
-
-        ////POST: api/driver
-        //[HttpPost]
-        //public async Task<ActionResult> PostDriverAsync([FromBody] AddAllInfoAboutDriverDTO model)
-        //{
-        //    try
-        //    {
-        //        if (model == null)
-        //        {
-        //            _logger.LogInformation($"Ми отримали пустий json зі сторони клієнта");
-        //            return BadRequest("Обєкт івенту є null");
-        //        }
-        //        if (!ModelState.IsValid)
-        //        {
-        //            _logger.LogInformation($"Ми отримали некоректний json зі сторони клієнта");
-        //            return BadRequest("Обєкт івенту є некоректним");
-        //        }
-
-        //        var obj_DriverLicense = new DriverLicense();
-        //        obj_DriverLicense.LicenseId = model.LicenseId;
-        //        obj_DriverLicense.ExpiryDate = model.ExpiryDate;
-        //        obj_DriverLicense.Type = model.Type;
-
-        //        var created_id_license = await _ADOuow._driverlicenseRepository.AddAsync(obj_DriverLicense);
-
-        //        var obj_Car = new Car();
-        //        obj_Car.PlateNumber = model.PlateNumber;
-        //        obj_Car.Model = model.Model;
-        //        obj_Car.Capacity = model.Capacity;
-
-        //        var created_id_car = await _ADOuow._carRepository.AddAsync(obj_Car);
-
-        //        var obj_Country = new Country();
-        //        obj_Country.CountryName = model.CountryName;
-
-        //        var created_id_country = await _ADOuow._countryRepository.AddAsync(obj_Country);
-
-        //        var obj_Rating = new Rating();
-        //        obj_Rating.Ratings = model.Ratings;
-
-        //        var created_id_rating = await _ADOuow._ratingRepository.AddAsync(obj_Rating);
-
-        //        var obj_Route = new DAL.Entities.Route();
-        //        obj_Route.FromPoint = model.FromPoint;
-        //        obj_Route.ToPoint = model.ToPoint;
-
-        //        var created_id_route = await _ADOuow._routeRepository.AddAsync(obj_Route);
-
-        //        var obj_Driver = new Driver();
-        //        obj_Driver.Name = model.Name;
-        //        obj_Driver.Surname = model.Surname;
-        //        obj_Driver.Experience = model.Experience;
-        //        obj_Driver.Email = model.Email;
-        //        obj_Driver.Phone = model.Phone;
-        //        obj_Driver.DriverLicense_Id = created_id_license;
-        //        obj_Driver.Car_Id = created_id_car;
-        //        obj_Driver.Country_Id = created_id_country;
-        //        obj_Driver.Rating_Id = created_id_rating;
-        //        obj_Driver.Route_Id = created_id_route;
-
-        //        var created_id = await _ADOuow._driverRepository.AddAsync(obj_Driver);
-        //        _ADOuow.Commit();
-        //        return StatusCode(StatusCodes.Status201Created);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError($"Транзакція сфейлилась! Щось пішло не так у методі PostEventAsync - {ex.Message}");
-        //        return StatusCode(StatusCodes.Status500InternalServerError, "вот так вот!");
-        //    }
-        //}
+        /// <summary>
+        /// Add driver
+        /// </summary>
+        /// <param name="model">Information about driver - MiniDriverReqDTO</param>
+        /// <param name="validator">FluentValidation validator of MiniDriverReqDTO </param>
+        /// <returns></returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [HttpPost]
+        public async Task<ActionResult> PostDriverAsync([FromBody] MiniDriverReqDTO model,
+            [FromServices] IValidator<MiniDriverReqDTO> validator,
+            CancellationToken cancellationToken)
+        {
+            this._logger.LogInformation($"==>> API Input : {{ Driver: {model.LastName}}}");
+            ValidationResult validationResult = validator.Validate(model);
+            if (!validationResult.IsValid)
+            {
+                // Если есть ошибки из FluentValidation, возвращайте их
+                return BadRequest(validationResult.Errors);
+            }
+            if (!ModelState.IsValid)
+            {
+                // Если есть ошибки из встроенной валидации атрибутов модели, также возвращайте их
+                return BadRequest(ModelState);
+            }
+            var created_driver = await _driversManager.AddDriverToSystemAsync(model, cancellationToken);
+            this._logger.LogInformation($"==>> Added driver : {{ Driver: {created_driver.LastName}-{created_driver.Id}}}");
+            return CreatedAtAction(nameof(GetFullInfoAboutDriver), new { id = created_driver.Id }, created_driver);
+        }
 
         ////PUT: api/driver/id
         //[HttpPut("{id}")]

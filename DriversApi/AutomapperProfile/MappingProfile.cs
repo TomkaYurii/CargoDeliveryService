@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Drivers.BLL.DTOs.Requests;
 using Drivers.BLL.DTOs.Responses;
 using Drivers.DAL_EF.Entities;
 
@@ -11,8 +12,12 @@ namespace Drivers.Api.AutomapperProfile
                 .ForMember(dest => dest.CompanyDTO, opt => opt.MapFrom(src => src.Company));      
             CreateMap<FullDriverResponceDTO, EFDriver>();
 
-            CreateMap<CompanyResponceDTO, EFCompany>();
-            CreateMap<EFCompany, CompanyResponceDTO> ();
+            CreateMap<EFDriver, ShortDriverResponceDTO>();
+            CreateMap<ShortDriverResponceDTO, EFDriver>();
+
+
+            CreateMap<EFCompany, CompanyResponceDTO>().ReverseMap ();
+            CreateMap<EFDriver, MiniDriverReqDTO>().ReverseMap();
         }
     }
 }

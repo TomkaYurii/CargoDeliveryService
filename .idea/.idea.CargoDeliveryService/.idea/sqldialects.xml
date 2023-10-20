@@ -10,5 +10,9 @@
     <file url="file://$PROJECT_DIR$/Drivers.Db/dbo/Tables/Repairs.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Drivers.Db/dbo/Tables/Trucks.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/Drivers.Db/dbo/Tables/__EFMigrationsHistory.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Drivers.JWT/Security/Permissions.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Drivers.JWT/dbo/Tables/Accounts.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Drivers.JWT/dbo/Tables/RefreshToken.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/Drivers.JWT/dbo/Tables/__EFMigrationsHistory.sql" dialect="TSQL" />
   </component>
 </project>

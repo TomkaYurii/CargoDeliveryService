@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Drivers.DAL_EF.Exceptions
+﻿namespace Drivers.DAL_EF.Exceptions
 {
     public class EntityNotFoundException : Exception
     {
@@ -15,3 +13,4 @@ namespace Drivers.DAL_EF.Exceptions
         }
     }
 }
+

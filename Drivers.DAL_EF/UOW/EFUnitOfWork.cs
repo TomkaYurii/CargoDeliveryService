@@ -1,11 +1,14 @@
 ﻿using Drivers.DAL_EF.Contracts;
 using Drivers.DAL_EF.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Drivers.DAL_EF.UOW;
 
 public class EFUnitOfWork : IEFUnitOfWork
 {
-    protected readonly DriversManagementContext databaseContext;
+    private readonly DriversManagementContext databaseContext;
+    private IDbContextTransaction transaction;
 
     public IEFDriverRepository EFDriverRepository { get; }
 
@@ -41,8 +44,35 @@ public class EFUnitOfWork : IEFUnitOfWork
         this.EFPTruckRepository = eFTruckRepository;
     }
 
-    public async Task SaveChangesAsync()
+/*    public async Task SaveChangesAsync()
     {
         await databaseContext.SaveChangesAsync();
+    }*/
+
+    public async Task BeginTransactionAsync(CancellationToken cancellationToken = default)
+    {
+        transaction = await databaseContext.Database.BeginTransactionAsync(cancellationToken);
+    }
+
+    public async Task CommitTransactionAsync(CancellationToken cancellationToken = default)
+    {
+        await transaction.CommitAsync(cancellationToken);
+    }
+
+    public async Task RollbackTransactionAsync(CancellationToken cancellationToken = default)
+    {
+        await transaction.RollbackAsync(cancellationToken);
+    }
+
+    public async Task<int> CompleteAsync(CancellationToken cancellationToken = default)
+    {
+        return await databaseContext.SaveChangesAsync(cancellationToken);
+    }
+
+    public void Dispose()
+    {
+        transaction?.Dispose();
+
+        databaseContext.Dispose();
     }
 }

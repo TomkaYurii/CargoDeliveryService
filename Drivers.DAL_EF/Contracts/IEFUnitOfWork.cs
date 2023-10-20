@@ -9,5 +9,9 @@ public interface IEFUnitOfWork
     IEFPhotoRepository EFPhotoRepository { get; }
     IEFRepairRepository EFPRepairRepository { get; }
     IEFTruckRepository EFPTruckRepository { get; }
-    Task SaveChangesAsync();
+    Task BeginTransactionAsync(CancellationToken cancellationToken);
+    Task CommitTransactionAsync(CancellationToken cancellationToken);
+    Task RollbackTransactionAsync(CancellationToken cancellationToken);
+    Task<int> CompleteAsync(CancellationToken cancellationToken);
+    void Dispose();
 }

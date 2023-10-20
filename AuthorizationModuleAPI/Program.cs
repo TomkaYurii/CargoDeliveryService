@@ -7,17 +7,16 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
-// Add services to DI container
+// add services to DI container
 {
     var services = builder.Services;
     var env = builder.Environment;
-
+ 
     services.AddDbContext<DataContext>();
     services.AddCors();
-    services.AddControllers().AddJsonOptions(x =>
+    services.AddControllers().AddJsonOptions(x => 
     {
-        // Serialize enums as strings in api responses (e.g. Role)
+        // serialize enums as strings in api responses (e.g. Role)
         x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
     services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -32,11 +31,6 @@ var builder = WebApplication.CreateBuilder(args);
     services.AddScoped<IEmailService, EmailService>();
 }
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
 var app = builder.Build();
 
 // migrate any database changes on startup (includes initial db creation)
@@ -46,7 +40,6 @@ using (var scope = app.Services.CreateScope())
     dataContext.Database.Migrate();
 }
 
-// Configure the HTTP request pipeline.
 // configure HTTP request pipeline
 {
     // generated swagger json and swagger ui middleware
@@ -68,5 +61,4 @@ using (var scope = app.Services.CreateScope())
 
     app.MapControllers();
 }
-
-app.Run("http://localhost:4000");
+app.Run();

@@ -6,7 +6,7 @@ using AuthorizationModuleAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-//[Authorize]
+/*[Authorize]*/
 [ApiController]
 [Route("[controller]")]
 public class AccountsController : BaseController
@@ -134,10 +134,10 @@ public class AccountsController : BaseController
     }
 
     /// <summary>
-    /// ОТРИМАННЯ всіх аккаунтів 
+    /// Отримання всіх аккаунтів 
     /// </summary>
     /// <returns></returns>
-    //  [Authorize(Role.Admin)]
+    /*[Authorize]*/
     [HttpGet]
     public ActionResult<IEnumerable<AccountResponse>> GetAll()
     {
@@ -154,8 +154,8 @@ public class AccountsController : BaseController
     public ActionResult<AccountResponse> GetById(int id)
     {
         // users can get their own account and admins can get any account
-        if (id != Account.Id && Account.Role != Role.Admin)
-            return Unauthorized(new { message = "Unauthorized" });
+/*        if (id != Account.Id && Account.Role != Role.Admin)
+            return Unauthorized(new { message = "Unauthorized" });*/
 
         var account = _accountService.GetById(id);
         return Ok(account);
