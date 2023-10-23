@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace Drivers.Api.Exceptions
+namespace Drivers.BLL.Exceptions
 {
     public class CustomException : Exception
     {

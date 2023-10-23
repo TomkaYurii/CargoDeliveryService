@@ -17,22 +17,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14924304-48ab-4b2e-bd8e-bedf580f630a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CargoDeliveryService/.idea/sqlDataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CargoDeliveryService/.idea/sqlDataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CargoDeliveryService/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CargoDeliveryService/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CargoDeliveryService/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CargoDeliveryService/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthorizationModuleAPI/AuthorizationModuleAPI.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorizationModuleAPI/AuthorizationModuleAPI.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AuthorizationModuleAPI/Controllers/AccountsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorizationModuleAPI/Controllers/AccountsController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthorizationModuleAPI/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorizationModuleAPI/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthorizationModuleAPI/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorizationModuleAPI/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthorizationModuleAPI/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorizationModuleAPI/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CargoDeliveryService.sln" beforeDir="false" afterPath="$PROJECT_DIR$/CargoDeliveryService.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Drivers.BLL/Drivers.BLL.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers.BLL/Drivers.BLL.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Drivers.BLL/Managers/DriversManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers.BLL/Managers/DriversManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Drivers.DAL_EF/Drivers.DAL_EF.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers.DAL_EF/Drivers.DAL_EF.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DriversApi/AutomapperProfile/MappingProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DriversApi/AutomapperProfile/MappingProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DriversApi/Controllers/DriversController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DriversApi/Controllers/DriversController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DriversApi/Drivers.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/DriversApi/Drivers.Api.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DriversApi/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DriversApi/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,34 +34,6 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ffdb2247427342a78d5dfb5b506e8aa57b910/1f/a45847f1/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2048d5b61a78bef52894eecf448e34a883cb22e1abb6711e0eb6d690a3b0/WebApplication.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/235b8d206b56acfe04faeb04511585b156981556882336a9a49a871c0722e90/Type.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
@@ -96,7 +54,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a0cb50bd29af8ab8654a24572d7e6cbc0f39c58f4d26745cdb2106a5bcdb81/RuntimeType.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/aeae22b1c972504e8888d248c7af57e956db03461ad886a20159e93a0d118f3/ParameterExpression.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/af16a857fa2cb98cf5e81784b69dc7ad434bcfb8e6fe27442a46beb9113d2c/InternalDbSet.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b1455a1b8a078d2fb2b94ca6b592e4fdf565fda99c679e809d992e9270/ValueTask.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b1455a1b8a078d2fb2b94ca6b592e4fdf565fda99c679e809d992e9270/ValueTask.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c018a1a3af0722da2f22dede3badfa058bc532f9991c982db8493bbe5d34f4/ServiceCollection.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/cc4c889cc6695421e5ba7380782096616c46a660e8b5c920df3b7564dcef43/ServiceDescriptor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ee456ec7f2e479b4eaa66183eaa0d1365ef16c4615282c4e7dccacdcc14dda/ArgumentNullException.cs" root0="SKIP_HIGHLIGHTING" />
@@ -117,29 +75,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "XThreadsFramesViewSplitterKey": "0.27367204",
-    "deletionFromPopupRequiresConfirmation": "false",
-    "git-widget-placeholder": "master",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.27367204&quot;,
+    &quot;deletionFromPopupRequiresConfirmation&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\Yurii\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache",
-      "C:\\Users\\Yurii\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache",
-      "C:\\Users\\Yurii\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\Yurii\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\Yurii\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\Yurii\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.AuthorizationModuleAPI: AuthHttps">
     <configuration name="FakeDataDriverDbGenerator" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -284,6 +242,7 @@
       <workItem from="1696768741066" duration="961000" />
       <workItem from="1696769908997" duration="3097000" />
       <workItem from="1696776102545" duration="10538000" />
+      <workItem from="1697835410080" duration="590000" />
     </task>
     <servers />
   </component>
@@ -318,21 +277,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" log-message="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/DriversApi/Controllers/DriversController.cs</url>
-          <line>33</line>
-          <properties documentPath="C:\Users\Yurii\source\repos\CargoDeliveryService\DriversApi\Controllers\DriversController.cs" initialLine="33" containingFunctionPresentation="Method 'GetFullInfoAboutDriver'">
-            <startOffsets>
-              <option value="1105" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1888" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog>
           <selected-grouping-rules>

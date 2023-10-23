@@ -1,5 +1,6 @@
 using Drivers.DAL_EF.Contracts;
 using Drivers.DAL_EF.Data;
+using Drivers.DAL_EF.Entities;
 using Drivers.DAL_EF.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -19,6 +20,9 @@ public abstract class EFGenericRepository<TEntity> : IEFGenericRepository<TEntit
         table = this.databaseContext.Set<TEntity>();
     }
 
+    /////////////////////////////////////////////////////////////////////
+    ///   Generic CRUD
+    /////////////////////////////////////////////////////////////////////
 
     /// <summary>
     /// GetByIdAsync
@@ -53,7 +57,7 @@ public abstract class EFGenericRepository<TEntity> : IEFGenericRepository<TEntit
     {
         if (entity == null)
         {
-            throw new ArgumentNullException($"{nameof(TEntity)} entity must not be null");
+            throw new ArgumentNullException($"{nameof(TEntity)} entity can't be null");
         }
         var added_entity = await table.AddAsync(entity);
         return added_entity.Entity;
@@ -68,10 +72,9 @@ public abstract class EFGenericRepository<TEntity> : IEFGenericRepository<TEntit
     {
         if (entity == null)
         {
-            throw new ArgumentNullException($"{nameof(TEntity)} entity must not be null");
+            throw new ArgumentNullException($"{nameof(TEntity)} entity can't be null");
         }
         await Task.Run(() => table.Update(entity));
-
     }
 
     /// <summary>
@@ -81,7 +84,7 @@ public abstract class EFGenericRepository<TEntity> : IEFGenericRepository<TEntit
     /// <returns></returns>
     public virtual async Task DeleteByIdAsync(int id)
     {
-        var entity = await GetByIdAsync(id) ?? throw new Exception($"{typeof(TEntity).Name} with id {id} not found. Cann't delete.");
+        var entity = await GetByIdAsync(id) ?? throw new EntityNotFoundException($"{typeof(TEntity).Name} with id {id} not found. Cann't delete.");
         await Task.Run(() => table.Remove(entity));
     }
 
@@ -98,6 +101,10 @@ public abstract class EFGenericRepository<TEntity> : IEFGenericRepository<TEntit
         }
         await Task.Run(() => table.Remove(entity));
     }
+
+    /////////////////////////////////////////////////////////////////////
+    ///   FILTERS
+    /////////////////////////////////////////////////////////////////////
 
     /// <summary>
     /// Пошук
@@ -120,6 +127,10 @@ public abstract class EFGenericRepository<TEntity> : IEFGenericRepository<TEntit
             .Where(expression)
             .AsNoTracking());
     }
+
+    /////////////////////////////////////////////////////////////////////
+    ///   Contracts
+    /////////////////////////////////////////////////////////////////////
 
     /// <summary>
     /// GetCompleteEntityAsync
