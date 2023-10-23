@@ -9,6 +9,7 @@ namespace Drivers.BLL.DTOs.Requests
 {
     public class MiniDriverReqDTO
     {
+        public int id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? MiddleName { get; set; }

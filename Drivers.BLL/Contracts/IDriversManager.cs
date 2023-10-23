@@ -12,5 +12,7 @@ namespace Drivers.BLL.Contracts
         Task<FullDriverResponceDTO> GetFullInfoAboutDriver(int id);
         Task<PagedList<EFDriver>> GetPaginatedDrivers(DriverParameters driverParameters);
         Task<EFDriver> AddDriverToSystemAsync(MiniDriverReqDTO driverDTO, CancellationToken cancellationToken);
+        Task<EFDriver> UpdateDriverInSystemAsync(int id, MiniDriverReqDTO driverDTO, CancellationToken cancellationToken);
+        Task DeleteDriverFromSystemAsync(int id, CancellationToken cancellationToken);
     }
 }

@@ -3,6 +3,7 @@ using Drivers.DAL_EF.Data;
 using Drivers.DAL_EF.Entities;
 using Drivers.DAL_EF.Entities.HelpModels;
 using Drivers.DAL_EF.Helpers;
+using Microsoft.EntityFrameworkCore;
 using MyEventsEntityFrameworkDb.EFRepositories;
 
 namespace Drivers.DAL_EF.Repositories;
@@ -34,6 +35,11 @@ public class EFDriverRepository : EFGenericRepository<EFDriver>, IEFDriverReposi
         return PagedList<EFDriver>.ToPagedList(drivers,
                 driverParameters.PageNumber,
                 driverParameters.PageSize);
+    }
+
+    public async Task<EFDriver> GetByIdAsNoTrackingAsync(int id)
+    {
+        return await table.AsNoTracking().FirstOrDefaultAsync(drv => drv.Id == id);
     }
 
     /// <summary>

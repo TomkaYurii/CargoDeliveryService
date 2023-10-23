@@ -7,16 +7,21 @@ namespace Drivers.Api.AutomapperProfile
 {
     public class MappingProfile : Profile
     {
-        public MappingProfile() {
+        public MappingProfile() 
+        {
+            /////////////////////////////////////////////////////////////////////
+            ///   Responces
+            /////////////////////////////////////////////////////////////////////
             CreateMap<EFDriver, FullDriverResponceDTO>()
                 .ForMember(dest => dest.CompanyDTO, opt => opt.MapFrom(src => src.Company));      
             CreateMap<FullDriverResponceDTO, EFDriver>();
 
-            CreateMap<EFDriver, ShortDriverResponceDTO>();
-            CreateMap<ShortDriverResponceDTO, EFDriver>();
-
-
+            CreateMap<EFDriver, ShortDriverResponceDTO>().ReverseMap();
             CreateMap<EFCompany, CompanyResponceDTO>().ReverseMap ();
+
+            /////////////////////////////////////////////////////////////////////
+            ///   Requests
+            /////////////////////////////////////////////////////////////////////
             CreateMap<EFDriver, MiniDriverReqDTO>().ReverseMap();
         }
     }

@@ -2,6 +2,7 @@
 using Drivers.BLL.Contracts;
 using Drivers.BLL.DTOs.Requests;
 using Drivers.BLL.DTOs.Responses;
+using Drivers.BLL.Exceptions;
 using Drivers.DAL_ADO.Contracts;
 using Drivers.DAL_EF.Contracts;
 using Drivers.DAL_EF.Entities;
@@ -40,8 +41,7 @@ namespace Drivers.BLL.Managers
             var driver = await _EFuow.EFDriverRepository.GetByIdAsync(id);
             if (driver == null)
             {
-                // Обработка случая, когда водитель с указанным id не найден.
-                return null;
+                throw new NotFoundException($"Driver with {id} cant be found in database!");
             }
 
             if (driver.CompanyId.HasValue)
@@ -94,11 +94,10 @@ namespace Drivers.BLL.Managers
         /// <exception cref="ApplicationException"></exception>
         public async Task<EFDriver> AddDriverToSystemAsync(MiniDriverReqDTO driverDTO, CancellationToken cancellationToken)
         {
-            var result = new EFDriver();
             try
             {
                 await _EFuow.BeginTransactionAsync(cancellationToken);
-                    result = await _EFuow.EFDriverRepository.AddAsync(_mapper.Map<EFDriver>(driverDTO));
+                    var result = await _EFuow.EFDriverRepository.AddAsync(_mapper.Map<EFDriver>(driverDTO));
                     await _EFuow.CompleteAsync(cancellationToken);
                 await _EFuow.CommitTransactionAsync(cancellationToken);
                 return result;
@@ -107,6 +106,65 @@ namespace Drivers.BLL.Managers
             {
                 await _EFuow.RollbackTransactionAsync(cancellationToken);
                 throw new ApplicationException("Error in transaction while adding information about driver", ex);
+            }
+        }
+
+        /// <summary>
+        /// ОНОВЛЕННЯ ІНФОРМАЦІЇ ПРО ВОДІЯ
+        /// </summary>
+        /// <param name="driverDTO">Скорочена інфа про водія</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationException"></exception>
+        public async Task<EFDriver> UpdateDriverInSystemAsync(int id, MiniDriverReqDTO driverDTO, CancellationToken cancellationToken)
+        {
+            var driverEntity = await _EFuow.EFDriverRepository.GetByIdAsNoTrackingAsync(id);
+            if (driverEntity == null)
+            {
+                throw new NotFoundException($"Driver with {id} cant be found and updated in database!");
+            }
+            try
+            {
+                await _EFuow.BeginTransactionAsync(cancellationToken);
+                await _EFuow.EFDriverRepository.UpdateAsync(_mapper.Map<EFDriver>(driverDTO));
+                await _EFuow.CompleteAsync(cancellationToken);
+
+                await _EFuow.CommitTransactionAsync(cancellationToken);
+                return await _EFuow.EFDriverRepository.GetByIdAsync(id);
+            }
+            catch (Exception ex)
+            {
+                await _EFuow.RollbackTransactionAsync(cancellationToken);
+                throw new ApplicationException("Error in transaction while updating information about driver", ex);
+            }
+        }
+
+        /// <summary>
+        /// Видалення запису водія
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="NotFoundException"></exception>
+        /// <exception cref="ApplicationException"></exception>
+        public async Task DeleteDriverFromSystemAsync(int id, CancellationToken cancellationToken)
+        {
+            var driverEntity = await _EFuow.EFDriverRepository.GetByIdAsNoTrackingAsync(id);
+            if (driverEntity == null)
+            {
+                throw new NotFoundException($"Driver with {id} cant be found and deleted from database!");
+            }
+            try
+            {
+                await _EFuow.BeginTransactionAsync(cancellationToken);
+                await _EFuow.EFDriverRepository.DeleteByIdAsync(id);
+                await _EFuow.CompleteAsync(cancellationToken);
+                await _EFuow.CommitTransactionAsync(cancellationToken);
+            }
+            catch (Exception ex)
+            {
+                await _EFuow.RollbackTransactionAsync(cancellationToken);
+                throw new ApplicationException("Error in transaction while updating information about driver", ex);
             }
         }
     }

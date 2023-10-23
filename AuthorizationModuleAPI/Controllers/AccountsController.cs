@@ -1,8 +1,8 @@
 ﻿namespace AuthorizationModuleAPI.Controllers;
 
-using AuthorizationModuleAPI.Entities;
-using AuthorizationModuleAPI.Models.Accounts;
-using AuthorizationModuleAPI.Services;
+using Entities;
+using Models.Accounts;
+using Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +19,7 @@ public class AccountsController : BaseController
     }
 
     /// <summary>
-    /// Аутентифікація
+    /// Authentification
     /// </summary>
     /// <param name="model"></param>
     /// <returns></returns>
@@ -33,7 +33,7 @@ public class AccountsController : BaseController
     }
 
     /// <summary>
-    /// Оновлення рефреш токену
+    /// Update of refresh token
     /// </summary>
     /// <returns></returns>
     [AllowAnonymous]
@@ -47,7 +47,7 @@ public class AccountsController : BaseController
     }
 
     /// <summary>
-    /// Відкликання токену
+    /// Token Validation
     /// </summary>
     /// <param name="model"></param>
     /// <returns></returns>
@@ -69,7 +69,7 @@ public class AccountsController : BaseController
     }
 
     /// <summary>
-    /// Реєстрація
+    /// Registration
     /// </summary>
     /// <param name="model"></param>
     /// <returns></returns>
@@ -82,7 +82,7 @@ public class AccountsController : BaseController
     }
 
     /// <summary>
-    /// Верифікація мейлу
+    /// Email Verification
     /// </summary>
     /// <param name="model"></param>
     /// <returns></returns>
@@ -95,7 +95,7 @@ public class AccountsController : BaseController
     }
 
     /// <summary>
-    /// Забування паролю
+    /// Password forgeting
     /// </summary>
     /// <param name="model"></param>
     /// <returns></returns>
@@ -108,7 +108,7 @@ public class AccountsController : BaseController
     }
 
     /// <summary>
-    /// Валідація токену
+    /// Token Validation
     /// </summary>
     /// <param name="model"></param>
     /// <returns></returns>
@@ -121,7 +121,7 @@ public class AccountsController : BaseController
     }
 
     /// <summary>
-    /// Скидання паролю
+    /// Password Reset
     /// </summary>
     /// <param name="model"></param>
     /// <returns></returns>
@@ -134,7 +134,7 @@ public class AccountsController : BaseController
     }
 
     /// <summary>
-    /// Отримання всіх аккаунтів 
+    /// Get All Accounts
     /// </summary>
     /// <returns></returns>
     /*[Authorize]*/
@@ -162,7 +162,7 @@ public class AccountsController : BaseController
     }
 
     /// <summary>
-    /// Створення аккаунта
+    /// Account creation
     /// </summary>
     /// <param name="model"></param>
     /// <returns></returns>
@@ -196,7 +196,7 @@ public class AccountsController : BaseController
     }
 
     /// <summary>
-    /// Видалення акаунту
+    /// Delete of account
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
