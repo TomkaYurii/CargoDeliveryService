@@ -7,6 +7,7 @@
     <projectFile profileName="http">AuthorizationModuleAPI/AuthorizationModuleAPI.csproj</projectFile>
     <projectFile profileName="https">AuthorizationModuleAPI/AuthorizationModuleAPI.csproj</projectFile>
     <projectFile profileName="DriversApi">DriversApi/Drivers.Api.csproj</projectFile>
+    <projectFile profileName="DriversHttps">DriversApi/Drivers.Api.csproj</projectFile>
     <projectFile profileName="IIS Express">DriversApi/Drivers.Api.csproj</projectFile>
     <projectFile>FakeDataDbGenerator/FakeDataDriverDbGenerator.csproj</projectFile>
     <projectFile profileName="WPF DRIVERS [PRODUCTION]">WPFDrivers/WPFDrivers.csproj</projectFile>
@@ -18,7 +19,24 @@
   <component name="ChangeListManager">
     <list default="true" id="14924304-48ab-4b2e-bd8e-bedf580f630a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CargoDeliveryService/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CargoDeliveryService/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthorizationModuleAPI/Controllers/AccountsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorizationModuleAPI/Controllers/AccountsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthorizationModuleAPI/Authorization/JwtUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorizationModuleAPI/Authorization/JwtUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthorizationModuleAPI/Helpers/AppSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorizationModuleAPI/Helpers/AppSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthorizationModuleAPI/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorizationModuleAPI/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthorizationModuleAPI/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorizationModuleAPI/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Drivers.BLL/DTOs/Responses/FullDriverResponceDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers.BLL/DTOs/Responses/FullDriverResponceDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Drivers.BLL/Managers/DriversManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers.BLL/Managers/DriversManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Drivers.DAL/Contracts/IUnitOfWork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers.DAL/Contracts/IUnitOfWork.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Drivers.DAL/Repositories/GenericRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers.DAL/Repositories/GenericRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Drivers.DAL_EF/Repositories/EFDriverRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers.DAL_EF/Repositories/EFDriverRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DriversApi/AutomapperProfile/MappingProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DriversApi/AutomapperProfile/MappingProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DriversApi/Controllers/DriversController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DriversApi/Controllers/DriversController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DriversApi/Drivers.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/DriversApi/Drivers.Api.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DriversApi/Middleware/ExceptionMiddleware.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DriversApi/Middleware/ExceptionMiddleware.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DriversApi/Models/ErrorResult.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DriversApi/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DriversApi/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DriversApi/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/DriversApi/Properties/launchSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DriversApi/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/DriversApi/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DriversApi/todo.cs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +64,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/789b158a98468e474a2af1348cfd47e7792de2ae2344f55a03ddf85b16699b/WebApplicationBuilder.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7a403cba08345c96e825f152f83f7387ca90e5b98cf92f2d95fbedc8d25d24/ServiceCollectionServiceExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7cb6b7c72d108583c026611357d59eb9c29fc5a452d33c863a5a1678613153/Array.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/85448f861b1cb95910693f28a5ce3363967c79953b460b176d97298ae5ed0/Nullable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/85448f861b1cb95910693f28a5ce3363967c79953b460b176d97298ae5ed0/Nullable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/8b59fa60d15ea79167bca4aee77af3ed6b93648c61b472b7a8381c62977ddfdb/Type.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/928523f08964492b10792127821f369a6464b88be5a48e8ce4aa6975f23538/Array.Enumerators.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/981d65c7fbe528a515db85bcbb92fe19ea3641e6ccd184df299fbba0eff72630/AnyAll.cs" root0="SKIP_HIGHLIGHTING" />
@@ -63,7 +81,7 @@
     <setting file="file://$PROJECT_DIR$/Drivers.DAL_EF/Entities/EFDriver.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/DriversApi/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FakeDataDbGenerator/Data/DriversManagementContext.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/FakeDataDbGenerator/Entities/Company.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/FakeDataDbGenerator/Entities/Company.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FakeDataDbGenerator/Entities/Driver.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FakeDataDbGenerator/Program.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -98,7 +116,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.AuthorizationModuleAPI: AuthHttps">
+  <component name="RunManager" selected=".NET Launch Settings Profile.Drivers.Api: DriversHttps">
     <configuration name="FakeDataDriverDbGenerator" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -113,21 +131,6 @@
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
       <option name="PROJECT_KIND" value="DotNetCore" />
       <option name="PROJECT_TFM" value="" />
-      <method v="2">
-        <option name="Build" />
-      </method>
-    </configuration>
-    <configuration name="AuthorizationModuleAPI: AuthHttp" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
-      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/AuthorizationModuleAPI/AuthorizationModuleAPI.csproj" />
-      <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
-      <option name="LAUNCH_PROFILE_NAME" value="AuthHttp" />
-      <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      <option name="USE_MONO" value="0" />
-      <option name="RUNTIME_ARGUMENTS" value="" />
-      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
-      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
-      <option name="SEND_DEBUG_REQUEST" value="1" />
-      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
       <method v="2">
         <option name="Build" />
       </method>
@@ -162,10 +165,10 @@
         <option name="Build" />
       </method>
     </configuration>
-    <configuration name="Drivers.Api: DriversApi" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+    <configuration name="Drivers.Api: DriversHttps" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/DriversApi/Drivers.Api.csproj" />
-      <option name="LAUNCH_PROFILE_TFM" value="net6.0" />
-      <option name="LAUNCH_PROFILE_NAME" value="DriversApi" />
+      <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
+      <option name="LAUNCH_PROFILE_NAME" value="DriversHttps" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
@@ -243,6 +246,7 @@
       <workItem from="1696769908997" duration="3097000" />
       <workItem from="1696776102545" duration="10538000" />
       <workItem from="1697835410080" duration="590000" />
+      <workItem from="1698169876032" duration="2873000" />
     </task>
     <servers />
   </component>

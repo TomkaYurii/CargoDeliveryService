@@ -126,10 +126,5 @@ namespace Drivers.DAL_ADO.Repositories
             insertQuery.Append("; SELECT SCOPE_IDENTITY()");
             return insertQuery.ToString();
         }
-
-        public Task<IEnumerable<Driver>> GetAllDrivers()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

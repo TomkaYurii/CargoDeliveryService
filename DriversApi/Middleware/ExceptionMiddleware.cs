@@ -1,15 +1,8 @@
-﻿using Drivers.Api.Models;
-using Drivers.BLL.Exceptions;
+﻿using Drivers.BLL.Exceptions;
+using Drivers.BLL.Exceptions.Models;
 using Drivers.DAL_EF.Exceptions;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Serilog;
-using Serilog.Context;
-using System;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace Drivers.Api.Middleware
 {

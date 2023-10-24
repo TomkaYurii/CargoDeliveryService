@@ -48,9 +48,50 @@ public class EFDriverRepository : EFGenericRepository<EFDriver>, IEFDriverReposi
     /// <param name="id"></param>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
-    public override Task<EFDriver> GetCompleteEntityAsync(int id)
+    public override async Task<EFDriver> GetCompleteEntityAsync(int id)
     {
-        throw new NotImplementedException();
+        var result = await databaseContext.Drivers
+            .Where(driver => driver.Id == id)
+            .Include(driver=>driver.Company)
+            .FirstOrDefaultAsync();
+
+        var photo = await databaseContext.Photos
+            .Where(photo => photo.Id == result.PhotoId)
+            .Select(photo => new EFPhoto
+                {
+                    Id = photo.Id,
+                    PhotoData = photo.PhotoData,
+                    ContentType = photo.ContentType,
+                    FileName = photo.FileName,
+                    FileSize = photo.FileSize,
+                    CreatedAt = photo.CreatedAt,
+                    UpdatedAt = photo.UpdatedAt,
+                    DeletedAt = photo.DeletedAt
+            })
+            .FirstOrDefaultAsync();
+
+        var expenses = await databaseContext.Expenses
+            .Where(expense => expense.DriverId == id)
+            .Select(expense => new EFExpense
+            {
+                Id = expense.Id,
+                DriverId = expense.DriverId,
+                TruckId = expense.TruckId,
+                DriverPayment = expense.DriverPayment,
+                FuelCost = expense.FuelCost,
+                MaintenanceCost = expense.MaintenanceCost,
+                Category = expense.Category,
+                Date = expense.Date,
+                Note = expense.Note,
+                CreatedAt = expense.CreatedAt,
+                UpdatedAt = expense.UpdatedAt,
+                DeletedAt = expense.DeletedAt
+            })
+            .ToListAsync();
+
+        result.Photo = photo;
+        result.Expenses = expenses;
+        return result;
     }
 
     /////////////////////

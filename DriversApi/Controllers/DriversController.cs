@@ -7,12 +7,14 @@ using Drivers.DAL_EF.Entities.HelpModels;
 using Drivers.DAL_EF.Helpers;
 using FluentValidation;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Threading;
 
 namespace Drivers.Api.Controllers
 {
+    /*[Authorize]*/
     [Route("api/[controller]")]
     [ApiController]
     public class DriversController : ControllerBase
@@ -26,7 +28,7 @@ namespace Drivers.Api.Controllers
             _logger = logger;
             _driversManager= driversManager;
         }
-
+        
         /// <summary>
         /// Get Driver by Id
         /// </summary>
@@ -110,19 +112,19 @@ namespace Drivers.Api.Controllers
         /// <summary>
         /// Add driver
         /// </summary>
-        /// <param name="model">Information about driver - MiniDriverReqDTO</param>
+        /// <param name="drv">Information about driver - MiniDriverReqDTO</param>
         /// <param name="validator">FluentValidation validator of MiniDriverReqDTO </param>
         /// <returns></returns>
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost]
-        public async Task<ActionResult> PostDriverAsync([FromBody] MiniDriverReqDTO model,
+        public async Task<ActionResult> PostDriverAsync([FromBody] MiniDriverReqDTO drv,
             [FromServices] IValidator<MiniDriverReqDTO> validator,
             CancellationToken cancellationToken)
         {
-            this._logger.LogInformation($"==> ADD ==> API Input : Driver Name: {model.LastName}");
-            ValidationResult validationResult = validator.Validate(model);
+            this._logger.LogInformation($"==> ADD ==> API Input : {drv.GetType().Name}");
+            ValidationResult validationResult = validator.Validate(drv);
             if (!validationResult.IsValid)
             {
                 return BadRequest(validationResult.Errors);
@@ -131,8 +133,8 @@ namespace Drivers.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var created_driver = await _driversManager.AddDriverToSystemAsync(model, cancellationToken);
-            this._logger.LogInformation($"==>> Added driver : {{ Driver: {created_driver.LastName}-{created_driver.Id}}}");
+            var created_driver = await _driversManager.AddDriverToSystemAsync(drv, cancellationToken);
+            this._logger.LogInformation($"==> Added driver : {{ Driver: {created_driver.LastName}-{created_driver.Id}}}");
             return CreatedAtAction(nameof(GetFullInfoAboutDriver), new { id = created_driver.Id }, created_driver);
         }
 
@@ -140,7 +142,7 @@ namespace Drivers.Api.Controllers
         /// Update Driver by Id
         /// </summary>
         /// <param name="id">Id of driver</param>
-        /// <param name="model">Information about driver</param>
+        /// <param name="drv">Information about driver</param>
         /// <returns></returns>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -148,13 +150,13 @@ namespace Drivers.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateEventAsync(int id,
-            [FromBody] MiniDriverReqDTO model,
+            [FromBody] MiniDriverReqDTO drv,
             [FromServices] IValidator<MiniDriverReqDTO> validator,
             CancellationToken cancellationToken)
         {
-            this._logger.LogInformation($"==> UPDATE ==> API Input :  Driver with id = {id}, Name: {model.LastName}");
-            ValidationResult validationResult = validator.Validate(model);
-            if (id <= 0 || id!=model.id)
+            this._logger.LogInformation($"==> UPDATE ==> API Input :  Driver with id = {id}, {drv.GetType().Name}");
+            ValidationResult validationResult = validator.Validate(drv);
+            if (id <= 0 || id!=drv.id)
             {
                 return BadRequest($"Invalid id: {id}");
             }
@@ -167,7 +169,7 @@ namespace Drivers.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            return Ok(await _driversManager.UpdateDriverInSystemAsync(id, model, cancellationToken));
+            return Ok(await _driversManager.UpdateDriverInSystemAsync(id, drv, cancellationToken));
         }
 
         /// <summary>

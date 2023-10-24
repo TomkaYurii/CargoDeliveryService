@@ -38,30 +38,13 @@ namespace Drivers.BLL.Managers
         public async Task<FullDriverResponceDTO> GetFullInfoAboutDriver(int id)
         {
             var result = new FullDriverResponceDTO();
-            var driver = await _EFuow.EFDriverRepository.GetByIdAsync(id);
+            var driver = await _EFuow.EFDriverRepository.GetByIdAsNoTrackingAsync(id);
             if (driver == null)
             {
                 throw new NotFoundException($"Driver with {id} cant be found in database!");
             }
-
-            if (driver.CompanyId.HasValue)
-            {
-                var company = await _EFuow.EFCompanyRepository.GetByIdAsync(driver.CompanyId.Value);
-                driver.Company = company;
-            }
-
-            if (driver.PhotoId.HasValue)
-            {
-                var photo = await _EFuow.EFPhotoRepository.GetByIdAsync(driver.PhotoId.Value);
-                driver.Photo = photo;
-            }
-
-            var expenses = await _EFuow.EFExpenseRepository.GetExpencesByDriver(driver.Id);
-            driver.Expenses = expenses.ToList();
-
-            result = _mapper.Map<FullDriverResponceDTO>(driver);
-
-            return result;
+            var driverEntity = await _EFuow.EFDriverRepository.GetCompleteEntityAsync(id);
+            return _mapper.Map<FullDriverResponceDTO>(driverEntity);
         }
 
         /// <summary>

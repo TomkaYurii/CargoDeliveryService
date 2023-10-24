@@ -37,9 +37,14 @@ public class JwtUtils : IJwtUtils
         var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = new ClaimsIdentity(new[] { new Claim("id", account.Id.ToString()) }),
+            Subject = new ClaimsIdentity(new[] 
+                { 
+                    new Claim("id", account.Id.ToString()) 
+                }),
             Expires = DateTime.UtcNow.AddMinutes(15),
-            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
+            Issuer = _appSettings.Issuer,
+            Audience = _appSettings.Audience
         };
         var token = tokenHandler.CreateToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);
@@ -58,9 +63,10 @@ public class JwtUtils : IJwtUtils
             {
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(key),
-                ValidateIssuer = false,
-                ValidateAudience = false,
-                // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
+                ValidateIssuer = true,
+                ValidIssuer = _appSettings.Issuer,
+                ValidateAudience = true,
+                ValidAudience = _appSettings.Audience,
                 ClockSkew = TimeSpan.Zero
             }, out SecurityToken validatedToken);
 

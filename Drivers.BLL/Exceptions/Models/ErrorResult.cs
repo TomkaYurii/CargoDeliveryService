@@ -1,4 +1,4 @@
-﻿namespace Drivers.Api.Models
+﻿namespace Drivers.BLL.Exceptions.Models
 {
     public class ErrorResult
     {
