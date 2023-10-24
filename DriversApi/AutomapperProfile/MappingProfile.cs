@@ -12,8 +12,7 @@ namespace Drivers.Api.AutomapperProfile
             /////////////////////////////////////////////////////////////////////
             ///   Responces
             /////////////////////////////////////////////////////////////////////
-            CreateMap<EFDriver, FullDriverResponceDTO>()
-                .ForMember(dest => dest.CompanyDTO, opt => opt.MapFrom(src => src.Company));      
+            CreateMap<EFDriver, FullDriverResponceDTO>();
             CreateMap<FullDriverResponceDTO, EFDriver>();
 
             CreateMap<EFDriver, ShortDriverResponceDTO>().ReverseMap();

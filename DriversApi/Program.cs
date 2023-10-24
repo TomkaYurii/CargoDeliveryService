@@ -1,3 +1,4 @@
+using Drivers.Api.Helpers;
 using Drivers.Api.Middleware;
 using Drivers.BLL.Contracts;
 using Drivers.BLL.DTOs.Requests;
@@ -14,16 +15,18 @@ using Drivers.DAL_EF.Repositories;
 using Drivers.DAL_EF.UOW;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using System;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Data;
+using System.Text;
 
 
 
 //КОНФІГРУВАННЯ: 1) файли конфігурацій 2) IOC 3) логіювання
 var builder = WebApplication.CreateBuilder(args);
-
 
 ////////////////////////////////////////////////////////////////////////////////////
 /// ADO.NET = Dapper
@@ -80,29 +83,76 @@ builder.Services.AddScoped<IPhotoManager, PhotoManager>();
 builder.Services.AddScoped<IRepairManager, RepairManager>();
 builder.Services.AddScoped<ITruckManager, TruckManager>();
 
+////////////////////////////////////////////////////////////////////////////////////
+/// APPLICATION
+////////////////////////////////////////////////////////////////////////////////////
+//MIDLLEWARE
 builder.Services.AddTransient<ExceptionMiddleware>();
 //AUTOMAPPER
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
-
 //FLUENT VALIDATION
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
-
 builder.Services.AddScoped<IValidator<MiniDriverReqDTO>, MiniDriverReqDTO_Validator>();
+//JWT TOKEN VALIDATION
+var jwt = builder.Configuration.GetSection("JWT").Get<jwtConfig>();
+builder.Services.AddAuthentication(opt =>
+{
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
 
+            ValidIssuer = jwt.ValidIssuer,
+            ValidAudience = jwt.ValidAudience,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwt.Secret))
+        };
+    });
 // Controllers
 builder.Services.AddControllers();
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(opt =>
+{
+    opt.SwaggerDoc("v1", new OpenApiInfo { Title = "DriverAPI", Version = "v1" });
+    opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "bearer"
+    });
+    opt.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type=ReferenceType.SecurityScheme,
+                    Id="Bearer"
+                }
+            },
+            new string[]{}
+        }
+    });
+});
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
+///PIPELINE
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -119,9 +169,6 @@ app.UseCors(x => x
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.UseMiddleware<ExceptionMiddleware>();
-
-
 app.MapControllers();
 app.Run();

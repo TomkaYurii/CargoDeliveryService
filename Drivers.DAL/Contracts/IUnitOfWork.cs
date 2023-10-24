@@ -11,6 +11,5 @@
         ITruckRepository _truckRepository { get; }
 
         void Commit();
-        void Dispose();
     }
 }

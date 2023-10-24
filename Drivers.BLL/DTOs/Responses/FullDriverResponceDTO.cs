@@ -30,9 +30,9 @@ namespace Drivers.BLL.DTOs.Responses
         public int? CompanyId { get; set; }
         public int? PhotoId { get; set; }
 
-        public virtual CompanyResponceDTO? CompanyDTO { get; set; }
-        //public virtual EFPhoto? Photo { get; set; }
-        //public virtual ICollection<EFExpense>? Expenses { get; set; }
+        public virtual CompanyResponceDTO? Company { get; set; }
+        public virtual EFPhoto? Photo { get; set; }
+        public virtual ICollection<EFExpense>? Expenses { get; set; }
 
     }
 }
