@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CargoDeliveryBlog</name>
+    </assembly>
+    <members>
+        <member name="M:CargoDeliveryBlog.Controllers.v1.BlogPostsController.AddBlogPost(CargoDeliveryBlog.Domain.BlogPosts.Dtos.BlogPostForCreationDto)">
+            <summary>
+            Creates a new BlogPost record.
+            </summary>
+        </member>
+        <member name="M:CargoDeliveryBlog.Controllers.v1.BlogPostsController.GetBlogPost(System.Guid)">
+            <summary>
+            Gets a single BlogPost by ID.
+            </summary>
+        </member>
+        <member name="M:CargoDeliveryBlog.Controllers.v1.BlogPostsController.GetBlogPosts(CargoDeliveryBlog.Domain.BlogPosts.Dtos.BlogPostParametersDto)">
+            <summary>
+            Gets a list of all BlogPosts.
+            </summary>
+        </member>
+        <member name="M:CargoDeliveryBlog.Controllers.v1.BlogPostsController.UpdateBlogPost(System.Guid,CargoDeliveryBlog.Domain.BlogPosts.Dtos.BlogPostForUpdateDto)">
+            <summary>
+            Updates an entire existing BlogPost.
+            </summary>
+        </member>
+        <member name="M:CargoDeliveryBlog.Controllers.v1.BlogPostsController.DeleteBlogPost(System.Guid)">
+            <summary>
+            Deletes an existing BlogPost record.
+            </summary>
+        </member>
+        <member name="M:CargoDeliveryBlog.Controllers.v1.CommentsController.AddComment(CargoDeliveryBlog.Domain.Comments.Dtos.CommentForCreationDto)">
+            <summary>
+            Creates a new Comment record.
+            </summary>
+        </member>
+        <member name="M:CargoDeliveryBlog.Controllers.v1.CommentsController.GetComment(System.Guid)">
+            <summary>
+            Gets a single Comment by ID.
+            </summary>
+        </member>
+        <member name="M:CargoDeliveryBlog.Controllers.v1.CommentsController.GetComments(CargoDeliveryBlog.Domain.Comments.Dtos.CommentParametersDto)">
+            <summary>
+            Gets a list of all Comments.
+            </summary>
+        </member>
+        <member name="M:CargoDeliveryBlog.Controllers.v1.CommentsController.UpdateComment(System.Guid,CargoDeliveryBlog.Domain.Comments.Dtos.CommentForUpdateDto)">
+            <summary>
+            Updates an entire existing Comment.
+            </summary>
+        </member>
+        <member name="M:CargoDeliveryBlog.Controllers.v1.CommentsController.DeleteComment(System.Guid)">
+            <summary>
+            Deletes an existing Comment record.
+            </summary>
+        </member>
+        <member name="M:CargoDeliveryBlog.Controllers.v1.UsersController.AddUser(CargoDeliveryBlog.Domain.Users.Dtos.UserForCreationDto)">
+            <summary>
+            Creates a new User record.
+            </summary>
+        </member>
+        <member name="M:CargoDeliveryBlog.Controllers.v1.UsersController.GetUser(System.Guid)">
+            <summary>
+            Gets a single User by ID.
+            </summary>
+        </member>
+        <member name="M:CargoDeliveryBlog.Controllers.v1.UsersController.GetUsers(CargoDeliveryBlog.Domain.Users.Dtos.UserParametersDto)">
+            <summary>
+            Gets a list of all Users.
+            </summary>
+        </member>
+        <member name="M:CargoDeliveryBlog.Controllers.v1.UsersController.UpdateUser(System.Guid,CargoDeliveryBlog.Domain.Users.Dtos.UserForUpdateDto)">
+            <summary>
+            Updates an entire existing User.
+            </summary>
+        </member>
+        <member name="M:CargoDeliveryBlog.Controllers.v1.UsersController.DeleteUser(System.Guid)">
+            <summary>
+            Deletes an existing User record.
+            </summary>
+        </member>
+        <member name="M:CargoDeliveryBlog.Databases.EntityConfigurations.BlogPostConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{CargoDeliveryBlog.Domain.BlogPosts.BlogPost})">
+            <summary>
+            The database configuration for BlogPosts. 
+            </summary>
+        </member>
+        <member name="M:CargoDeliveryBlog.Databases.EntityConfigurations.CommentConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{CargoDeliveryBlog.Domain.Comments.Comment})">
+            <summary>
+            The database configuration for Comments. 
+            </summary>
+        </member>
+        <member name="M:CargoDeliveryBlog.Databases.EntityConfigurations.DriverConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{CargoDeliveryBlog.Domain.Drivers.Driver})">
+            <summary>
+            The database configuration for Drivers. 
+            </summary>
+        </member>
+        <member name="M:CargoDeliveryBlog.Databases.EntityConfigurations.LikeConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{CargoDeliveryBlog.Domain.Likes.Like})">
+            <summary>
+            The database configuration for Likes. 
+            </summary>
+        </member>
+        <member name="M:CargoDeliveryBlog.Databases.EntityConfigurations.UserConfiguration.Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{CargoDeliveryBlog.Domain.Users.User})">
+            <summary>
+            The database configuration for Users. 
+            </summary>
+        </member>
+        <member name="P:CargoDeliveryBlog.Domain.Addresses.Address.Line1">
+            <summary>
+            Address line 1 (e.g., street, PO Box, or company name).
+            </summary>
+        </member>
+        <member name="P:CargoDeliveryBlog.Domain.Addresses.Address.Line2">
+            <summary>
+            Address line 2 (e.g., apartment, suite, unit, or building).
+            </summary>
+        </member>
+        <member name="P:CargoDeliveryBlog.Domain.Addresses.Address.City">
+            <summary>
+            City, district, suburb, town, or village.
+            </summary>
+        </member>
+        <member name="P:CargoDeliveryBlog.Domain.Addresses.Address.State">
+            <summary>
+            State, county, province, or region.
+            </summary>
+        </member>
+        <member name="P:CargoDeliveryBlog.Domain.Addresses.Address.PostalCode">
+            <summary>
+            ZIP or postal code.
+            </summary>
+        </member>
+        <member name="P:CargoDeliveryBlog.Domain.Addresses.Address.Country">
+            <summary>
+            Two-letter country code <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">(ISO 3166-1 alpha-2)</a>.
+            </summary>
+        </member>
+        <member name="M:CargoDeliveryBlog.Extensions.Services.WebAppServiceConfiguration.AddBoundaryServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Reflection.Assembly[])">
+            <summary>
+            Registers all services in the assembly of the given interface.
+            </summary>
+        </member>
+        <member name="T:CargoDeliveryBlog.Migrations.InitialMigration">
+            <inheritdoc />
+        </member>
+        <member name="M:CargoDeliveryBlog.Migrations.InitialMigration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CargoDeliveryBlog.Migrations.InitialMigration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CargoDeliveryBlog.Migrations.InitialMigration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

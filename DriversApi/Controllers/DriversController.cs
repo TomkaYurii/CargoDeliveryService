@@ -32,9 +32,7 @@ namespace Drivers.Api.Controllers
         /// <summary>
         /// Get Driver by Id
         /// </summary>
-        /// <param name="id">Key</param>
-        /// <returns></returns>
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetInformationAboutDriver")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
