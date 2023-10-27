@@ -1,6 +1,6 @@
-﻿using Drivers.BLL.Contracts;
-using Drivers.BLL.DTOs.Responses;
+﻿using Drivers.BLL.DTOs.Responses;
 using Drivers.BLL.Managers;
+using Drivers.BLL.Managers.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860

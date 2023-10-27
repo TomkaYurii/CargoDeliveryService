@@ -1,6 +1,6 @@
-﻿using Drivers.DAL_EF.Contracts;
-using Drivers.DAL_EF.Data;
+﻿using Drivers.DAL_EF.Data;
 using Drivers.DAL_EF.Entities;
+using Drivers.DAL_EF.Repositories.Contracts;
 using MyEventsEntityFrameworkDb.EFRepositories;
 using System;
 using System.Collections.Generic;

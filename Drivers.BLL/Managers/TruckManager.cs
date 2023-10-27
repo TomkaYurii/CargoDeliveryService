@@ -1,7 +1,7 @@
-﻿using Drivers.BLL.Contracts;
-using Drivers.BLL.DTOs.Responses;
+﻿using Drivers.BLL.DTOs.Responses;
+using Drivers.BLL.Managers.Contracts;
 using Drivers.DAL_ADO.Contracts;
-using Drivers.DAL_EF.Contracts;
+using Drivers.DAL_EF.UOW.Contracts;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;

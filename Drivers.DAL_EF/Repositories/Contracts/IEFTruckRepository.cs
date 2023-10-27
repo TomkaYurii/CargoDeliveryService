@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Drivers.DAL_EF.Contracts
+namespace Drivers.DAL_EF.Repositories.Contracts
 {
-    public interface IEFRepairRepository : IEFGenericRepository<EFRepair>
+    public interface IEFTruckRepository : IEFGenericRepository<EFTruck>
     {
     }
 }

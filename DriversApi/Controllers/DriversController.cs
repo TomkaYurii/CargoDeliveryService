@@ -1,7 +1,7 @@
-﻿using Drivers.BLL.Contracts;
-using Drivers.BLL.DTOs.Requests;
+﻿using Drivers.BLL.DTOs.Requests;
 using Drivers.BLL.DTOs.Responses;
 using Drivers.BLL.Exceptions;
+using Drivers.BLL.Managers.Contracts;
 using Drivers.DAL_EF.Entities;
 using Drivers.DAL_EF.Entities.HelpModels;
 using Drivers.DAL_EF.Helpers;
@@ -14,7 +14,7 @@ using System.Threading;
 
 namespace Drivers.Api.Controllers
 {
-    /*[Authorize]*/
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class DriversController : ControllerBase
@@ -38,9 +38,10 @@ namespace Drivers.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<FullDriverResponceDTO>> GetFullInfoAboutDriver(int id)
+        public async Task<ActionResult<FullDriverResponceDTO>> GetFullInfoAboutDriver(int id, 
+            CancellationToken cancellationToken)
         {
-            var result = await _driversManager.GetFullInfoAboutDriver(id);
+            var result = await _driversManager.GetFullInfoAboutDriver(id, cancellationToken);
             return Ok(result);
         }
 
@@ -52,10 +53,10 @@ namespace Drivers.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("alldrivers")]
-        public async Task<ActionResult<IEnumerable<ShortDriverResponceDTO>>> GetAllDriversAsync()
+        public async Task<ActionResult<IEnumerable<ShortDriverResponceDTO>>> GetAllDriversAsync(CancellationToken cancellationToken)
         {
 
-            var result = await _driversManager.GetListOfAllDrivers();
+            var result = await _driversManager.GetListOfAllDrivers(cancellationToken);
             if (result == null)
             {
                 _logger.LogInformation($"Records are absent in database");
@@ -77,7 +78,8 @@ namespace Drivers.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("alldriverspaginated")]
-        public async Task<ActionResult<PagedList<EFDriver>>> GetAllDriversPaginatedAsync([FromQuery] DriverParameters driverParameters)
+        public async Task<ActionResult<PagedList<EFDriver>>> GetAllDriversPaginatedAsync([FromQuery] DriverParameters driverParameters, 
+            CancellationToken cancellationToken)
         {
             if (!driverParameters.ValidYearRange)
             {
@@ -85,7 +87,7 @@ namespace Drivers.Api.Controllers
             }
             try
             {
-                var drivers = await _driversManager.GetPaginatedDrivers(driverParameters);
+                var drivers = await _driversManager.GetPaginatedDrivers(driverParameters, cancellationToken);
                 var metadata = new
                 {
                     drivers.TotalCount,
@@ -149,7 +151,7 @@ namespace Drivers.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateEventAsync(int id,
+        public async Task<ActionResult> UpdateDriverAsync(int id,
             [FromBody] MiniDriverReqDTO drv,
             [FromServices] IValidator<MiniDriverReqDTO> validator,
             CancellationToken cancellationToken)
@@ -168,7 +170,6 @@ namespace Drivers.Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-
             return Ok(await _driversManager.UpdateDriverInSystemAsync(id, drv, cancellationToken));
         }
 
@@ -182,7 +183,8 @@ namespace Drivers.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> DeleteByIdAsync(int id, CancellationToken cancellationToken)
+        public async Task<ActionResult> DeleteDriverByIdAsync(int id, 
+            CancellationToken cancellationToken)
         {
             this._logger.LogInformation($"==> DELETE ==> API Input :  Id of Driver: {id}");
             if (id <= 0)

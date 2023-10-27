@@ -12,9 +12,7 @@ namespace Drivers.Api.AutomapperProfile
             /////////////////////////////////////////////////////////////////////
             ///   Responces
             /////////////////////////////////////////////////////////////////////
-            CreateMap<EFDriver, FullDriverResponceDTO>();
-            CreateMap<FullDriverResponceDTO, EFDriver>();
-
+            CreateMap<EFDriver, FullDriverResponceDTO>().ReverseMap();
             CreateMap<EFDriver, ShortDriverResponceDTO>().ReverseMap();
             CreateMap<EFCompany, CompanyResponceDTO>().ReverseMap ();
 
@@ -22,6 +20,7 @@ namespace Drivers.Api.AutomapperProfile
             ///   Requests
             /////////////////////////////////////////////////////////////////////
             CreateMap<EFDriver, MiniDriverReqDTO>().ReverseMap();
+            CreateMap<EFPhoto, PhotoReqDTO>().ReverseMap();
         }
     }
 }

@@ -9,12 +9,19 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="FluentValidation" Version="11.8.0" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="13.4.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Drivers.DAL\Drivers.DAL_ADO.csproj" />
     <ProjectReference Include="..\Drivers.DAL_EF\Drivers.DAL_EF.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Helpers\" />
   </ItemGroup>
 
 </Project>

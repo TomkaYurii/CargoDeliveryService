@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Drivers.BLL.Contracts
+namespace Drivers.BLL.Managers.Contracts
 {
     public interface IRepairManager
     {

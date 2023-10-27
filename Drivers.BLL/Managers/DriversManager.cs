@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
-using Drivers.BLL.Contracts;
 using Drivers.BLL.DTOs.Requests;
 using Drivers.BLL.DTOs.Responses;
 using Drivers.BLL.Exceptions;
+using Drivers.BLL.Managers.Contracts;
 using Drivers.DAL_ADO.Contracts;
-using Drivers.DAL_EF.Contracts;
 using Drivers.DAL_EF.Entities;
 using Drivers.DAL_EF.Entities.HelpModels;
 using Drivers.DAL_EF.Helpers;
+using Drivers.DAL_EF.UOW.Contracts;
 using Microsoft.Extensions.Logging;
 
 namespace Drivers.BLL.Managers
@@ -35,7 +35,7 @@ namespace Drivers.BLL.Managers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<FullDriverResponceDTO> GetFullInfoAboutDriver(int id)
+        public async Task<FullDriverResponceDTO> GetFullInfoAboutDriver(int id, CancellationToken cancellationToken)
         {
             var result = new FullDriverResponceDTO();
             var driver = await _EFuow.EFDriverRepository.GetByIdAsNoTrackingAsync(id);
@@ -52,7 +52,7 @@ namespace Drivers.BLL.Managers
         /// </summary>
         /// <param name="driverParameters"></param>
         /// <returns></returns>
-        public async Task<PagedList<EFDriver>> GetPaginatedDrivers(DriverParameters driverParameters)
+        public async Task<PagedList<EFDriver>> GetPaginatedDrivers(DriverParameters driverParameters, CancellationToken cancellationToken)
         {
             return await _EFuow.EFDriverRepository.GetPaginatedDriversAsync(driverParameters);
         }
@@ -62,7 +62,7 @@ namespace Drivers.BLL.Managers
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async Task<IEnumerable<ShortDriverResponceDTO>> GetListOfAllDrivers()
+        public async Task<IEnumerable<ShortDriverResponceDTO>> GetListOfAllDrivers(CancellationToken cancellationToken)
         {
             var alldrv = await _EFuow.EFDriverRepository.GetAllAsync();
             return _mapper.Map<IEnumerable<ShortDriverResponceDTO>>(alldrv);

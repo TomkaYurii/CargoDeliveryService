@@ -2,7 +2,7 @@
 using Drivers.DAL_EF.Entities.HelpModels;
 using Drivers.DAL_EF.Helpers;
 
-namespace Drivers.DAL_EF.Contracts;
+namespace Drivers.DAL_EF.Repositories.Contracts;
 
 public interface IEFDriverRepository : IEFGenericRepository<EFDriver>
 {

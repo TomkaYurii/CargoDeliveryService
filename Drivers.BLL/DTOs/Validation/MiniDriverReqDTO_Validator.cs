@@ -8,7 +8,7 @@ namespace Drivers.BLL.DTOs.Validation
         public MiniDriverReqDTO_Validator()
         {
             RuleFor(model => model.FirstName)
-                .NotNull().WithMessage("FirstName cannot be empty.");
+                .NotNull().WithMessage("Hey man! FirstName cannot be empty.");
 
             RuleFor(model => model.LastName)
                 .NotNull().WithMessage("LastName cannot be empty.");

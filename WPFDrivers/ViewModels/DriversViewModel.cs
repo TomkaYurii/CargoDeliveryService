@@ -1,6 +1,6 @@
-﻿using Drivers.BLL.Contracts;
-using Drivers.BLL.DTOs.Responses;
+﻿using Drivers.BLL.DTOs.Responses;
 using Drivers.BLL.Managers;
+using Drivers.BLL.Managers.Contracts;
 using Drivers.DAL_EF.Contracts;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

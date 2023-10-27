@@ -1,5 +1,6 @@
-﻿using Drivers.DAL_EF.Contracts;
-using Drivers.DAL_EF.Data;
+﻿using Drivers.DAL_EF.Data;
+using Drivers.DAL_EF.Repositories.Contracts;
+using Drivers.DAL_EF.UOW.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
