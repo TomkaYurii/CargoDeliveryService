@@ -1,10 +1,9 @@
-﻿using Drivers.DAL_EF.Data;
-using Drivers.DAL_EF.Entities;
-using Drivers.DAL_EF.Repositories.Contracts;
+﻿using Drivers.DAL.EF.Data;
+using Drivers.DAL.EF.Entities;
+using Drivers.DAL.EF.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
-using MyEventsEntityFrameworkDb.EFRepositories;
 
-namespace Drivers.DAL_EF.Repositories
+namespace Drivers.DAL.EF.Repositories
 {
     public class EFExpenseRepository : EFGenericRepository<EFExpense>, IEFExpenseRepository
     {
@@ -26,7 +25,7 @@ namespace Drivers.DAL_EF.Repositories
         public virtual async Task<IEnumerable<EFExpense>> GetExpencesByDriver(int driver_id)
         {
             return await databaseContext.Expenses.Where(expense => expense.DriverId == driver_id).ToListAsync();
-  
+
         }
     }
 }

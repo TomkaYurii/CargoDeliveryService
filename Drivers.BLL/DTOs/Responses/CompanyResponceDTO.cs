@@ -1,6 +1,4 @@
-﻿using Drivers.DAL_EF.Entities;
-
-namespace Drivers.BLL.DTOs.Responses
+﻿namespace Drivers.BLL.DTOs.Responses
 {
     public class CompanyResponceDTO
     {

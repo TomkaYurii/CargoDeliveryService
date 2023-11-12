@@ -1,10 +1,9 @@
-﻿using Drivers.DAL_EF.Data;
-using Drivers.DAL_EF.Repositories.Contracts;
-using Drivers.DAL_EF.UOW.Contracts;
-using Microsoft.EntityFrameworkCore;
+﻿using Drivers.DAL.EF.Data;
+using Drivers.DAL.EF.Repositories.Contracts;
+using Drivers.DAL.EF.UOW.Contracts;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Drivers.DAL_EF.UOW;
+namespace Drivers.DAL.EF.UOW;
 
 public class EFUnitOfWork : IEFUnitOfWork
 {
@@ -36,19 +35,19 @@ public class EFUnitOfWork : IEFUnitOfWork
         IEFTruckRepository eFTruckRepository)
     {
         this.databaseContext = databaseContext;
-        this.EFDriverRepository = eFDriverRepository;
-        this.EFCompanyRepository = eFCompanyRepository;
-        this.EFExpenseRepository= eFExpenseRepository;
-        this.EFPhotoRepository = eFPhotoRepository;
-        this.EFInspectionRepository = eFInspectionRepository;
-        this.EFPRepairRepository = eFRepairRepository;
-        this.EFPTruckRepository = eFTruckRepository;
+        EFDriverRepository = eFDriverRepository;
+        EFCompanyRepository = eFCompanyRepository;
+        EFExpenseRepository = eFExpenseRepository;
+        EFPhotoRepository = eFPhotoRepository;
+        EFInspectionRepository = eFInspectionRepository;
+        EFPRepairRepository = eFRepairRepository;
+        EFPTruckRepository = eFTruckRepository;
     }
 
-/*    public async Task SaveChangesAsync()
-    {
-        await databaseContext.SaveChangesAsync();
-    }*/
+    /*    public async Task SaveChangesAsync()
+        {
+            await databaseContext.SaveChangesAsync();
+        }*/
 
     public async Task BeginTransactionAsync(CancellationToken cancellationToken = default)
     {

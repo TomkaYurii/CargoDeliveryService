@@ -1,4 +1,4 @@
-﻿namespace Drivers.DAL_ADO.Entities
+﻿namespace Drivers.DAL.ADO.Entities
 {
     public class Repair
     {

@@ -19,4 +19,9 @@
     <Folder Include="Helpers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Drivers.DAL.ADO\Drivers.DAL.ADO.csproj" />
+    <ProjectReference Include="..\Drivers.DAL.EF\Drivers.DAL.EF.csproj" />
+  </ItemGroup>
+
 </Project>

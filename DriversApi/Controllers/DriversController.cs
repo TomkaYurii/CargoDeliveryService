@@ -1,16 +1,14 @@
 ﻿using Drivers.BLL.DTOs.Requests;
 using Drivers.BLL.DTOs.Responses;
-using Drivers.BLL.Exceptions;
 using Drivers.BLL.Managers.Contracts;
-using Drivers.DAL_EF.Entities;
-using Drivers.DAL_EF.Entities.HelpModels;
-using Drivers.DAL_EF.Helpers;
+using Drivers.DAL.EF.Entities;
+using Drivers.DAL.EF.Entities.HelpModels;
+using Drivers.DAL.EF.Helpers;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Threading;
 
 namespace Drivers.Api.Controllers
 {

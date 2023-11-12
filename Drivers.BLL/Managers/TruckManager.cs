@@ -1,13 +1,8 @@
 ﻿using Drivers.BLL.DTOs.Responses;
 using Drivers.BLL.Managers.Contracts;
-using Drivers.DAL_ADO.Contracts;
-using Drivers.DAL_EF.UOW.Contracts;
+using Drivers.DAL.ADO.UOW.Contracts;
+using Drivers.DAL.EF.UOW.Contracts;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Drivers.BLL.Managers
 {

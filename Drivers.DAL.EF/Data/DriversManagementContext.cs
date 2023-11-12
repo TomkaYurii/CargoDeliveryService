@@ -1,7 +1,7 @@
-﻿using Drivers.DAL_EF.Entities;
+﻿using Drivers.DAL.EF.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Drivers.DAL_EF.Data
+namespace Drivers.DAL.EF.Data
 {
     public partial class DriversManagementContext : DbContext
     {

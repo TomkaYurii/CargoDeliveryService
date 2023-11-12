@@ -1,6 +1,6 @@
 ﻿using Drivers.BLL.Exceptions;
 using Drivers.BLL.Exceptions.Models;
-using Drivers.DAL_EF.Exceptions;
+using Drivers.DAL.EF.Exceptions;
 using Newtonsoft.Json;
 using System.Net;
 

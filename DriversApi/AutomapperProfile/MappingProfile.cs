@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Drivers.BLL.DTOs.Requests;
 using Drivers.BLL.DTOs.Responses;
-using Drivers.DAL_EF.Entities;
+using Drivers.DAL.EF.Entities;
 
 namespace Drivers.Api.AutomapperProfile
 {

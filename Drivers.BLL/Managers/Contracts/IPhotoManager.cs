@@ -1,4 +1,4 @@
-﻿using Drivers.DAL_EF.Entities;
+﻿using Drivers.DAL.EF.Entities;
 using Microsoft.AspNetCore.Http;
 namespace Drivers.BLL.Managers.Contracts
 {

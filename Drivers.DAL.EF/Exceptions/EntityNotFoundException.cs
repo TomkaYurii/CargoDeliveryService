@@ -1,16 +1,15 @@
-﻿namespace Drivers.DAL_EF.Exceptions
-{
-    public class EntityNotFoundException : Exception
-    {
-        public EntityNotFoundException(string message)
-            : base(message)
-        {
-        }
+﻿namespace Drivers.DAL.EF.Exceptions;
 
-        public EntityNotFoundException()
-            : base()
-        {
-        }
+public class EntityNotFoundException : Exception
+{
+    public EntityNotFoundException(string message)
+        : base(message)
+    {
+    }
+
+    public EntityNotFoundException()
+        : base()
+    {
     }
 }
 

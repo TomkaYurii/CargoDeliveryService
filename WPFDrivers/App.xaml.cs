@@ -1,9 +1,10 @@
 ﻿using DataAccessLibrary.Notes;
 using Drivers.BLL.Managers;
 using Drivers.BLL.Managers.Contracts;
-using Drivers.DAL_ADO.Contracts;
-using Drivers.DAL_ADO.Repositories;
-using Drivers.DAL_ADO.UOW;
+using Drivers.DAL.ADO.Repositories;
+using Drivers.DAL.ADO.Repositories.Contracts;
+using Drivers.DAL.ADO.UOW;
+using Drivers.DAL.ADO.UOW.Contracts;
 using Drivers.DAL_EF.Data;
 using Drivers.DAL_EF.Entities;
 using Drivers.DAL_EF.Helpers;

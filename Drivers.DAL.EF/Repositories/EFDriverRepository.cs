@@ -1,12 +1,11 @@
-﻿using Drivers.DAL_EF.Data;
-using Drivers.DAL_EF.Entities;
-using Drivers.DAL_EF.Entities.HelpModels;
-using Drivers.DAL_EF.Helpers;
-using Drivers.DAL_EF.Repositories.Contracts;
+﻿using Drivers.DAL.EF.Data;
+using Drivers.DAL.EF.Entities;
+using Drivers.DAL.EF.Entities.HelpModels;
+using Drivers.DAL.EF.Helpers;
+using Drivers.DAL.EF.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
-using MyEventsEntityFrameworkDb.EFRepositories;
 
-namespace Drivers.DAL_EF.Repositories;
+namespace Drivers.DAL.EF.Repositories;
 
 public class EFDriverRepository : EFGenericRepository<EFDriver>, IEFDriverRepository
 {
@@ -52,21 +51,21 @@ public class EFDriverRepository : EFGenericRepository<EFDriver>, IEFDriverReposi
     {
         var result = await databaseContext.Drivers
             .Where(driver => driver.Id == id)
-            .Include(driver=>driver.Company)
+            .Include(driver => driver.Company)
             .FirstOrDefaultAsync();
 
         var photo = await databaseContext.Photos
             .Where(photo => photo.Id == result.PhotoId)
             .Select(photo => new EFPhoto
-                {
-                    Id = photo.Id,
-                    PhotoData = photo.PhotoData,
-                    ContentType = photo.ContentType,
-                    FileName = photo.FileName,
-                    FileSize = photo.FileSize,
-                    CreatedAt = photo.CreatedAt,
-                    UpdatedAt = photo.UpdatedAt,
-                    DeletedAt = photo.DeletedAt
+            {
+                Id = photo.Id,
+                PhotoData = photo.PhotoData,
+                ContentType = photo.ContentType,
+                FileName = photo.FileName,
+                FileSize = photo.FileSize,
+                CreatedAt = photo.CreatedAt,
+                UpdatedAt = photo.UpdatedAt,
+                DeletedAt = photo.DeletedAt
             })
             .FirstOrDefaultAsync();
 

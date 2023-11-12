@@ -1,11 +1,7 @@
-﻿using Drivers.BLL.Managers;
-using Drivers.BLL.Managers.Contracts;
-using Drivers.DAL_EF.Entities;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+﻿using Drivers.BLL.Managers.Contracts;
+using Drivers.DAL.EF.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SixLabors.ImageSharp.Formats.Jpeg;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

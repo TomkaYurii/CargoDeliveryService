@@ -1,8 +1,8 @@
-﻿using Drivers.DAL_EF.Entities;
-using Drivers.DAL_EF.Entities.HelpModels;
-using Drivers.DAL_EF.Helpers;
+﻿using Drivers.DAL.EF.Entities;
+using Drivers.DAL.EF.Entities.HelpModels;
+using Drivers.DAL.EF.Helpers;
 
-namespace Drivers.DAL_EF.Repositories.Contracts;
+namespace Drivers.DAL.EF.Repositories.Contracts;
 
 public interface IEFDriverRepository : IEFGenericRepository<EFDriver>
 {

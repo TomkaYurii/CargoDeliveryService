@@ -1,9 +1,6 @@
-using Drivers.DAL_EF.Entities.HelpModels;
-using Drivers.DAL_EF.Entities;
-using Drivers.DAL_EF.Helpers;
 using System.Linq.Expressions;
 
-namespace Drivers.DAL_EF.Repositories.Contracts;
+namespace Drivers.DAL.EF.Repositories.Contracts;
 
 public interface IEFGenericRepository<TEntity> where TEntity : class
 {

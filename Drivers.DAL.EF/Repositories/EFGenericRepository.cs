@@ -1,11 +1,10 @@
-using Drivers.DAL_EF.Data;
-using Drivers.DAL_EF.Entities;
-using Drivers.DAL_EF.Exceptions;
-using Drivers.DAL_EF.Repositories.Contracts;
+using Drivers.DAL.EF.Data;
+using Drivers.DAL.EF.Exceptions;
+using Drivers.DAL.EF.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace MyEventsEntityFrameworkDb.EFRepositories;
+namespace Drivers.DAL.EF.Repositories;
 
 public abstract class EFGenericRepository<TEntity> : IEFGenericRepository<TEntity> where TEntity : class
 {
@@ -112,7 +111,7 @@ public abstract class EFGenericRepository<TEntity> : IEFGenericRepository<TEntit
     /// <returns></returns>
     public IQueryable<TEntity> FindAll()
     {
-        return this.databaseContext.Set<TEntity>()
+        return databaseContext.Set<TEntity>()
             .AsNoTracking();
     }
 
@@ -123,7 +122,7 @@ public abstract class EFGenericRepository<TEntity> : IEFGenericRepository<TEntit
     /// <returns></returns>
     public async Task<IQueryable<TEntity>> FindByCondition(Expression<Func<TEntity, bool>> expression)
     {
-        return await Task.Run(() => this.databaseContext.Set<TEntity>()
+        return await Task.Run(() => databaseContext.Set<TEntity>()
             .Where(expression)
             .AsNoTracking());
     }

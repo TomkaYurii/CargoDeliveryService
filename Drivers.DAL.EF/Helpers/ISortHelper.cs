@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Drivers.DAL.EF.Helpers;
 
-namespace Drivers.DAL_EF.Helpers
+public interface ISortHelper<T>
 {
-    public interface ISortHelper<T>
-    {
-        IQueryable<T> ApplySort(IQueryable<T> entities, string orderByQueryString);
-    }
+    IQueryable<T> ApplySort(IQueryable<T> entities, string orderByQueryString);
 }

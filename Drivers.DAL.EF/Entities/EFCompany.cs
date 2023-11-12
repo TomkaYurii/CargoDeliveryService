@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Drivers.DAL_EF.Entities;
+﻿namespace Drivers.DAL.EF.Entities;
 
 public class EFCompany
 {

@@ -3,11 +3,11 @@ using Drivers.BLL.DTOs.Requests;
 using Drivers.BLL.DTOs.Responses;
 using Drivers.BLL.Exceptions;
 using Drivers.BLL.Managers.Contracts;
-using Drivers.DAL_ADO.Contracts;
-using Drivers.DAL_EF.Entities;
-using Drivers.DAL_EF.Entities.HelpModels;
-using Drivers.DAL_EF.Helpers;
-using Drivers.DAL_EF.UOW.Contracts;
+using Drivers.DAL.ADO.UOW.Contracts;
+using Drivers.DAL.EF.Entities;
+using Drivers.DAL.EF.Entities.HelpModels;
+using Drivers.DAL.EF.Helpers;
+using Drivers.DAL.EF.UOW.Contracts;
 using Microsoft.Extensions.Logging;
 
 namespace Drivers.BLL.Managers

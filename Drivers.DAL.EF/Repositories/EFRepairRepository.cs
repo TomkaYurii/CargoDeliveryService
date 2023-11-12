@@ -1,14 +1,8 @@
-﻿using Drivers.DAL_EF.Data;
-using Drivers.DAL_EF.Entities;
-using Drivers.DAL_EF.Repositories.Contracts;
-using MyEventsEntityFrameworkDb.EFRepositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Drivers.DAL.EF.Data;
+using Drivers.DAL.EF.Entities;
+using Drivers.DAL.EF.Repositories.Contracts;
 
-namespace Drivers.DAL_EF.Repositories
+namespace Drivers.DAL.EF.Repositories
 {
     public class EFRepairRepository : EFGenericRepository<EFRepair>, IEFRepairRepository
     {

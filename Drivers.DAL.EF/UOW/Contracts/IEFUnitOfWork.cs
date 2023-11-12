@@ -1,6 +1,6 @@
-﻿using Drivers.DAL_EF.Repositories.Contracts;
+﻿using Drivers.DAL.EF.Repositories.Contracts;
 
-namespace Drivers.DAL_EF.UOW.Contracts;
+namespace Drivers.DAL.EF.UOW.Contracts;
 
 public interface IEFUnitOfWork
 {

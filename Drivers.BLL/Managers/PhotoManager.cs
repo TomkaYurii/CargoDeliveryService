@@ -1,16 +1,13 @@
 ﻿using AutoMapper;
 using Drivers.BLL.DTOs.Requests;
 using Drivers.BLL.Managers.Contracts;
-using Drivers.DAL_ADO.Contracts;
-using Drivers.DAL_EF.Entities;
-using Drivers.DAL_EF.UOW.Contracts;
+using Drivers.DAL.ADO.UOW.Contracts;
+using Drivers.DAL.EF.Entities;
+using Drivers.DAL.EF.UOW.Contracts;
 using ImageMagick;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using SixLabors.ImageSharp.Formats.Jpeg;
-using SixLabors.ImageSharp.Processing;
-using System.Text.RegularExpressions;
-using System.Threading;
 
 namespace Drivers.BLL.Managers
 {

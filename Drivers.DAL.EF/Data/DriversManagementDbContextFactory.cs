@@ -1,8 +1,7 @@
-﻿using Drivers.DAL_EF.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Reservoom.DbContexts;
 
-namespace DataAccessLibrary.Notes;
+namespace Drivers.DAL.EF.Data;
 
 public class DriversManagementDbContextFactory : IDriversManagementDbContextFactory
 {
