@@ -1,7 +1,4 @@
-﻿using Drivers.BLL.Contracts;
-using Drivers.BLL.Managers;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using WPFDrivers.ViewModels;
 
 namespace WPFDrivers.Commands;
@@ -9,7 +6,7 @@ namespace WPFDrivers.Commands;
 public class NavigateCommand : CommandBase
 {
     private readonly MainViewModel _mainViewModel;
-    //ivate readonly IDriversManager _driversManager; 
+    //pivate readonly IDriversManager _driversManager; 
     private readonly IServiceProvider _serviceProvider;
 
 

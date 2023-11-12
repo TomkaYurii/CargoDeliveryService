@@ -1,15 +1,8 @@
 ﻿using Drivers.BLL.DTOs.Responses;
-using Drivers.BLL.Managers;
 using Drivers.BLL.Managers.Contracts;
-using Drivers.DAL_EF.Contracts;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 using WPFDrivers.Commands;
 
@@ -41,8 +34,7 @@ namespace WPFDrivers.ViewModels
                 var _driversManager = provider.GetRequiredService<IDriversManager>();
                 try
                 {
-                    this.DriverInfo = await _driversManager.GetFullInfoAboutDriver(DriverId);
-                    var x = 10;
+                    //this.DriverInfo = await _driversManager.GetFullInfoAboutDriver(DriverId, cancellationToken);
                 }
                 catch (Exception ex)
                 {

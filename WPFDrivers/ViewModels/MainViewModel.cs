@@ -1,5 +1,4 @@
-﻿using Drivers.BLL.Contracts;
-using System;
+﻿using System;
 using System.Windows.Input;
 using WPFDrivers.Commands;
 using static WPFDrivers.Commands.NavigateCommand;

@@ -32,7 +32,7 @@ public static class SwaggerServiceExtension
                 new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Carbon Kitchen Recipes",
+                    Title = "Blog for DriverManagement System",
                     Description = "Our API uses a REST based design, leverages the JSON data format, and relies upon HTTPS for transport. We respond with meaningful HTTP response codes and if an error occurs, we include error details in the response body.",
                     Contact = new OpenApiContact
                     {

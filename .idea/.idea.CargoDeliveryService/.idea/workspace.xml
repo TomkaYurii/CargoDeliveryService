@@ -6,9 +6,13 @@
     <projectFile profileName="IIS Express">AuthorizationModuleAPI/AuthorizationModuleAPI.csproj</projectFile>
     <projectFile profileName="http">AuthorizationModuleAPI/AuthorizationModuleAPI.csproj</projectFile>
     <projectFile profileName="https">AuthorizationModuleAPI/AuthorizationModuleAPI.csproj</projectFile>
+    <projectFile profileName="BlogHttp">CargoDeliveryBlog/CargoDeliveryBlog.csproj</projectFile>
+    <projectFile profileName="BlogHttps">CargoDeliveryBlog/CargoDeliveryBlog.csproj</projectFile>
+    <projectFile profileName="Development">CargoDeliveryBlog/CargoDeliveryBlog.csproj</projectFile>
     <projectFile profileName="DriversApi">DriversApi/Drivers.Api.csproj</projectFile>
     <projectFile profileName="DriversHttps">DriversApi/Drivers.Api.csproj</projectFile>
     <projectFile profileName="IIS Express">DriversApi/Drivers.Api.csproj</projectFile>
+    <projectFile>FakeDataBlogDbGenerator/FakeDataBlogDbGenerator.csproj</projectFile>
     <projectFile>FakeDataDbGenerator/FakeDataDriverDbGenerator.csproj</projectFile>
     <projectFile profileName="WPF DRIVERS [PRODUCTION]">WPFDrivers/WPFDrivers.csproj</projectFile>
     <projectFile profileName="WPFDRIVERS [DEVELOPMENT]">WPFDrivers/WPFDrivers.csproj</projectFile>
@@ -19,24 +23,26 @@
   <component name="ChangeListManager">
     <list default="true" id="14924304-48ab-4b2e-bd8e-bedf580f630a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CargoDeliveryService/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CargoDeliveryService/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthorizationModuleAPI/Authorization/JwtUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorizationModuleAPI/Authorization/JwtUtils.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthorizationModuleAPI/Helpers/AppSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorizationModuleAPI/Helpers/AppSettings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthorizationModuleAPI/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorizationModuleAPI/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthorizationModuleAPI/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorizationModuleAPI/Properties/launchSettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AuthorizationModuleAPI/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorizationModuleAPI/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Drivers.BLL/DTOs/Responses/FullDriverResponceDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers.BLL/DTOs/Responses/FullDriverResponceDTO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Drivers.BLL/Managers/DriversManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers.BLL/Managers/DriversManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Drivers.DAL/Contracts/IUnitOfWork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers.DAL/Contracts/IUnitOfWork.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Drivers.DAL/Repositories/GenericRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers.DAL/Repositories/GenericRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Drivers.DAL_EF/Repositories/EFDriverRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Drivers.DAL_EF/Repositories/EFDriverRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DriversApi/AutomapperProfile/MappingProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DriversApi/AutomapperProfile/MappingProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DriversApi/Controllers/DriversController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DriversApi/Controllers/DriversController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DriversApi/Drivers.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/DriversApi/Drivers.Api.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DriversApi/Middleware/ExceptionMiddleware.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DriversApi/Middleware/ExceptionMiddleware.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DriversApi/Models/ErrorResult.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DriversApi/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DriversApi/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CargoDeliveryBlog/CargoDeliveryBlog.WebApi.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CargoDeliveryBlog/CargoDeliveryBlog.WebApi.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CargoDeliveryBlog/CargoDeliveryBlog.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CargoDeliveryBlog/CargoDeliveryBlog.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CargoDeliveryBlog/Controllers/v1/BlogPostsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CargoDeliveryBlog/Controllers/v1/BlogPostsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CargoDeliveryBlog/Controllers/v1/CommentsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CargoDeliveryBlog/Controllers/v1/CommentsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CargoDeliveryBlog/Domain/Addresses/Address.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CargoDeliveryBlog/Domain/Addresses/Dtos/AddressDto.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CargoDeliveryBlog/Domain/Addresses/Dtos/AddressForCreationDto.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CargoDeliveryBlog/Domain/Addresses/Dtos/AddressForUpdateDto.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CargoDeliveryBlog/Domain/MonetaryAmounts/MonetaryAmount.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CargoDeliveryBlog/Domain/Percentages/Percent.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CargoDeliveryBlog/Domain/Users/Features/UpdateUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CargoDeliveryBlog/Domain/Users/Features/UpdateUser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CargoDeliveryBlog/Extensions/Services/SwaggerServiceExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CargoDeliveryBlog/Extensions/Services/SwaggerServiceExtension.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CargoDeliveryBlog/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/CargoDeliveryBlog/Properties/launchSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CargoDeliveryService.sln" beforeDir="false" afterPath="$PROJECT_DIR$/CargoDeliveryService.sln" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DriversApi/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/DriversApi/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DriversApi/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/DriversApi/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DriversApi/todo.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFDrivers/Commands/NavigateCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFDrivers/Commands/NavigateCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFDrivers/ViewModels/DriversViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFDrivers/ViewModels/DriversViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPFDrivers/ViewModels/MainViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WPFDrivers/ViewModels/MainViewModel.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +91,9 @@
     <setting file="file://$PROJECT_DIR$/FakeDataDbGenerator/Entities/Driver.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/FakeDataDbGenerator/Program.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="Toolset" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -105,7 +114,7 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Color Scheme Font&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -117,6 +126,24 @@
   }
 }</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.Drivers.Api: DriversHttps">
+    <configuration name="FakeDataBlogDbGenerator" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/FakeDataBlogDbGenerator/FakeDataBlogDbGenerator.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="DotNetCore" />
+      <option name="PROJECT_TFM" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
     <configuration name="FakeDataDriverDbGenerator" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -154,6 +181,51 @@
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/AuthorizationModuleAPI/AuthorizationModuleAPI.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
       <option name="LAUNCH_PROFILE_NAME" value="IIS Express" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
+      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
+      <option name="SEND_DEBUG_REQUEST" value="1" />
+      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <configuration name="CargoDeliveryBlog: BlogHttp" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/CargoDeliveryBlog/CargoDeliveryBlog.csproj" />
+      <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
+      <option name="LAUNCH_PROFILE_NAME" value="BlogHttp" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
+      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
+      <option name="SEND_DEBUG_REQUEST" value="1" />
+      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <configuration name="CargoDeliveryBlog: BlogHttps" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/CargoDeliveryBlog/CargoDeliveryBlog.csproj" />
+      <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
+      <option name="LAUNCH_PROFILE_NAME" value="BlogHttps" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
+      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
+      <option name="SEND_DEBUG_REQUEST" value="1" />
+      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <configuration name="CargoDeliveryBlog: Development" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/CargoDeliveryBlog/CargoDeliveryBlog.csproj" />
+      <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
+      <option name="LAUNCH_PROFILE_NAME" value="Development" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
@@ -247,6 +319,14 @@
       <workItem from="1696776102545" duration="10538000" />
       <workItem from="1697835410080" duration="590000" />
       <workItem from="1698169876032" duration="2873000" />
+      <workItem from="1698438828669" duration="667000" />
+      <workItem from="1698662932184" duration="610000" />
+      <workItem from="1698693772184" duration="31000" />
+      <workItem from="1698693821874" duration="1165000" />
+      <workItem from="1698942545947" duration="448000" />
+      <workItem from="1699037915803" duration="90000" />
+      <workItem from="1699042652355" duration="97000" />
+      <workItem from="1699801187525" duration="599000" />
     </task>
     <servers />
   </component>
@@ -289,5 +369,9 @@
         </breakpoints-dialog>
       </breakpoints-dialog>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

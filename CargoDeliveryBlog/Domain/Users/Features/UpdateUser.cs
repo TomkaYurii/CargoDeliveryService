@@ -11,7 +11,7 @@ using MediatR;
 
 public static class UpdateUser
 {
-    public sealed record Command(Guid UserId, UserForUpdateDto UpdatedUserData) : IRequest;
+    public sealed record Command(Guid UserId, UserForUpdateDto UpdatedUserData) : IRequest ;
 
     public sealed class Handler : IRequestHandler<Command>
     {
