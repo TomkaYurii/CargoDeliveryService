@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DriversManagement.Migrations
 {
     [DbContext(typeof(DriversManagementContext))]
-    [Migration("20231112172040_InitialMigration")]
+    [Migration("20231112194710_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />

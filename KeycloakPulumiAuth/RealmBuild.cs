@@ -19,6 +19,7 @@ class RealmBuild : Stack
             EditUsernameAllowed = true
         });
         var driversmanagementScope = ScopeFactory.CreateScope(realm.Id, "drivers_management");
+        var blogmanagementScope = ScopeFactory.CreateScope(realm.Id, "blog_management");
         
         var driversManagementPostmanMachineClient = ClientFactory.CreateClientCredentialsFlowClient(realm.Id,
             "drivers_management.postman.machine", 
@@ -67,6 +68,55 @@ class RealmBuild : Stack
             );
         driversManagementBFFClient.ExtendDefaultScopes(driversmanagementScope.Name);
         driversManagementBFFClient.AddAudienceMapper("drivers_management");
+        
+        var blogManagementPostmanMachineClient = ClientFactory.CreateClientCredentialsFlowClient(realm.Id,
+            "blog_management.postman.machine", 
+            "56a32679-2c51-409b-9c4c-618274a06993", 
+            "BlogManagement Postman Machine",
+            "https://oauth.pstmn.io");
+        blogManagementPostmanMachineClient.ExtendDefaultScopes(blogmanagementScope.Name);
+        blogManagementPostmanMachineClient.AddAudienceMapper("blog_management");
+        
+        var blogManagementPostmanCodeClient = ClientFactory.CreateCodeFlowClient(realm.Id,
+            "blog_management.postman.code", 
+            "13b4ad5c-d172-4aab-8822-baa0cf96a9fb", 
+            "BlogManagement Postman Code",
+            "https://oauth.pstmn.io",
+            redirectUris: null,
+            webOrigins: null
+            );
+        blogManagementPostmanCodeClient.ExtendDefaultScopes(blogmanagementScope.Name);
+        blogManagementPostmanCodeClient.AddAudienceMapper("blog_management");
+        
+        var blogManagementSwaggerClient = ClientFactory.CreateCodeFlowClient(realm.Id,
+            "blog_management.swagger", 
+            "81053a06-52b5-4f88-a885-43fbb487c1a4", 
+            "BlogManagement Swagger",
+            "https://localhost:5002",
+            redirectUris: null,
+            webOrigins: null
+            );
+        blogManagementSwaggerClient.ExtendDefaultScopes(blogmanagementScope.Name);
+        blogManagementSwaggerClient.AddAudienceMapper("blog_management");
+        
+        var blogManagementBFFClient = ClientFactory.CreateCodeFlowClient(realm.Id,
+            "blog_management.bff", 
+            "48179ca7-36c7-4e9a-b1c4-4fb4ab092eaf", 
+            "BlogManagement BFF",
+            "https://localhost:4000",
+            redirectUris: new InputList<string>() 
+                {
+                "https://localhost:4000/signin-oidc",
+                },
+            webOrigins: new InputList<string>() 
+                {
+                "https://localhost:5301",
+                "https://localhost:5302",
+                "https://localhost:4000",
+                }
+            );
+        blogManagementBFFClient.ExtendDefaultScopes(blogmanagementScope.Name);
+        blogManagementBFFClient.AddAudienceMapper("blog_management");
         
         var bob = new User("bob", new UserArgs
         {

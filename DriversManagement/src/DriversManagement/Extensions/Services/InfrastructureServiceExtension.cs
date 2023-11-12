@@ -21,7 +21,7 @@ public static class ServiceRegistration
         {
             // this makes local migrations easier to manage. feel free to refactor if desired.
             connectionString = env.IsDevelopment() 
-                ? "Data Source=localhost,51084;Integrated Security=False;Database=dev_driversmanagement;User ID=SA;Password=#localDockerPassword#"
+                ? "Data Source=localhost,56374;Integrated Security=False;Database=dev_driversmanagement;User ID=SA;Password=#localDockerPassword#"
                 : throw new Exception("The database connection string is not set.");
         }
 
