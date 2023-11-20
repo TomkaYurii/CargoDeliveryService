@@ -20,8 +20,10 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using SixLabors.ImageSharp;
 using System.Data;
 using System.Text;
 
@@ -96,44 +98,100 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
 builder.Services.AddScoped<IValidator<MiniDriverReqDTO>, MiniDriverReqDTO_Validator>();
-//JWT TOKEN VALIDATION
-var jwt = builder.Configuration.GetSection("JWT").Get<jwtConfig>();
-builder.Services.AddAuthentication(opt =>
-{
-    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-})
+
+//JWT TOKEN VALIDATION FOR => AuthJWTModule
+//var jwt = builder.Configuration.GetSection("JWT").Get<jwtConfig>();
+//builder.Services.AddAuthentication(opt =>
+//{
+//    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//    opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+//})
+//    .AddJwtBearer(options =>
+//    {
+//        options.TokenValidationParameters = new TokenValidationParameters
+//        {
+//            ValidateIssuer = true,
+//            ValidateAudience = true,
+//            ValidateLifetime = true,
+//            ValidateIssuerSigningKey = true,
+
+//            ValidIssuer = jwt.ValidIssuer,
+//            ValidAudience = jwt.ValidAudience,
+//            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwt.Secret))
+//        };
+//    });
+
+//JWT TOKEN VALIDATION FOR => DuendeIdentityInMemory
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-
-            ValidIssuer = jwt.ValidIssuer,
-            ValidAudience = jwt.ValidAudience,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwt.Secret))
-        };
+        options.Authority = builder.Configuration.GetSection("Auth:Authority").Get<string>();
+        options.Audience = "DriverApi";
+        options.TokenValidationParameters.ValidTypes = new[] { "at+jwt" };
     });
+
 // Controllers
 builder.Services.AddControllers();
-// Swagger/OpenAPI
+
+// Swagger/OpenAPI => AuthorizationModuleAPI (access & refresh token)
+//builder.Services.AddEndpointsApiExplorer();
+//builder.Services.AddSwaggerGen(opt =>
+//{
+//    opt.SwaggerDoc("v1", new OpenApiInfo { Title = "DriverAPI", Version = "v1" });
+//    opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+//    {
+//        In = ParameterLocation.Header,
+//        Description = "Please enter token",
+//        Name = "Authorization",
+//        Type = SecuritySchemeType.Http,
+//        BearerFormat = "JWT",
+//        Scheme = "bearer"
+//    });
+//    opt.AddSecurityRequirement(new OpenApiSecurityRequirement
+//    {
+//        {
+//            new OpenApiSecurityScheme
+//            {
+//                Reference = new OpenApiReference
+//                {
+//                    Type=ReferenceType.SecurityScheme,
+//                    Id="Bearer"
+//                }
+//            },
+//            new string[]{}
+//        }
+//    });
+//});
+
+// Swagger/OpenAPI => Duende Identity server (Authorization Code Grant)
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(opt =>
 {
     opt.SwaggerDoc("v1", new OpenApiInfo { Title = "DriverAPI", Version = "v1" });
-    opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+
+    // Добавляем Security Definition для OAuth 2.0 с Authorization Code Grant
+    opt.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
     {
-        In = ParameterLocation.Header,
-        Description = "Please enter token",
-        Name = "Authorization",
-        Type = SecuritySchemeType.Http,
-        BearerFormat = "JWT",
-        Scheme = "bearer"
+        Type = SecuritySchemeType.OAuth2,
+        Flows = new OpenApiOAuthFlows
+        {
+            AuthorizationCode = new OpenApiOAuthFlow
+            {
+                AuthorizationUrl = new Uri(builder.Configuration.GetSection("Auth:Swagger:AuthorizationUrl").Get<string>()),
+                TokenUrl = new Uri(builder.Configuration.GetSection("Auth:Swagger:TokenUrl").Get<string>()),
+                Scopes = new Dictionary<string, string>
+                {
+                    { "openid", "OpenID scope" },
+                    { "profile", "Profile scope" },
+                    { "DriverApi.read", "Read access to Driver API" },
+                    { "DriverApi.write", "Write access to Driver API" }
+                }
+            }
+        }
     });
+
+    // Добавляем Security Requirement для указания использования OAuth 2.0
     opt.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
@@ -141,11 +199,11 @@ builder.Services.AddSwaggerGen(opt =>
             {
                 Reference = new OpenApiReference
                 {
-                    Type=ReferenceType.SecurityScheme,
-                    Id="Bearer"
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "oauth2"
                 }
             },
-            new string[]{}
+            new[] { "openid", "profile", "DriverApi.read", "DriverApi.write" }
         }
     });
 });
@@ -158,10 +216,19 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    
     app.UseSwagger();
-    app.UseSwaggerUI();
+    
+    // simple configuration
+    // app.UseSwaggerUI();
+
+    // Autorization Code Flow & PKCE:
+    app.UseSwaggerUI(options =>
+    {
+        options.OAuthUsePkce();
+    });
 }
-// global cors policy
+// Global cors policy
 app.UseCors(x => x
     .SetIsOriginAllowed(origin => true)
     .AllowAnyMethod()
@@ -171,6 +238,7 @@ app.UseCors(x => x
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.UseMiddleware<ExceptionMiddleware>();
 app.MapControllers();
 app.Run();
