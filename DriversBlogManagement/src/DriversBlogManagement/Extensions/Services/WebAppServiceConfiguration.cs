@@ -14,6 +14,7 @@ using Resources;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using Billing.Extensions.Services;
 
 public static class WebAppServiceConfiguration
 {
@@ -28,6 +29,7 @@ public static class WebAppServiceConfiguration
         builder.Services.AddCorsService("DriversBlogManagementCorsPolicy", builder.Environment);
         builder.OpenTelemetryRegistration(builder.Configuration, "DriversBlogManagement");
         builder.Services.AddInfrastructure(builder.Environment, builder.Configuration);
+        builder.Services.AddMassTransitServices(builder.Environment, builder.Configuration);
 
         builder.Services.AddControllers()
             .AddJsonOptions(o => o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);

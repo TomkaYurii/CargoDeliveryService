@@ -2,18 +2,13 @@ namespace DriversManagement.Extensions.Services;
 
 using DriversManagement.Middleware;
 using DriversManagement.Services;
-using Configurations;
 using System.Text.Json.Serialization;
 using Serilog;
-using FluentValidation.AspNetCore;
 using Hellang.Middleware.ProblemDetails;
 using Hellang.Middleware.ProblemDetails.Mvc;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using Resources;
 using System.Reflection;
-using System.Text.Json;
-using System.Text.RegularExpressions;
+using Ordering.Extensions.Services;
 
 public static class WebAppServiceConfiguration
 {
@@ -28,6 +23,7 @@ public static class WebAppServiceConfiguration
         builder.Services.AddCorsService("DriversManagementCorsPolicy", builder.Environment);
         builder.OpenTelemetryRegistration(builder.Configuration, "DriversManagement");
         builder.Services.AddInfrastructure(builder.Environment, builder.Configuration);
+        builder.Services.AddMassTransitServices(builder.Environment, builder.Configuration);
 
         builder.Services.AddControllers()
             .AddJsonOptions(o => o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);

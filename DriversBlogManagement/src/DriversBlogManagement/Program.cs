@@ -17,6 +17,7 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 builder.ConfigureServices();
+
 var app = builder.Build();
 
 using var scope = app.Services.CreateScope();
