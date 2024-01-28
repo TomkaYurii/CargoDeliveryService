@@ -12,7 +12,7 @@ public class JwtMiddleware
     public JwtMiddleware(RequestDelegate next, IOptions<AppSettings> appSettings)
     {
         _next = next;
-        _appSettings = appSettings.Value;
+       // _appSettings = appSettings.Value;
     }
 
     public async Task Invoke(HttpContext context, DataContext dataContext, IJwtUtils jwtUtils)

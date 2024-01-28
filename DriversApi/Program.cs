@@ -134,7 +134,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 // Controllers
 builder.Services.AddControllers();
 
-// Swagger/OpenAPI => AuthorizationModuleAPI (access & refresh token)
+//Swagger / OpenAPI => AuthorizationModuleAPI(access & refresh token)
 //builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen(opt =>
 //{
@@ -170,7 +170,7 @@ builder.Services.AddSwaggerGen(opt =>
 {
     opt.SwaggerDoc("v1", new OpenApiInfo { Title = "DriverAPI", Version = "v1" });
 
-    // Добавляем Security Definition для OAuth 2.0 с Authorization Code Grant
+    // Додаємо Security Definition для OAuth 2.0 с Authorization Code Grant
     opt.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
     {
         Type = SecuritySchemeType.OAuth2,
@@ -191,7 +191,7 @@ builder.Services.AddSwaggerGen(opt =>
         }
     });
 
-    // Добавляем Security Requirement для указания использования OAuth 2.0
+    // Додаємо Security Requirement для вказівки що використовується OAuth 2.0
     opt.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
@@ -216,13 +216,12 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    
-    app.UseSwagger();
-    
-    // simple configuration
-    // app.UseSwaggerUI();
+    // Access+Refresh token
+    //app.UseSwagger();
+    //app.UseSwaggerUI();
 
     // Autorization Code Flow & PKCE:
+    app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
         options.OAuthUsePkce();

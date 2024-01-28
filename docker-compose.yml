@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  duendeidentityinmemory:
+    image: ${DOCKER_REGISTRY-}duendeidentityinmemory
+    build:
+      context: .
+      dockerfile: DuendeIdentityInMemory/Dockerfile

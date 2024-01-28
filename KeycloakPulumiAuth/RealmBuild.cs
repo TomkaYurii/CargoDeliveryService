@@ -118,6 +118,8 @@ class RealmBuild : Stack
         blogManagementBFFClient.ExtendDefaultScopes(blogmanagementScope.Name);
         blogManagementBFFClient.AddAudienceMapper("blog_management");
         
+
+
         var bob = new User("bob", new UserArgs
         {
             RealmId = realm.Id,
