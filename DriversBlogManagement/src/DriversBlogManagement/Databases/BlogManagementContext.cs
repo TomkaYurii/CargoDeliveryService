@@ -20,11 +20,12 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-public sealed class BlogManagementContext : DbContext
+public class BlogManagementContext : DbContext
 {
     private readonly ICurrentUserService _currentUserService;
     private readonly IMediator _mediator;
     private readonly IDateTimeProvider _dateTimeProvider;
+
 
     public BlogManagementContext(
         DbContextOptions<BlogManagementContext> options, ICurrentUserService currentUserService, IMediator mediator, IDateTimeProvider dateTimeProvider) : base(options)

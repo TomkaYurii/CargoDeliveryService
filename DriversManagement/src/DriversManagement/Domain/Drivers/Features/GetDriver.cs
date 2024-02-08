@@ -7,28 +7,45 @@ using DriversManagement.Domain;
 using HeimGuard;
 using Mappings;
 using MediatR;
+using DriversBlogManagement;
 
 public static class GetDriver
 {
-    public sealed record Query(Guid DriverId) : IRequest<DriverDto>;
+    public sealed record Query(Guid DriverId) : IRequest<FullDataAboutDriverAndPostsDto>;
 
-    public sealed class Handler : IRequestHandler<Query, DriverDto>
+    public sealed class Handler : IRequestHandler<Query, FullDataAboutDriverAndPostsDto>
     {
         private readonly IDriverRepository _driverRepository;
         private readonly IHeimGuardClient _heimGuard;
+        private readonly DriverRpc.DriverRpcClient _client;
 
-        public Handler(IDriverRepository driverRepository, IHeimGuardClient heimGuard)
+        public Handler(IDriverRepository driverRepository, 
+            IHeimGuardClient heimGuard,
+            DriverRpc.DriverRpcClient client)
         {
             _driverRepository = driverRepository;
             _heimGuard = heimGuard;
+            _client = client;
         }
 
-        public async Task<DriverDto> Handle(Query request, CancellationToken cancellationToken)
+        public async Task<FullDataAboutDriverAndPostsDto> Handle(Query request, CancellationToken cancellationToken)
         {
             await _heimGuard.MustHavePermission<ForbiddenAccessException>(Permissions.CanReadDriver);
 
-            var result = await _driverRepository.GetById(request.DriverId, cancellationToken: cancellationToken);
-            return result.ToDriverDto();
+            FullDataAboutDriverAndPostsDto result = new FullDataAboutDriverAndPostsDto();
+
+            Driver drv = await _driverRepository.GetById(request.DriverId, cancellationToken: cancellationToken);
+            DriverDto drvDTO = drv.ToDriverDto();
+
+            result.Driver = drvDTO;
+
+            // Отправка запроса через gRPC
+            // var grpcRequest = new DriverWithPostsRequest { driver_id = request.DriverId.ToString() };
+            DriverWithPostsResponse grpcResponse = await _client.GetDriverWithPostsAsync(grpcRequest);
+
+            /// result.Posts = grpcResponse.Posts.ToList();
+
+            return result;
         }
     }
 }

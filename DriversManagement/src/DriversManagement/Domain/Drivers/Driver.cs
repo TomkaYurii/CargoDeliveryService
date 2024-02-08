@@ -1,22 +1,12 @@
-namespace DriversManagement.Domain.Drivers;
-
-using System.ComponentModel.DataAnnotations;
 using DriversManagement.Domain.Expences;
 using DriversManagement.Domain.Companies;
 using DriversManagement.Domain.Companies.Models;
 using DriversManagement.Domain.Photos;
 using DriversManagement.Domain.Photos.Models;
-using System.ComponentModel.DataAnnotations.Schema;
-using Destructurama.Attributed;
-using DriversManagement.Exceptions;
 using DriversManagement.Domain.Drivers.Models;
 using DriversManagement.Domain.Drivers.DomainEvents;
-using DriversManagement.Domain.Photos;
-using DriversManagement.Domain.Photos.Models;
-using DriversManagement.Domain.Companies;
-using DriversManagement.Domain.Companies.Models;
 
-
+namespace DriversManagement.Domain.Drivers;
 public class Driver : BaseEntity
 {
     public string FirstName { get; private set; }

@@ -1,19 +1,9 @@
-namespace DriversManagement.Domain.Expences;
-
-using System.ComponentModel.DataAnnotations;
 using DriversManagement.Domain.Trucks;
 using DriversManagement.Domain.Drivers;
-using System.ComponentModel.DataAnnotations.Schema;
-using Destructurama.Attributed;
-using DriversManagement.Exceptions;
 using DriversManagement.Domain.Expences.Models;
 using DriversManagement.Domain.Expences.DomainEvents;
-using DriversManagement.Domain.Drivers;
-using DriversManagement.Domain.Drivers.Models;
-using DriversManagement.Domain.Trucks;
-using DriversManagement.Domain.Trucks.Models;
 
-
+namespace DriversManagement.Domain.Expences;
 public class Expence : BaseEntity
 {
     public string DriverPaiment { get; private set; }

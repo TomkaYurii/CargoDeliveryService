@@ -1,0 +1,33 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "DriversBlogManagement";
+
+// Определение сообщения для запроса на получение водителя с постами
+message DriverWithPostsRequest {
+  string driver_id = 1;
+}
+
+// Определение сервиса gRPC для работы с водителями
+service DriverRpc {
+  // Метод для получения информации о водителе и его постах
+  rpc GetDriverWithPosts(DriverWithPostsRequest) returns (DriverWithPostsResponse);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Responce Messages
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+// Определение сообщения для ответа на запрос с информацией о водителе и его постах
+message DriverWithPostsResponse {
+  string driver_id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  repeated PostAboutDriverResponse posts = 4;
+}
+// Определение сообщения для поста о водителе
+message PostAboutDriverResponse {
+  string id = 1;
+  string title = 2;
+  string content = 3;
+}
+

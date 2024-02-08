@@ -1,18 +1,10 @@
-namespace DriversBlogManagement.Domain.Drivers;
-
-using System.ComponentModel.DataAnnotations;
 using DriversBlogManagement.Domain.PostAboutDrivers;
 using DriversBlogManagement.Domain.PostAboutDrivers.Models;
 using DriversBlogManagement.Domain.Likes;
-using System.ComponentModel.DataAnnotations.Schema;
-using Destructurama.Attributed;
-using DriversBlogManagement.Exceptions;
 using DriversBlogManagement.Domain.Drivers.Models;
 using DriversBlogManagement.Domain.Drivers.DomainEvents;
-using DriversBlogManagement.Domain.PostAboutDrivers;
-using DriversBlogManagement.Domain.PostAboutDrivers.Models;
 
-
+namespace DriversBlogManagement.Domain.Drivers;
 public class Driver : BaseEntity
 {
     public string FirstName { get; private set; }

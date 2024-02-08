@@ -73,7 +73,7 @@ public sealed class DriversController: ControllerBase
     /// </summary>
     [Authorize]
     [HttpGet("{driverId:guid}", Name = "GetDriver")]
-    public async Task<ActionResult<DriverDto>> GetDriver(Guid driverId)
+    public async Task<ActionResult<FullDataAboutDriverAndPostsDto>> GetDriver(Guid driverId)
     {
         var query = new GetDriver.Query(driverId);
         var queryResponse = await _mediator.Send(query);

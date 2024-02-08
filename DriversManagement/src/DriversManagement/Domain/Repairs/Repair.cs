@@ -1,16 +1,8 @@
-namespace DriversManagement.Domain.Repairs;
-
-using System.ComponentModel.DataAnnotations;
 using DriversManagement.Domain.Trucks;
-using System.ComponentModel.DataAnnotations.Schema;
-using Destructurama.Attributed;
-using DriversManagement.Exceptions;
 using DriversManagement.Domain.Repairs.Models;
 using DriversManagement.Domain.Repairs.DomainEvents;
-using DriversManagement.Domain.Trucks;
-using DriversManagement.Domain.Trucks.Models;
 
-
+namespace DriversManagement.Domain.Repairs;
 public class Repair : BaseEntity
 {
     public string RepairDate { get; private set; }

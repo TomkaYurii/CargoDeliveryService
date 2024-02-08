@@ -9,6 +9,7 @@ using Hellang.Middleware.ProblemDetails.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using Ordering.Extensions.Services;
+using DriversBlogManagement;
 
 public static class WebAppServiceConfiguration
 {
@@ -39,6 +40,12 @@ public static class WebAppServiceConfiguration
 
         builder.Services.AddHealthChecks();
         builder.Services.AddSwaggerExtension(builder.Configuration);
+
+        // Добавляем генерацию клиента gRPC
+        builder.Services.AddGrpcClient<DriverRpc.DriverRpcClient>(options =>
+        {
+            options.Address = new Uri(builder.Configuration.GetSection("GrpcServer")["Address"]); // Адрес вашего gRPC сервера
+        });
     }
 
     /// <summary>

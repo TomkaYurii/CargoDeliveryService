@@ -38,6 +38,11 @@ public static class WebAppServiceConfiguration
         builder.Services.AddHttpContextAccessor();
         builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
+        builder.Services.AddGrpc(options =>
+        {
+            options.EnableDetailedErrors = true;
+        });
+
         // registers all services that inherit from your base service interface - IDriversBlogManagementScopedService
         builder.Services.AddBoundaryServices(Assembly.GetExecutingAssembly());
 

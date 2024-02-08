@@ -1,16 +1,8 @@
-namespace DriversManagement.Domain.Inspections;
-
-using System.ComponentModel.DataAnnotations;
 using DriversManagement.Domain.Trucks;
-using System.ComponentModel.DataAnnotations.Schema;
-using Destructurama.Attributed;
-using DriversManagement.Exceptions;
 using DriversManagement.Domain.Inspections.Models;
 using DriversManagement.Domain.Inspections.DomainEvents;
-using DriversManagement.Domain.Trucks;
-using DriversManagement.Domain.Trucks.Models;
 
-
+namespace DriversManagement.Domain.Inspections;
 public class Inspection : BaseEntity
 {
     public string InspectionDate { get; private set; }

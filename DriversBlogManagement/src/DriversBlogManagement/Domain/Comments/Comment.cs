@@ -1,19 +1,9 @@
-namespace DriversBlogManagement.Domain.Comments;
-
-using System.ComponentModel.DataAnnotations;
 using DriversBlogManagement.Domain.Users;
 using DriversBlogManagement.Domain.PostAboutDrivers;
-using System.ComponentModel.DataAnnotations.Schema;
-using Destructurama.Attributed;
-using DriversBlogManagement.Exceptions;
 using DriversBlogManagement.Domain.Comments.Models;
 using DriversBlogManagement.Domain.Comments.DomainEvents;
-using DriversBlogManagement.Domain.PostAboutDrivers;
-using DriversBlogManagement.Domain.PostAboutDrivers.Models;
-using DriversBlogManagement.Domain.Users;
-using DriversBlogManagement.Domain.Users.Models;
 
-
+namespace DriversBlogManagement.Domain.Comments;
 public class Comment : BaseEntity
 {
     public string Text { get; private set; }
